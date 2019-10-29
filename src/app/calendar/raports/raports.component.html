@@ -1,0 +1,264 @@
+<header>
+    <a href="http://krakowwelcome.com/" class="myButton"><img class="icon" src="https://img.icons8.com/metro/20/000000/world-map.png">Krakow Welcome</a>
+    <a class="myButton" routerLink="../Home"><img class="icon" src="https://img.icons8.com/color/20/000000/mercedes-benz.png">Booking</a>
+    <a routerLink="../calendar"  class="myButton"><img class="icon" src="https://img.icons8.com/metro/20/000000/calendar-11.png">Calendar</a>
+    <a routerLink="../register" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/android/20/000000/login-rounded.png">Register</a>
+    <a routerLink="../editHotels" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Hotels</a>
+    <a routerLink="../editInviduals" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Invidual</a>
+    <a routerLink="../editForms" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/bubbles/26/000000/multi-edit.png">Edit-Forms</a>
+    <a routerLink="" (click)="logOut()" class="myButton"><img src="https://img.icons8.com/ultraviolet/20/000000/shutdown.png">Logout</a>
+    <button mat-button [matMenuTriggerFor]="menu" id="mobileMenu"><img src="https://img.icons8.com/ios/32/000000/menu-filled.png"></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item><a href="http://krakowwelcome.com/" class="navButton">Krakow Welcome</a></button>
+      <button mat-menu-item><a class="navButton" routerLink="../Home">Booking</a></button>
+      <button mat-menu-item><a routerLink="../calendar"  class="navButton">Calendar</a></button>
+      <button mat-menu-item><a routerLink="../register" *ngIf="isMaster" class="navButton">Register</a></button>
+      <button mat-menu-item><a routerLink="../editHotels" *ngIf="isMaster" class="navButton">Ed-Hotels</a></button>
+      <button mat-menu-item><a routerLink="../editInviduals" *ngIf="isMaster" class="navButton">Ed-Invidual</a></button>
+      <button mat-menu-item><a routerLink="../editForms" *ngIf="isMaster" class="navButton">Edit-Forms</a></button>
+      <button mat-menu-item><a routerLink="" (click)="logOut()" class="navButton">Logout</a></button>
+    </mat-menu>
+    <div class="col-md-2">
+        <mat-checkbox #checkBox *ngIf="isMaster" (click)="checked()" style="position: relative; left: 0px;">Report For Drivers</mat-checkbox>
+    </div>
+    <div class="col-md-2">
+      <mat-checkbox #checkBox *ngIf="isMaster" (click)="checked2()" style="position: relative; left: 0px; top:20px;">Report For Hotel</mat-checkbox>
+  </div>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!driverReport && !isMaster">
+    <div class="row time">
+        <div class="col-md-1"></div>
+    <div class="col-md-4 dateInput">
+      <section class="inputs2">
+            <label>
+                    Date Time Range From:
+                    <input [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12"
+                           ngModel name="FromDate"
+                           [selectMode]="'rangeFrom'">
+                    <owl-date-time #dt12></owl-date-time>
+                </label>
+      </section>
+    </div>
+    <div class="col-md-1">
+    <a *ngIf="download" class="button button-red download" [href]="url | safe:'url'"><img src="https://img.icons8.com/ios/32/000000/download-from-cloud.png"></a>
+    </div>
+    <div class="col-md-4 dateInput">
+      <section class="inputs2">
+            <label>
+                    Date Time Range To:
+                    <input [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13"
+                           ngModel name="ToDate"
+                           [selectMode]="'rangeTo'">
+                    <owl-date-time #dt13></owl-date-time>
+                </label>
+      </section>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5"></div>
+      <div class="col-md-4 reportType">
+          <mat-form-field>
+              <mat-label>Report Type</mat-label>
+              <mat-select class="reportTypeSelect" ngModel name="reportType">
+                <mat-option *ngFor="let food of foods" [value]="food.value" required>
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+    </div>
+    <div class="row" *ngIf="!driverReport">
+    <div class="col-md-12">
+    <section class="buttonAnimated sumbitBtn">
+      <button type="submit" >
+        <span class="text">GeneratePDF</span>
+        <span class="line -right"></span>
+        <span class="line -top"></span>
+        <span class="line -left"></span>
+        <span class="line -bottom"></span>
+      </button>
+    </section>
+    </div>
+    </div>
+    </form>
+
+          <form *ngIf="!driverReport && isMaster && !hotelReport" (ngSubmit)="onSubmit3(f)" #f="ngForm">
+              <div class="row time">
+                  <div class="col-md-1"></div>
+              <div class="col-md-4 dateInput">
+                <section class="inputs2">
+                      <label>
+                              Date Time Range From:
+                              <input [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12"
+                                     ngModel name="FromDate"
+                                     [selectMode]="'rangeFrom'">
+                              <owl-date-time #dt12></owl-date-time>
+                          </label>
+                </section>
+              </div>
+              <div class="col-md-1">
+              <a *ngIf="download" class="button button-red download" [href]="url | safe:'url'"><img src="https://img.icons8.com/ios/32/000000/download-from-cloud.png"></a>
+              </div>
+              <div class="col-md-4 dateInput">
+                <section class="inputs2">
+                      <label>
+                              Date Time Range To:
+                              <input [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13"
+                                     ngModel name="ToDate"
+                                     [selectMode]="'rangeTo'">
+                              <owl-date-time #dt13></owl-date-time>
+                          </label>
+                </section>
+              </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-12">
+                  <section class="buttonAnimated sumbitBtn">
+                    <button type="submit" >
+                      <span class="text">GeneratePDF</span>
+                      <span class="line -right"></span>
+                      <span class="line -top"></span>
+                      <span class="line -left"></span>
+                      <span class="line -bottom"></span>
+                    </button>
+                  </section>
+                  </div>
+                  </div>
+              </form>
+              <form *ngIf="driverReport" (ngSubmit)="onSubmit2(f)" #f="ngForm">
+                <div class="row time">
+                    <div class="col-md-1"></div>
+                <div class="col-md-4 dateInput">
+                  <section class="inputs2">
+                        <label>
+                                Date Time Range From:
+                                <input [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12"
+                                       ngModel name="FromDate"
+                                       [selectMode]="'rangeFrom'">
+                                <owl-date-time #dt12></owl-date-time>
+                            </label>
+                  </section>
+                </div>
+                <div class="col-md-1">
+                <a *ngIf="download" class="button button-red download" [href]="url | safe:'url'"><img src="https://img.icons8.com/ios/32/000000/download-from-cloud.png"></a>
+                </div>
+                <div class="col-md-4 dateInput">
+                  <section class="inputs2">
+                        <label>
+                                Date Time Range To:
+                                <input [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13"
+                                       ngModel name="ToDate"
+                                       [selectMode]="'rangeTo'">
+                                <owl-date-time #dt13></owl-date-time>
+                            </label>
+                  </section>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4 reportType">
+                        <mat-form-field>
+                            <mat-label>Report Type</mat-label>
+                            <mat-select class="reportTypeSelect" ngModel name="type">
+                              <mat-option *ngFor="let raportType of raportTypes" [value]="raportType.value" required>
+                                {{raportType.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-4 reportType">
+                        <mat-form-field>
+                            <mat-label>Raport Of User</mat-label>
+                            <mat-select class="reportTypeSelect" ngModel name="driverId">
+                              <mat-option *ngFor="let driver of drivers" [value]="driver.id" required>
+                                {{driver.email}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                  </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    <section class="buttonAnimated sumbitBtn">
+                      <button type="submit" >
+                        <span class="text">Raport For Drivers</span>
+                        <span class="line -right"></span>
+                        <span class="line -top"></span>
+                        <span class="line -left"></span>
+                        <span class="line -bottom"></span>
+                      </button>
+                    </section>
+                    </div>
+                    </div>
+                </form>
+                <form *ngIf="hotelReport" (ngSubmit)="submitHotel(j)" #j="ngForm">
+                  <div class="row time">
+                      <div class="col-md-1"></div>
+                  <div class="col-md-4 dateInput">
+                    <section class="inputs2">
+                          <label>
+                                  Date Time Range From:
+                                  <input [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12"
+                                         ngModel name="FromDate"
+                                         [selectMode]="'rangeFrom'">
+                                  <owl-date-time #dt12></owl-date-time>
+                              </label>
+                    </section>
+                  </div>
+                  <div class="col-md-1">
+                  <a *ngIf="download" class="button button-red download" [href]="url | safe:'url'"><img src="https://img.icons8.com/ios/32/000000/download-from-cloud.png"></a>
+                  </div>
+                  <div class="col-md-4 dateInput">
+                    <section class="inputs2">
+                          <label>
+                                  Date Time Range To:
+                                  <input [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13"
+                                         ngModel name="ToDate"
+                                         [selectMode]="'rangeTo'">
+                                  <owl-date-time #dt13></owl-date-time>
+                              </label>
+                    </section>
+                  </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-4 reportType">
+                          <mat-form-field>
+                              <mat-label>Report Type</mat-label>
+                              <mat-select class="reportTypeSelect" ngModel name="type">
+                                <mat-option *ngFor="let raportType of raportTypes" [value]="raportType.value" required>
+                                  {{raportType.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                      </div>
+                      <div class="col-md-1"></div>
+
+                      <div class="col-md-4 reportType">
+                          <mat-form-field>
+                              <mat-label>Choose Hotel</mat-label>
+                              <mat-select class="reportTypeSelect" ngModel name="hotelName">
+                                <mat-option *ngFor="let hotel of receptionist" [value]="hotel.name" required>
+                                  {{hotel.email}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                      </div>
+                    </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                      <section class="buttonAnimated sumbitBtn">
+                        <button type="submit" >
+                          <span class="text">Raport For Hotels</span>
+                          <span class="line -right"></span>
+                          <span class="line -top"></span>
+                          <span class="line -left"></span>
+                          <span class="line -bottom"></span>
+                        </button>
+                      </section>
+                      </div>
+                      </div>
+                  </form>
+</header>

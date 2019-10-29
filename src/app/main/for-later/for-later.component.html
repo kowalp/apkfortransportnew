@@ -1,0 +1,137 @@
+<div class="main">
+</div>
+
+<div class="header">
+    <div class="row imgResponsive">
+        <div class="responsive">
+          <a href="https://krakowwelcome.com">
+            <img  src="http://yea.com.pl/wp-content/uploads/2019/04/logo.png" alt="">
+          </a>
+        </div>
+      </div>
+<div class="nav">
+    <a [@fadeIn3]="state3" id="calendar" (mouseenter)="onAnimate()" (mouseleave)="onAnimate()" routerLink="../calendar">Calendar<i class="icons"><img src="https://img.icons8.com/metro/32/000000/calendar-11.png"></i></a>
+    <a [@fadeIn4]="state4" id="pricing" [routerLink]="['../prices']" (mouseenter)="onAnimate2()" (mouseleave)="onAnimate2()">Prices<i class="icons"><img src="https://img.icons8.com/wired/32/000000/expensive.png"></i></a>
+
+<div class="row">
+<div class="col-md-2 col-sm-12"></div>
+<div class="col-md-10">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="row" id="chooseRide">
+      <div >
+          <mat-form-field>
+            <mat-label>Choose your ride</mat-label>
+            <select matNativeControl (click)="pickARide($event)">
+              <option value="" selected></option>
+              <option value="Transfer">Transfer</option>
+              <option value="Trip">Trip</option>
+            </select>
+          </mat-form-field>
+
+      </div>
+    </div>
+  <div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-3 col-sm-5 transferDiv">
+  <section class="wycieczka form-group" [@fadeIn]="showTransfer">
+
+          <select class="dropdown-el labelFirst2" (click)="dropdownTransfer($event)" [(ngModel)]="name2"  name="Transfer">
+            <option name="Transfer" value="Transfer">Transfer</option>
+            <option *ngFor="let transfer of transfers" [value]="transfer">{{transfer}}</option>
+          </select>
+
+  </section>
+</div>
+<div class="col-md-1 col-sm-2 pauseDiv"></div>
+
+  <div class="col-md-3 col-sm-5 tripDiv">
+    <section class="wycieczka" [@fadeIn]="showTrip" >
+          <select class="dropdown-el" (click)="dropdownTrip($event)" [(ngModel)]="name" name="trip" >
+              <option class="labelFirst " for="Trip" >Trip</option>
+              <option *ngFor="let trip of trips" [value]="trip">{{trip}}</option>
+            </select>
+    </section>
+  </div>
+  <div class="col-md-2 log-in  col-sm-2">
+    <a routerLink="" (click)="logOut()" class="animated-button victoria-three">Log Out</a>
+  </div>
+</div>
+<div class="numberOfPpl">
+  <div class="container-y">
+        <section [@fadeIn]="showFlightNumber">
+            <div class="form-group flight">
+                <label for="required-input" id="flightNumber">Flight Number</label>
+                <input ngModel name="flightNumber" type="text" value="flightNumber" id="required-input">
+            </div>
+    </section>
+          <section [@fadeIn]="state">
+                <select class="dropdown-elem num" (click)="dropdownPpl($event)" [ngClass]="{expanded: personChange }"  [(ngModel)]="iloscOsob" name="people">
+                    <option type="radio" name="sortType" value="numberOfPeople" checked="checked">Number Of People</option>
+                  <option *ngFor="let people of ppl" [value]="people">{{people}}</option>
+                  </select>
+          </section>
+          <section [@fadeIn]="state">
+              <div class="form-group flight">
+                  <label for="required-input">
+                     Reservation Number</label>
+                  <input ngModel name="reservationNumber" type="text" value="reservationNumber" id="required-input">
+              </div>
+      </section>
+    </div>
+  </div>
+<div class="row tripleRow"  [@fadeIn]="stateForName"  >
+    <div class="col-md-1"></div>
+    <div class="col-md-3  col-sm-12 nameInput" >
+      <section class="inputs">
+        <div class="form-group">
+          <label for="required-input">Name:</label>
+          <input ngModel name="Name" type="text" id="required-input" required>
+          <span class="help-text"></span>
+      </div>
+
+
+      </section>
+    </div>
+      <div class="col-md-3  col-sm-12 phoneInput">
+        <section class="inputs">
+        <div class="form-group phoneInput">
+
+          <label for="required-input">Phone:</label>
+          <input ngModel name="phone" type="tel" id="required-input" for="phone" required>
+          <span class="help-text"></span>
+        </div>
+        </section>
+
+      </div>
+      <div class="col-md-3  col-sm-12 dateInput">
+        <section class="inputs2">
+            <label>
+                <h3><b>Date Time:</b></h3>
+                <input [min]="min" [max]="max" ngModel name="pickupTime" [owlDateTimeTrigger]="dt" type="text" [owlDateTime]="dt" required>
+                <owl-date-time #dt></owl-date-time>
+          <span class="help-text"></span>
+
+            </label>
+        </section>
+      </div>
+</div>
+
+<div class="row" >
+  <div class="col-md-10">
+    <section class="buttonAnimated sumbitBtn">
+      <button type="submit" [disabled]="!f.valid" [@fadeIn]="stateForName" >
+        <span class="text">Submit</span>
+        <span class="line -right"></span>
+        <span class="line -top"></span>
+        <span class="line -left"></span>
+        <span class="line -bottom"></span>
+      </button>
+      <h3 id="price" [@fadeIn]="stateForName">{{price}}</h3>
+    </section>
+  </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>

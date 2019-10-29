@@ -1,0 +1,34 @@
+<div class="row imgResponsive">
+  <div class="responsive">
+    <a href="https://krakowwelcome.com">
+      <img  src="http://yea.com.pl/wp-content/uploads/2019/04/logo.png" alt="">
+    </a>
+  </div>
+</div>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <form class="example-form" (ngSubmit)="onSubmit(email.value, password.value)" #f="ngForm">
+  <mat-card-content>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" #email ngModel name="email" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+        <td><mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" #password ngModel type="password" name="password" required>
+        </mat-form-field></td>
+      </tr></table>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button type="submit"  color="primary">Login</button>
+    <div *ngIf="isLoginError" class="red-text center error-message">Error Incorrect email or password</div>
+  </mat-card-actions>
+</form>
+</mat-card>

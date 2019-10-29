@@ -1,0 +1,71 @@
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.example-card{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    background: url('http://yea.com.pl/wp-content/uploads/2019/04/background-cement-concrete-242236.jpg') center no-repeat;
+    background-size: cover;
+
+}
+input:-webkit-autofill {
+  background-color: transparent !important;
+}
+.imgResponsive { 
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin-top: -40px;;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .responsive {
+      height: 10vh;
+      a{
+      img{
+        z-index: 21;
+        align-content: center;
+        align-items: center;
+        max-width:72%;
+        height: 18vh;
+        position: relative;
+        top:-35vh;
+        opacity: 0.8;
+        transform: scale(1, 1);
+        transition: 0.3s;  
+        left:10vh;
+        &:hover {
+          opacity: 1;
+          transform: scale(1.1, 1.1);
+          filter: brightness(120%);
+        }
+      
+      }
+    }
+      
+      
+    }
+  }
+  .mat-card-actions{
+    margin-left: 1px;
+  }
+  .red-text{
+    color:red;
+  }
+  .password{
+   color: rgb(12, 8, 2); 
+   text-decoration: none;
+  }
+  .password:hover {
+   color: rgb(255, 168, 55); 
+
+  }

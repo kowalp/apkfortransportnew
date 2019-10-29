@@ -1,0 +1,28 @@
+<header>
+    <button class="btn" routerLink="../calendar"><img src="https://img.icons8.com/nolan/42/000000/circled-left.png">Go back</button>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" autocomplete="off">
+<div class="example-container">
+  <mat-form-field>
+    <input class="form" minlength="3" ngModel  name="Name" matInput placeholder="Name" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="email" minlength="5" name="Email"  class="form" ngModel matInput placeholder="Enter your email" >
+    <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+  <mat-form-field >
+    <input class="form" minlength="5" ngModel  [type]="hide ? 'password' : 'text'" name="Password" matInput placeholder="Password" required>
+    <mat-icon matSuffix   (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Select Role"  name="Role" ngModel required>
+      <mat-option value="master">Master</mat-option>
+      <mat-option value="driver">Driver</mat-option>
+      <mat-option value="receptionist">Reception</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button type="submit" class="btn btn-success" [disabled]="!f.valid">Register</button>
+</div>
+
+</form>
+</header>

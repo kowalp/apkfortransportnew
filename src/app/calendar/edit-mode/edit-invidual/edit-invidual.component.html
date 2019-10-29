@@ -1,0 +1,158 @@
+<div class="header">
+    <a routerLink="../calendar"  class="myButton"><img class="icon" src="https://img.icons8.com/metro/20/000000/calendar-11.png">Calendar</a>
+    <a routerLink="../register" class="myButton"><img src="https://img.icons8.com/android/20/000000/login-rounded.png">Register</a>
+    <a routerLink="../editHotels" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Hotels</a>
+    <a routerLink="../editForms" class="myButton"><img src="https://img.icons8.com/bubbles/26/000000/multi-edit.png">Edit-Forms</a>
+    <a routerLink="" (click)="logOut()" class="myButton"><img src="https://img.icons8.com/ultraviolet/20/000000/shutdown.png">Logout</a>
+    <button mat-button [matMenuTriggerFor]="menu" id="mobileMenu"><img src="https://img.icons8.com/ios/32/000000/menu-filled.png"></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item><a routerLink="../calendar"  class="navButton">Calendar</a></button>
+      <button mat-menu-item><a routerLink="../editHotels" class="navButton">Ed-Hotels</a></button>
+      <button mat-menu-item><a routerLink="../register" class="navButton">Register</a></button>
+      <button mat-menu-item><a routerLink="../editForms" class="navButton">Edit-Forms</a></button>
+      <button mat-menu-item><a routerLink="" (click)="logOut()" class="navButton">Logout</a></button>
+    </mat-menu>
+<h3>
+Edit events
+<button class="btn btn-primary pull-right" (click)="addEvent()">
+  Add new
+</button>
+<label id="datePick">
+    Wybierz date:
+    <input  [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10"
+           [selectMode]="'range'">
+    <owl-date-time (change)="ShowTripsByDate(dt10)" #dt10></owl-date-time>
+    <button class="btn btn-primary btnTopABit" (click)="ShowTripsByDate(dt10)">New Date</button>
+</label>
+<div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Email</th>
+      <th>Telefon</th>
+      <th>Transfer</th>
+      <th>Trip</th>
+      <th>Liczba Osób</th>
+      <th>Number Lotu</th>
+      <th>Odebrać Z</th>
+      <th>Komentarz</th>
+      <th>Zaczyna się</th>
+      <th>Delete</th>
+      <th>Update</th>
+      <th>Save</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    <tr *ngFor="let event of events">
+        <td>
+            <input
+              type="text"
+              [(ngModel)]="event.Name"
+              name="title"
+              (change)="refresh.next()"
+              #name
+            />
+          </td>
+        <td>
+            <input
+              type="text"
+              [(ngModel)]="event.title"
+              name="title"
+              (change)="refresh.next()"
+              #title
+            />
+          </td>
+      <td>
+        <input
+          type="text"
+          [(ngModel)]="event.Email"
+          name="email"
+          (change)="refresh.next()"
+          #email
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          [(ngModel)]="event.Phone"
+          name="phone"
+          (change)="refresh.next()"
+          #phone
+        />
+      </td>
+      <td>
+          <select class="dropdown-el labelFirst2" [(ngModel)]="event.Transfer"  name="Transfer">
+              <option name="Transfer" value="Transfer">Transfer</option>
+              <option *ngFor="let transfer of transfersArray" [value]="transfer">{{transfer}}</option>
+          </select>
+      </td>
+      <td>
+        <select class="dropdown-el labelFirst2" [(ngModel)]="event.Trip"  name="Trip">
+            <option name="Trip" value="Trip">Trip</option>
+            <option *ngFor="let trip of toursArray" [value]="trip">{{trip}}</option>
+        </select>
+    </td>
+      <td>
+          <select class="dropdown-el labelFirst2" [(ngModel)]="event.PersonCount"  name="numberOfPeople">
+              <option name="numberOfPeople" value="numberOfPeople">Number Of People</option>
+              <option *ngFor="let numberOfPeople of ppl" [value]="numberOfPeople">{{numberOfPeople}}</option>
+          </select>
+      </td>
+      <td>
+          <input
+            type="text"
+            [(ngModel)]="event.FlightNumber"
+            (change)="refresh.next()"
+            name="flightNumber"
+            #flightNumber
+          />
+        </td>
+        <td>
+            <input
+              type="text"
+              [(ngModel)]="event.Comment"
+              (change)="refresh.next()"
+              name="comment"
+              #comment
+            />
+          </td>
+          <td>
+              <input
+                type="text"
+                [(ngModel)]="event.PickupFrom"
+                (change)="refresh.next()"
+                name="pickupFrom"
+                #pickupFrom
+              />
+            </td>
+      <td>
+        <input  [(ngModel)]="event.start" (ngModelChange)="refresh.next()" [owlDateTimeTrigger]="dt" name="start" type="text" [owlDateTime]="dt" required #DepartureTime>
+          <owl-date-time #dt></owl-date-time>
+      </td>
+      
+      <td>
+        <button class="btn btn-danger" (click)="deleteEvent(event)" type="button">
+          Delete
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary" (click)="updateEvent(event)" type="button">
+          Update
+        </button>
+      </td>
+      <td>
+          <button class="btn btn-danger" (click)="saveEvent(event)" type="submit">
+            Save
+          </button>
+        </td>
+    </tr>
+  </tbody>
+
+</table>
+</div>

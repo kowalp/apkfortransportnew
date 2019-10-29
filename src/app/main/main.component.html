@@ -1,0 +1,55 @@
+
+<div class="header">
+    <nav>
+        <a [@navOut]="navout" id="calendar" (mouseenter)="navOut()" (mouseleave)="navOut()" routerLink="../calendar">Calendar<i class="icons"><img src="https://img.icons8.com/metro/32/000000/calendar-11.png"></i></a>
+        <a [@navOut2]="navout2" routerLink="../prices" id="pricing" (mouseenter)="navOut2()" (mouseleave)="navOut2()">Prices<i class="icons"><img src="https://img.icons8.com/wired/32/000000/expensive.png"></i></a>
+      </nav>
+  <div class="log-in">
+    <a routerLink="" (click)="logOut()" class="animated-button victoria-three">Log Out</a>
+  </div>
+  <div class="row imgResponsive">
+    <div class="responsive">
+      <a href="https://krakowwelcome.com">
+        <img  src="http://yea.com.pl/wp-content/uploads/2019/04/logo.png" alt="">
+      </a>
+    </div>
+  </div>
+
+  <section class="row beauty">
+      <div class="col-md-2"> </div>
+      
+      <div class="col-md-4  col-sm-12 for now"  (mouseenter)="onAnimate()" (mouseleave)="onAnimateReverse()">
+      <a class="linked" routerLink="../forNow">
+
+         <h1>FOR NOW</h1><br><br><br>
+         <p [@goUp]="state">If you need a fast ride at the moment<br>
+          Book your Trip/Transfer Now!
+        </p>
+        <button class="btn " [@fadeIn]="state">Book a Ride</button>
+    </a>
+
+      </div>
+      <div class="col-md-1 col-sm-0 line" > 
+      </div>
+
+      <div class="col-md-3 col-sm-12 for later" (mouseenter)="onAnimate2()" (mouseleave)="onAnimateReverse2()">
+      <a class="linked" routerLink="../forLater">
+
+        <h1>FOR LATER</h1><br><br><br>
+        <p [@goUp]="state2">Book a Trip/Transfer <br>
+          Wherever you want!
+        </p>
+        <button class="btn firstBtn"  [@fadeIn]="state2">Book a Ride</button>
+      </a>
+      </div>
+    </section>
+    
+  </div>
+  <section class="row car">
+      <div class="col-md-4"></div>
+      <div class="col-md-2">
+      <img class="cars" src="http://yea.com.pl/wp-content/uploads/2019/04/mercedes-benz-s-class-3378362_960_720.png" alt="" [@carUp]="car">
+      <img class="cars" src="http://yea.com.pl/wp-content/uploads/2019/04/mercedes-vito-png-6.png" alt="" [@carUp]="car2">
+
+      </div>
+    </section>
