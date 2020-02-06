@@ -1,493 +1,144 @@
-$textColor : rgb(14, 4, 100);
-$color2: #F8A93F;
-$fontColor: #fff;
-$color : #e06842;
-
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
-.full-width-table {
-  width: 100%;
-}
-body {
-  width: 100vw;
-  height: 100vh;
-}
-
-.header{
-  z-index: -1;
-  display: flex;
-  height: 100vh;
-    background: url('http://yea.com.pl/wp-content/uploads/2019/04/action-asphalt-auto-racing-938580-1.jpg') center no-repeat;
-    background-size: cover;
-  }
-  .animated-button{
-    height: 52px;
-  }
-  a.animated-button:link, a.animated-button:visited {
-  z-index: 2;
-  position: relative;
-  display: block;
-  margin: 6px auto 0;
-  padding: 14px 15px;
-  color: $fontColor;
-  font-size:14px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  letter-spacing: .08em;
-  border-radius: 0;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-  }
-  a.animated-button:link:after, a.animated-button:visited:after {
-  content: "";
-  position: absolute;
-  height: 0%;
-  left: 50%;
-  top: 50%;
-  width: 150%;
-  z-index: -1;
-  -webkit-transition: all 0.75s ease 0s;
-  -moz-transition: all 0.75s ease 0s;
-  -o-transition: all 0.75s ease 0s;
-  transition: all 0.75s ease 0s;
-  }
-  a.animated-button:link:hover, a.animated-button:visited:hover {
-  color: $textColor;
-  text-shadow: none;
-  }
-  a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
-  height: 450%;
-  }
-  
-  a.animated-button.victoria-three {
-  border: 2px solid $color2;
-  }
-  a.animated-button.victoria-three:after {
-  background: $color2;
-  opacity: .5;
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  }
-  a.animated-button.victoria-three:hover:after {
-  height: 140%;
-  opacity: 1;
-  }
-  @function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
-    @if $b-hsb == 0 {
-      @return hsla(0, 0, 0, $a);
-    } @else {
-      $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100));
-      $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
-      @return hsla($h-hsb, $s-hsl, $l-hsl, $a);
-    }
-  }
-  
-  @function hsb-saturate($s, $a) {
-    @if $s == 0 {
-      @return 0;
-    } @else {
-      @return $s + $a;
-    }
-  }
-  
-  @mixin buttonize($h, $s, $b, $light: 0) {
-  
-    $color: hsb($h, $s, $b);
-    $color-dark: hsb($h, hsb-saturate($s, 10), $b);
-    $inset-top: inset 0 1px 0 hsb($h, $s - 20, $b + 10);
-    $inset-bottom: inset 0 -1px 0 hsb($h, hsb-saturate($s, 10), $b - 10);
-    $inset: inset 0 0 0 1px hsb($h, hsb-saturate($s, - 10), $b);
-  
-    background-color: $color;
-    background-image: linear-gradient(to bottom, $color, $color-dark);
-    border: 1px solid hsb($h, hsb-saturate($s, 20), $b - 20);
-    box-shadow: $inset-top,
-                $inset-bottom,
-                $inset,
-                0 2px 4px rgba(black, 0.2);
-  
-    @if $light == 1 {
-      color: hsb($h, hsb-saturate($s, 40), $b - 40);
-      text-shadow: 0 1px 0 rgba(white, 0.5);
-    } @else {
-      color: white;
-      text-shadow: 0 1px 2px rgba(black, 0.3);
-    }
-  
-    &:hover,
-    &:focus {
-      background: $color-dark;
-      border-color: hsb($h, hsb-saturate($s, 40), $b - 40);
-      box-shadow: $inset-top,
-                  $inset-bottom,
-                  $inset;
-    }
-  
-    &:active {
-      background: $color-dark;
-      box-shadow: inset 0 2px 3px rgba(black, 0.2);
-    }
-  
-    .fa {
-      color: hsb($h, hsb-saturate($s, 20), $b - 20);
-      text-shadow: 0 1px 0 rgba(white, 0.3);
-    }
-  
-  }
-  .icon{
-    height: 32px;
-  }
-  
-  strong{ font-weight: bold;}
-  .button{ @include buttonize(0, 0, 95, 1); border-radius: 3px; cursor: pointer; display: inline-block; font-family: Verdana, sans-serif; font-size: 15px; font-weight: 400; line-height: 20px; padding: 9px 16px 9px; margin: 6px 0 6px 16px; transition: all 20ms ease-out; vertical-align: top;}
-  .button-purple{ @include buttonize(210, 24, 93);}
-  .button-orange{ @include buttonize(26, 77, 106);}
-  .button-green{ @include buttonize(97, 42, 80);}
-  .button-purple{ @include buttonize(249, 34, 73);}
-  .button .fa{ float: left; font-size: 14px; line-height: 20px; margin: -1px 8px 0 -4px; vertical-align: top;}
-  button{
-    background: none;
-      color: inherit;
-      border: none;
-      padding: 0;
-      font: inherit;
-      cursor: pointer;
-      outline: inherit;
-  }
-  
-  .imgResponsive { 
-    height: 100%;
+@import '../shared/styles/variables';
+@import '../shared/styles/buttons';
+@import '../shared/styles/typhography';
+.main-container {
+    @include flex(row, nowrap, space-evenly, center);
+    padding-right: 20px;
     width: 100%;
-    padding: 0;
-    margin: 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .responsive {
-      height: 10vh;
-      a{
-      img{
-        align-content: center;
-        align-items: center;
-        max-width:72%;
-        height: 18vh;
-        position: relative;
-        top:-35vh;
-        opacity: 0.8;
-        transform: scale(1, 1);
-        transition: 0.3s;  
-            left:7vh;
-        &:hover {
-          opacity: 1;
-          transform: scale(1.1, 1.1);
-          filter: brightness(120%);
+    height: calc(100vh - 150px);
+    transition: $transition-300;
+    &.isCollapsed {
+        padding-left: 120px;
+    }
+}
+
+.rides-conatiner {
+    width: 33%;
+    position: relative;
+}
+
+.last-rides {
+    padding: 20px;
+    border-radius: 2px;
+    border: 3px solid $menu-nav-main;
+    @include flex(column, nowrap, flex-start, center);
+    background: $white-dark;
+    position: relative;
+    width: 40%;
+    height: 80%;
+    @include boxshadow;
+    h2 {
+        @extend %title-large;
+    }
+    ul {
+        padding-top: 50px;
+        @include flex(column, nowrap, flex-start, stretch);
+        width: 100%;
+        li {
+            list-style-type: none;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            position: relative;
+            @include flex(row, nowrap, space-between, flex-start);
+            .title-container {
+                @include flex(column, nowrap, flex-start, flex-start);
+                p {
+                    text-transform: uppercase;
+                    @extend %title-medium;
+                    margin: 0;
+                }
+                span {
+                    color: $grey-dark;
+                    line-height: 15px;
+                    @extend %title-small;
+                }
+            }
+            span {
+                @extend %title-small;
+                color: $grey-dark;
+            }
+            &:nth-child(odd) {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 10px;
+                    height: 50px;
+                    background: $main-active-color;
+                }
+            }
+            &:nth-child(even) {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 10px;
+                    height: 50px;
+                    background: $menu-nav-main;
+                }
+            }
         }
-      
-      }
     }
-      
-      
-    }
-  }
-  .beauty{
-    display: flex;
-    position: absolute;
-    z-index: 2;
+}
+
+.favourite-companies {
+    border-radius: 2px;
+    border: 3px solid $menu-nav-main;
+    padding: 20px;
+    @include flex(column, nowrap, center, center);
+    background: $white-dark;
     width: 100%;
-    top: 50vh;
-     .for {
-      a{
-
-        p{
-          text-align: center;
-          font-family: 'Courier New', Courier, monospace;
-          font-size: 1rem;
-          color: $fontColor;
-          font-size: 15px;
+    min-height: 340px;
+    max-height: 400px;
+    @include boxshadow;
+    &.last-trip {
+        ul li {
+            @include flex(column, nowrap, center, center);
+            .inner-container {
+                position: relative;
+                width: 100%;
+                background: $white-background;
+                @include boxshadow;
+            }
+            p {
+                margin: -42px 0 21px;
+                border: 1px solid rgb(209, 209, 209);
+                padding: 5px;
+                font-weight: 600;
+            }
+            ul li {
+                @include flex(row, nowrap, space-between, center);
+                span {
+                    text-align: left;
+                }
+            }
         }
-        h1{
-        color:$fontColor;
-        font-family: 'Fira Sans', sans-serif;
-        font-size: 30px;
-        line-height: 1.28571;
-        letter-spacing: .267em;
-        text-transform: uppercase;
-        text-align: center;
-      }
-      button{
-        position: relative;
-        align-content: center;
-        @media (max-width: 1116px) {
-        left:33%;
+    }
+    ul {
+        margin: 0;
+        padding: 50px 0 0;
+        @include flex(column, nowrap, flex-start, stretch);
+        width: 100%;
+        li {
+            list-style-type: none;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            position: relative;
+            @include flex(row, nowrap, space-between, flex-start);
+            .btn {
+                @extend %btn-primary;
+            }
+            p {
+                text-transform: uppercase;
+                font-style: normal;
+                @extend %title-small;
+            }
         }
-        justify-content: center;
-        color:$fontColor;
-        padding: 10px;
-        border: thin solid #fff;
-        background-color: transparent;
-        &:hover {
-          background: #000;
-          color:#fff;
-        border: thin solid #000;
-        -webkit-box-shadow: 0px 0px 8px 3px rgba(87,87,87,1);
--moz-box-shadow: 0px 0px 8px 3px rgba(87,87,87,1);
-box-shadow: 0px 0px 8px 3px rgba(87,87,87,1);
-        }
-      }
     }
-      
+    &:first-child {
+        margin-bottom: 20px;
     }
-     .line { 
-       border-left: 0.5px solid $fontColor;
-       height: 230px;
-       margin-top:-100px;
-       
-     }
-    
-  }
-
-.log-in {
-  position: absolute;
-  right: 10px;
-}
-
-.car {
-  position: absolute;
-  margin-right: 0;
-  left:35%;
-  top:70vh;
-  .col-md-2 {
-    img {
-    position: absolute;
+    h2 {
+        @extend %title-large;
     }
-}
-}
-.later{
-  position: relative;
-  left:-4%;
-}
-
-
-#calendar {
-  position: absolute; /* Position them relative to the browser window */
-  transition: 0.3s; /* Add transition on hover */
-  width: 150px; /* Set a specific width */
-  text-decoration: none; /* Remove underline */
-  font-size: 1.5rem; /* Increase font size */
-  color: #000; /* White text color */
-  font-weight: 600;
-  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
-  top: 20px;
-  background-color: $color;
-z-index: 32;
- 
-  font-family: proxima-nova, monospace;
-}
-
-
-/* The about link: 20px from the top with a green background */
-#pricing {
-  position: absolute; /* Position them relative to the browser window */
-  transition: 0.3s; /* Add transition on hover */
-  width: 120px; /* Set a specific width */
-  text-decoration: none; /* Remove underline */
-  font-size: 1.5rem; /* Increase font size */
-  color: #000; /* White text color */
-  font-weight: 600;
-  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
-  top: 80px;
-  background-color: #3760AF; /* Blue */
-  font-family: proxima-nova, monospace;
-z-index: 32;
-}
-.icons{
-  margin-bottom: 5px;
-  float: right;
-}
-
-.linked{
-  text-decoration: none;
-}
-  button{
-    @media (min-width: 1117px) {
-    left: 35%;
-    }
-    @media(min-width: 1200px) {
-    left: 37%;
-    }
-    @media (min-width: 1317px) {
-    left: 39%;
-    }
-    @media (min-width: 1400px) {
-    left: 42%;
-    }
-  
-}
-@media (min-width: 1200px){
-  .firstBtn{
-    position: relative;
-    left: 35%!important;
-  }
-
-}
-@media (min-width: 1900px){
-  .firstBtn{
-    position: relative;
-    left: 37%!important;
-  }
-}
-@media (max-width: 1124px){
-  .firstBtn{
-    position: relative;
-    left: 29%!important;
-  }
-}
-@media (max-width: 1024px){
-  .firstBtn{
-    position: relative;
-    left: 24%!important;
-  }
-}
-@media (max-width: 1024px){
-.beauty{
-    top: 45vh!important;
-  }
-  .later a h1{
-    min-width:215px;
-  }
-}
-@media (max-width: 817px){
-    .for a p{
-      min-width:205px;
-    }
-    .beauty .line{
-      margin-left: 5%;
-    }
-    .firstBtn {
-      margin-top:45px;
-    }
-  }
-.cars{
-  @media (max-width: 1116px) {
-    left: -131%;
-  }
-  @media (min-width: 1117px) {
-    left: -85%;
-  }
-  @media(min-width: 1300px) {
-  left: -30%;
-  }
-  @media (min-width: 1399px) {
-  left: 7%;
-  }
-  @media (min-width: 1500px) {
-  left: 68%;
-  }
-  @media (min-width: 1600px) {
-    left: 119%;
-  }
-  @media (min-width: 1700px) {
-    left: 176%;
-  }
-  @media (min-width: 1800px) {
-    left: 236%;
-  }
-  @media (min-width: 1900px) {
-    left: 276%;
-  }
-  @media (min-width: 2000px) {
-    left: 320%;
-  }
-  @media (min-width: 2100px) {
-    left: 380%;
-  }
-}
-
-@media (max-width: 767px){
-  .imgResponsive .responsive img{
-    top:-42vh!important;
-  }
-  .cars, .line {
-    display: none;
-  }
-  button{
-    opacity: 1;
-    left:40%!important;
-  }
-  .beauty{
-    top: 25vh!important;
-  }
-  .later{
-    margin-top:5%;
-    position: relative;
-    margin-left:8%;
-  }
-  .now{
-    position: relative;
-    margin-left:4%;
-  }
-  .firstBtn{
-    left:42%!important;
-  }
-  .for {
-    p{
-      font-size: 17px;
-    }
-    h1{
-    font-size: 26px;
-    margin-bottom: 5%;
-    }
-  } 
-  .for br {
-    display:none;
-  }
-}
-@media (max-width: 728px){
-  button{
-    opacity: 1;
-    left:42%!important;
-  }
-}
-@media (max-width: 570px){
-  button{
-    left:40%!important;
-  }
-}
-@media (max-width: 490px){
-  button{
-    left:37%!important;
-  }
-  .firstBtn{
-    left:38%!important;
-  }
-}
-@media (max-width: 384px){
-  button{
-    left:34%!important;
-  }
-  .firstBtn{
-    left:35%!important;
-  }
-}
-@media (max-width: 340px){
-  button{
-    left:30%!important;
-  }
-  .firstBtn{
-    left:31%!important;
-  }
-  .imgResponsive .responsive img{
-    left:5vh!important;
-  }
 }

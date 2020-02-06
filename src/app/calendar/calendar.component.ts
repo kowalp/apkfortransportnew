@@ -1,35 +1,22 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from './../log-in/auth.service';
-import { CalendarService } from './calendar.service';
+import { MenuService } from './../shared/services/menu.service';
+import { AuthService } from '../shared/services/auth.service';
+import { forkJoin, Subject } from 'rxjs';
+import { CalendarService } from '../shared/services/calendar.service';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import * as moment from 'moment';
 import {
   Component,
-  ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
   OnInit,
   ElementRef,
-  Renderer2
 } from '@angular/core';
 import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours
 } from 'date-fns';
-import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView
-} from 'angular-calendar';
+import { CalendarView } from 'angular-calendar';
+import { takeUntil } from 'rxjs/operators';
 
 export interface CalendarEvent<MetaType = any> {
   Id?: number;
@@ -50,27 +37,12 @@ export interface CalendarEvent<MetaType = any> {
   allDay?: boolean;
   cssClass?: string;
   resizable?: {
-      beforeStart?: boolean;
-      afterEnd?: boolean;
+    beforeStart?: boolean;
+    afterEnd?: boolean;
   };
   draggable?: boolean;
   meta?: MetaType;
 }
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
 
 @Component({
   selector: 'app-calendar',
@@ -82,48 +54,67 @@ export class CalendarComponent implements OnInit {
   receptionistForm: Array<CalendarEvent<{ time: any }>> = [];
   invidualForm: Array<CalendarEvent<{ time: any }>> = [];
   allFroms: Array<CalendarEvent<{ time: any }>> = [];
-  tours = [];
-  transfers = [];
+  userRole: string;
+  view: CalendarView = CalendarView.Week;
   isMaster = false;
   isDriver = false;
   doneTrip = false;
-  constructor(private modal: NgbModal, private calendarService: CalendarService, private authService: AuthService,
-              private snackBar: MatSnackBar, private rd: Renderer2) {
-  }
-  @ViewChild('checkBox', { static: false }) el: ElementRef;
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-  @ViewChild(MatMenuTrigger, { static: false }) trigger: MatMenuTrigger;
-  view: CalendarView = CalendarView.Week;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
-
   modalData: {
     action: string;
     event: CalendarEvent;
   };
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      }
-    }
-  ];
-
   refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [
-  ];
-
+  events: CalendarEvent[] = [];
+  collapse: boolean;
   activeDayIsOpen = true;
+  @ViewChild('checkBox', { static: false }) checkbox: ElementRef;
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild(MatMenuTrigger, { static: false }) trigger: MatMenuTrigger;
+  private $unsubscribe: Subject<void> = new Subject<void>();
+
+  constructor(private modal: NgbModal, private calendarService: CalendarService, private authService: AuthService, private menuService: MenuService) {
+  }
+
+  ngOnInit() {
+    // this.userRole = localStorage.getItem('role');
+    // this.isMaster = false;
+    // this.isDriver = false;
+    // if (this.userRole === 'master') {
+    //   this.isMaster = true;
+    // } else if (this.userRole === 'driver') {
+    //   this.isDriver = true;
+    // }
+    // this.isDriver === true ? this.view = CalendarView.Day : this.view = CalendarView.Week;
+    // if (this.userRole === 'receptionist') {
+    //   const nameOfTheHotel = localStorage.getItem('name');
+    //   this.calendarService.getIndividualHotelData(nameOfTheHotel);
+    //   this.calendarService.setIndividualFormsAsOvservable()
+    //     .subscribe((res) => {
+    //       this.receptionistForm = res;
+    //       this.events = this.receptionistForm;
+    //     });
+    // } else if (this.userRole === 'master' || this.userRole === 'driver') {
+    //   this.calendarService.getHotelForms();
+    //   this.calendarService.setHotelFormsAsObservable()
+    //     .subscribe((res) => this.invidualForm = res);
+    //   this.calendarService.getIndividualFroms();
+    //   this.calendarService.setIndividualFormsAsOvservable()
+    //     .subscribe((res) => this.hotelForm = res);
+    //   forkJoin([this.hotelForm, this.invidualForm]).subscribe(results => {
+    //     this.events = results;
+    //   });
+    // }
+    this.menuService.getStatusOfMenuAsObservable().pipe(takeUntil(this.$unsubscribe)).subscribe((isCollapsed: boolean) => {
+      this.collapse = !isCollapsed;
+    })
+  }
+
+  ngOnDestroy() {
+    this.$unsubscribe.next();
+    this.$unsubscribe.complete();
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -138,220 +129,29 @@ export class CalendarComponent implements OnInit {
       }
     }
   }
-  ngOnInit() {
-    this.isMaster = false;
-    this.isDriver = false;
-    if (localStorage.getItem('role') === 'master') {
-      this.isMaster  = true;
-    }
-    if (localStorage.getItem('role') === 'driver') {
-      this.isDriver = true;
-    }
-    this.isDriver === true ? this.view = CalendarView.Day : this.view = CalendarView.Week;
 
-    this.calendarService.getTours()
-    .subscribe(
-      (res) => {
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = {
-              name: res[key].name,
-              price: res[key].price,
-              PriceFrom5Persons: res[key].PriceFrom5Persons,
-              duration: res[key].duration,
-            };
-            this.tours.push(element);
-          }
-        }
-      }
-    );
-    this.calendarService.getTransfers()
-    .subscribe(
-      (res) => {
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = {
-              name: res[key].name,
-              price: res[key].price,
-              PriceFrom5Persons: res[key].PriceFrom5Persons,
-              duration: res[key].duration,
-            };
-            this.transfers.push(element);
-          }
-        }
-      }
-    );
-    if (localStorage.getItem('role') === 'receptionist') {
-      setTimeout(() => {
-        const nameOfTheHotel = localStorage.getItem('name');
-        this.calendarService.hotelFormsForHotel(nameOfTheHotel)
-        .subscribe(
-          (res) => {
-            for (const key in res) {
-              if (res.hasOwnProperty(key)) {
-                const element = {
-                  Id: res[key].id,
-                  Name: res[key].name || '',
-                  start: this.getStartTime(res[key].arrivalTime),
-                  end:  this.getEndTime(new Date(res[key].arrivalTime),
-                  res[key].tour !== 'Trip' && res[key].tour !== null ? res[key].tour : res[key].transfer),
-                  title: this.getTitle(res[key].title, res[key].tour, res[key].transfer),
-                  Email: res[key].email || '',
-                  Phone: res[key].phone || '',
-                  Transfer: res[key].transfer || '',
-                  Trip: res[key].tour || '',
-                  PersonCount: res[key].personCount,
-                  Price: res[key].tour !== 'Trip' && res[key].tour !== null ?
-                  this.getPriceTo(res[key].tour) : this.getPriceTr(res[key].transfer),
-                  TourType: 'hotel'
-                };
-                this.receptionistForm.push(element);
-              }
-            }
-          });
-        setTimeout(() => {
-          this.events = [...this.receptionistForm];
-        }, 700);
-      }, 100);
-    }
-    if (localStorage.getItem('role') === 'master' || localStorage.getItem('role') === 'driver') {
-      setTimeout( () => {
-        this.calendarService.hotelForms()
-        .subscribe(
-          (res) => {
-            for (const key in res) {
-              if (res.hasOwnProperty(key)) {
-                const element = {
-                  Id: res[key].id,
-                  Name: res[key].name || '',
-                  start: this.getStartTime(res[key].arrivalTime),
-                  end:  this.getEndTime(new Date(res[key].arrivalTime),
-                  res[key].tour !== 'Trip' && res[key].tour !== null ? res[key].tour : res[key].transfer),
-                  title: this.getTitle(res[key].title, res[key].tour, res[key].transfer),
-                  Email: res[key].email || '',
-                  Phone: res[key].phone || '',
-                  Transfer: res[key].transfer || '',
-                  Trip: res[key].tour || '',
-                  PersonCount: res[key].personCount,
-                  Price: res[key].tour !== 'Trip' && res[key].tour !== null ?
-                  this.getPriceTo(res[key].tour) : this.getPriceTr(res[key].transfer),
-                  TourType: 'hotel'
-                };
-                this.invidualForm.push(element);
-              }
-            }
-          });
-        this.calendarService.invidualForms()
-        .subscribe(
-          (res) => {
-            for (const key in res) {
-              if (res.hasOwnProperty(key)) {
-                const element = {
-                  Id: res[key].id,
-                  Name: res[key].name || '',
-                  start: this.getStartTime(res[key].arrivalTime),
-                  end: this.getEndTime(new Date(res[key].arrivalTime),
-                  res[key].tour !== 'Trip' && res[key].tour !== null ? res[key].tour : res[key].transfer),
-                  title: this.getTitle(res[key].title, res[key].tour, res[key].transfer),
-                  Email: res[key].email || '',
-                  Phone: res[key].phone || '',
-                  Transfer: res[key].transfer || '',
-                  Trip: res[key].tour || '',
-                  PersonCount: res[key].personCount,
-                  Price: res[key].price || (res[key].tour !== 'Trip' && res[key].tour !== null ?
-                  this.getPriceTo(res[key].tour) : this.getPriceTr(res[key].transfer)),
-                  PickupFrom: res[key].pickupFrom,
-                  Comment: res[key].comment,
-                  FlightNumber: res[key].flightNumber,
-                  TourType: 'individual'
-                };
-                this.hotelForm.push(element);
-              }
-            }
-        });
-        setTimeout(() => {
-          this.allFroms = [...this.hotelForm, ...this.invidualForm];
-          this.events = this.allFroms;
-          }, 700);
-      }, 100);
-    }
-  }
-  getStartTime(time: Date) {
-    return moment(time).add(120, 'm').toDate();
-  }
-  getEndTime(time: Date, tour: string) {
-    for (const key of this.tours || this.transfers) {
-      if (tour === key.name) {
-        const newDate = moment(time).add(120 + key.duration, 'm').toDate();
-        return newDate;
-      }
-    }
-    return moment(time).add(180, 'm').toDate();
-  }
-  getTitle(title, trip, transfer) {
-    if (title !== null) {
-      return title;
-    } else if (transfer !== 'Transfer' && transfer !== null) {
-      return transfer;
-    } else {
-      return trip;
-    }
-  }
-  getPriceTo(tour: string) {
-    for (const key of this.tours) {
-      if (tour === key.name) {
-        return key.price;
-      }
-    }
-    return '';
-  }
-  getPriceTr(tour: string) {
-    for (const key of this.transfers) {
-      if (tour === key.name) {
-        return key.price;
-      }
-    }
-    return '';
-  }
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
-  }
-  setView(view: CalendarView) {
-    this.view = view;
   }
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
   logOut() {
     this.authService.Logout();
   }
-openSnackBar() {
-  this.snackBar.open('Dziękujemy!', 'Zostałeś oznaczony jako wykonawca wycieczki!', {
-    duration: 2000,
-  });
-}
-checked() {
-  this.doneTrip === false ? this.doneTrip = true : this.doneTrip = false;
-}
-onSubmit(e) {
-  const arrayOfData = {
-    UserEmail: localStorage.getItem('email'),
-    BookingId: e.Id,
-    BookingFormEmail: e.Email,
-    FormType: e.TourType
-  };
-  this.calendarService.addBookingForDriver(arrayOfData)
-  .subscribe((data: any) => {
-    this.openSnackBar();
-  },
-  (err: HttpErrorResponse) => {
-    console.log(err );
-  });
-  this.doneTrip = false;
 
-}
+  onSubmit(e) {
+    const arrayOfData = {
+      UserEmail: localStorage.getItem('email'),
+      BookingId: e.Id,
+      BookingFormEmail: e.Email,
+      FormType: e.TourType
+    };
+    this.calendarService.addBookingForDriver(arrayOfData);
+  }
 
 }
 

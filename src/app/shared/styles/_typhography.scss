@@ -1,0 +1,58 @@
+@import './variables';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap&subset=latin-ext');
+%title-large {
+    font-family: $font-title;
+    font-size: $title-large;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $main-active-color;
+}
+
+%title-medium {
+    font-family: $font-default;
+    font-size: $title-medium;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $main-font;
+}
+
+%title-small {
+    font-family: $font-default;
+    font-size: $title-small;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $main-font;
+}
+
+%data-table {
+    font-family: $font-default;
+    font-size: $title-small;
+    font-weight: 400;
+    line-height: 32px;
+    color: $grey-dark;
+}
+
+%subtitle {
+    font-family: $font-default;
+    font-size: $title-small;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: $grey-dark;
+}
+
+%description {
+    font-family: $font-default;
+    font-size: $subtitle;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: $grey-bright;
+}

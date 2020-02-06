@@ -1,0 +1,78 @@
+@import './_variables.scss';
+@font-face {
+    font-family: 'MyWebFont';
+    src: url('src/app/shared/assets/fonts/KIN668.TTF') format('truetype'), /* Safari, Android, iOS */
+}
+
+html {
+    @extend %firefox-scrollbar;
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: 'MyWebFont', Arial, sans-serif;
+}
+
+body {
+    position: relative;
+    line-height: 1.3;
+    &.gallery-modal {
+        overflow: hidden;
+    }
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $grey-bright;
+    outline: 0;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+p,
+span,
+label,
+img,
+input:not(:focus),
+div,
+button,
+a,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    user-select: none;
+}
+
+.image-lazy-loading {
+    transition: $transition-300;
+    opacity: 0;
+}
+
+.image-lazy-loaded {
+    opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: .25em;
+    height: .25em;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px transparent;
+    -webkit-box-shadow: inset 0 0 6px transparent;
+}

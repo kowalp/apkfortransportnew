@@ -1,0 +1,30 @@
+<section class="form-section" *ngIf="formData">
+    <div [formGroup]="reservationForm" class="search-form">
+        <div class="form-upper-part">
+            <ng-container *ngFor="let item of formData; let idx = index" [ngSwitch]="item.key">
+                <div class="input-container currency" *ngSwitchCase="'currency'" [ngClass]="{'error': reservationForm.currency.dirty && !reservationForm.currency.valid}">
+                    <input type="hidden" formControlName="currency" />
+                    <label for="currency">CURRENCY&nbsp;*</label>
+                </div>
+                <div class="input-container number" *ngSwitchCase="'min_rate'" [ngClass]="{'error': (reservationForm.min_rate.dirty && !reservationForm.min_rate.valid) || formInvalid}">
+                    <input type="number" formControlName="min_rate" (inputValue)="updateValue($event, item.key)" [value]="item.value ? item.value : ''" [placeholder]="item.label | titlecase" class="input-value">
+                    <label for="min_rate">MIN RATE&nbsp;*</label>
+                </div>
+                <div class="input-container number" *ngSwitchCase="'max_rate'" [ngClass]="{'error': (reservationForm.max_rate.dirty && !reservationForm.max_rate.valid) || formInvalid}">
+                    <input type="number" formControlName="max_rate" (inputValue)="updateValue($event, item.key)" [value]="item.value ? item.value : ''" [placeholder]=" item.label | titlecase" class="input-value">
+                    <label for="max_rate">MAX RATE</label>
+                </div>
+                <div class="input-container number" *ngSwitchCase="'base_port'" [ngClass]="{'error': (reservationForm.base_port.dirty && !reservationForm.base_port.valid) || formInvalid}">
+                    <input type="text" formControlName="base_port" (inputValue)="updateValue($event, item.key)" [value]="item.value ? item.value : ''" [placeholder]=" item.label | titlecase" class="input-value">
+                    <label for="base_port">BASE PORT</label>
+                </div>
+                <!-- <div class="input-container dropdown-container" *ngSwitchCase="'singleselect'">
+                    <input [formControlName]="item.key" type="text" class="dropdown" />
+                    <form-dropdown [selectedOption]="item.value?.key ? item.value.key : item.value" [data]="item.choices"
+                     [defaultTitle]="item.label | titlecase" (inputValue)="patchValue($event, item.key)">
+                    </form-dropdown>
+                </div> -->
+            </ng-container>
+        </div>
+    </div>
+</section>
