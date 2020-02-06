@@ -1,148 +1,46 @@
 <div class="header">
-  <a href="http://krakowwelcome.com/" class="myButton"><img class="icon" src="https://img.icons8.com/metro/20/000000/world-map.png">Krakow Welcome</a>
-  <a class="myButton" routerLink="../Home"><img class="icon" src="https://img.icons8.com/color/20/000000/mercedes-benz.png">Booking</a>
-  <a routerLink="../reports" *ngIf="!isDriver"  class="myButton"><img class="icon" src="https://img.icons8.com/color/20/000000/literature.png">Reports</a>
-  <a routerLink="../register" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/android/20/000000/login-rounded.png">Register</a>
-  <a routerLink="../editHotels" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Hotels</a>
-  <a routerLink="../editInviduals" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Invidual</a>
-  <a routerLink="../editForms" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/bubbles/20/000000/multi-edit.png">Edit-Forms</a>
-  <a routerLink="../passwordChange" class="myButton"><img src="https://img.icons8.com/ios/20/000000/password--v2.png">Change Password</a>
-  <a routerLink="" (click)="logOut()"  class="myButton"><img src="https://img.icons8.com/ultraviolet/20/000000/shutdown.png">Logout</a>
-
-  <button mat-button [matMenuTriggerFor]="menu" id="mobileMenu"><img src="https://img.icons8.com/ios/32/000000/menu-filled.png"></button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item><a href="http://krakowwelcome.com/" class="navButton">Krakow Welcome</a></button>
-    <button mat-menu-item><a class="navButton" routerLink="../Home">Booking</a></button>
-    <button mat-menu-item><a routerLink="../reports" *ngIf="!isDriver"  class="navButton">Reports</a></button>
-    <button mat-menu-item><a routerLink="../register" *ngIf="isMaster" class="navButton">Register</a></button>
-    <button mat-menu-item><a routerLink="../editHotels" *ngIf="isMaster" class="navButton">Ed-Hotels</a></button>
-    <button mat-menu-item><a routerLink="../editInviduals" *ngIf="isMaster" class="navButton">Ed-Invidual</a></button>
-    <button mat-menu-item><a routerLink="../editForms" *ngIf="isMaster" class="navButton">Edit-Forms</a></button>
-    <button mat-menu-item><a routerLink="../passwordChange" class="navButton">Change password</a></button>
-
-    <button mat-menu-item><a routerLink="" (click)="logOut()"  class="navButton">Logout</a></button>
-  </mat-menu>
-
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-        Previous
-      </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
-        Today
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-        Next
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Month)"
-        [class.active]="view === CalendarView.Month"
-      >
-        Month
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Week)"
-        [class.active]="view === CalendarView.Week"
-      >
-        Week
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day"
-      >
-        Day
-      </div>
-    </div>
-  </div>
+    <app-header [activeNumber]="'1'">
+    </app-header>
+    <section class="calendar" [ngClass]="{'collaped': collapse}">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="btn-group">
+                    <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                        Previous
+                    </div>
+                    <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                        Today
+                    </div>
+                    <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                        Next
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="btn-group">
+                    <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                        Month
+                    </div>
+                    <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                        Week
+                    </div>
+                    <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                        Day
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div [ngSwitch]="view">
+            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
+            </mwl-calendar-day-view>
+        </div>
+    </section>
 </div>
-<br />
-<div [ngSwitch]="view">
-  <mwl-calendar-month-view
-    *ngSwitchCase="CalendarView.Month"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="CalendarView.Week"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-  >
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="CalendarView.Day"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-  >
-  </mwl-calendar-day-view>
-</div>
-
-<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
-<ng-template #modalContent let-close="close">
-  <div class="modal-header">
-    <h5 class="modal-title">Event</h5>
-    <button type="button" class="close" (click)="close()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <pre >
-          <div class="jsonShow" *ngIf="modalData.event.Name"><h4>Name:</h4><i class="fas fa-user-alt"></i><p>{{modalData?.event.Name}}</p><br></div>
-          <div class="jsonShow"><h4>Date:</h4><i class="far fa-clock"></i><p>{{modalData?.event.start}}</p><br></div>
-          <div class="jsonShow"><h4>Phone:</h4><i class="fas fa-mobile-alt"></i><p>{{modalData?.event.Phone}}</p><br></div>
-          <div class="jsonShow" *ngIf="modalData.event.Transfer"><h4>Transfer:</h4><i class="fas fa-exchange-alt"></i><p>{{modalData?.event.Transfer}}</p><br></div>
-          <div class="jsonShow" *ngIf="modalData.event.Trip"><h4>Trip:</h4><i class="fas fa-suitcase-rolling"></i><p>{{modalData?.event.Trip}}</p><br></div>
-          <div class="jsonShow"><h4>PersonCount:</h4><i class="fas fa-users"></i><p>{{modalData?.event.PersonCount}}</p><br></div>
-          <div class="jsonShow" *ngIf="modalData.event.PickupFrom"><h4>Pick up From:</h4><i class="fas fa-car"></i><p>{{modalData?.event.PickupFrom}}</p><br></div>
-          <div class="jsonShow" *ngIf="modalData.event.FlightNumber"><h4>Flight number:</h4><i class="fas fa-plane"></i><p>{{modalData?.event.FlightNumber}}</p><br></div>
-          <div class="jsonShow" *ngIf="modalData.event.Comment"><h4>Comment:</h4><i class="fas fa-comments"></i><p>{{modalData?.event.Comment}}</p><br></div>
-          <div class="jsonShow" *ngIf="modalData.event.Price"><h4>Price(zł):</h4><i class="fas fa-tag"></i><p>{{modalData?.event.Price}}</p><br></div>
-
-          <mat-checkbox #checkBox *ngIf="isDriver" (click)="checked($event)" style="position: relative; left: 0px;">I've done that trip</mat-checkbox>
-        </pre>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button *ngIf="doneTrip" type="submit" class="submitBtn" (click)="onSubmit(modalData.event)">
-      Confirm & Send
-    </button>
-  <a  class="submitBtn" (click)="close()">OK</a>
-  </div>
-</ng-template>

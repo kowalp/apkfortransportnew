@@ -1,7 +1,9 @@
-import { AuthService } from './auth.service';
+import { KeyValueObject } from './../shared/models/calendar.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-log-in',
@@ -9,30 +11,77 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent implements OnInit {
-  isLoginError = false;
-  constructor(private router: Router, private authService: AuthService) { }
+  isLoginError: boolean = false;
   email: string;
   password: string;
+  registerForm: FormGroup;
+  loginForm: FormGroup;
+  registerFormActive: boolean = false;
+  loginFormActive: boolean = true;
+  userRoles: any[] = [{ key: 'Driver', value: 'driver' }, { key: 'Regular User', value: 'hotel' }];
+  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.createForms();
   }
-  onSubmit(email, password): void {
-    this.authService.LogIn(email, password)
-    .subscribe((data: any) => {
-      localStorage.setItem('userToken', data.token);
-      localStorage.setItem('role', data.role);
-      localStorage.setItem('name', data.name);
-      if (localStorage.getItem('role') === 'driver') {
-        this.router.navigate(['../calendar']);
-      } else {
-          this.router.navigate(['../Home']);
-      }
-      if (data.token != null) {
-        localStorage.setItem('email', email);
-      }
-    },
-    (err: HttpErrorResponse) => {
-      this.isLoginError = true;
+
+  onLoginSubmit(): void {
+    this.authService.LogIn(this.loginForm.value.email, this.loginForm.value.password)
+      .subscribe((data: any) => {
+        localStorage.setItem('userToken', data.token);
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('name', data.name);
+        if (data.role === 'driver') {
+          this.router.navigate(['../calendar']);
+        } else {
+          this.router.navigate(['../main']);
+        }
+        if (data.token !== null) {
+          localStorage.setItem('email', this.loginForm.value.email);
+        }
+      },
+        () => {
+          this.isLoginError = true;
+        });
+  }
+  onRegisterSubmit(): void {
+    console.log();
+    this.authService.Register(this.prepareDataFormatForRegister(this.registerForm.value))
+    this.registerForm.reset();
+  }
+
+  changeToRegister(): void {
+    this.registerFormActive = true;
+    this.loginFormActive = false;
+  }
+
+  changeToLogin(): void {
+    this.registerFormActive = false;
+    this.loginFormActive = true;
+  }
+
+  changeValue(result: string): void {
+    this.registerForm.patchValue({roleR: result});
+  }
+
+  private prepareDataFormatForRegister(data: any) {
+    return {
+      Name: data.emailR,
+      Email: data.emailR,
+      Password: data.passwordR,
+      Role: data.roleR.value,
+    }
+  }
+
+  private createForms(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+    this.registerForm = this.fb.group({
+      emailR: ['', [Validators.required, Validators.email]],
+      roleR: ['', Validators.required],
+      passwordR: ['', Validators.required]
     });
   }
 }

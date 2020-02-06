@@ -1,30 +1,41 @@
 <header>
-    <a href="http://krakowwelcome.com/" class="myButton"><img class="icon" src="https://img.icons8.com/metro/20/000000/world-map.png">Krakow Welcome</a>
-    <a class="myButton" routerLink="../Home"><img class="icon" src="https://img.icons8.com/color/20/000000/mercedes-benz.png">Booking</a>
-    <a routerLink="../calendar"  class="myButton"><img class="icon" src="https://img.icons8.com/metro/20/000000/calendar-11.png">Calendar</a>
-    <a routerLink="../register" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/android/20/000000/login-rounded.png">Register</a>
-    <a routerLink="../editHotels" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Hotels</a>
-    <a routerLink="../editInviduals" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/dusk/20/000000/edit-file.png">Ed-Invidual</a>
-    <a routerLink="../editForms" *ngIf="isMaster" class="myButton"><img src="https://img.icons8.com/bubbles/26/000000/multi-edit.png">Edit-Forms</a>
-    <a routerLink="" (click)="logOut()" class="myButton"><img src="https://img.icons8.com/ultraviolet/20/000000/shutdown.png">Logout</a>
-    <button mat-button [matMenuTriggerFor]="menu" id="mobileMenu"><img src="https://img.icons8.com/ios/32/000000/menu-filled.png"></button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item><a href="http://krakowwelcome.com/" class="navButton">Krakow Welcome</a></button>
-      <button mat-menu-item><a class="navButton" routerLink="../Home">Booking</a></button>
-      <button mat-menu-item><a routerLink="../calendar"  class="navButton">Calendar</a></button>
-      <button mat-menu-item><a routerLink="../register" *ngIf="isMaster" class="navButton">Register</a></button>
-      <button mat-menu-item><a routerLink="../editHotels" *ngIf="isMaster" class="navButton">Ed-Hotels</a></button>
-      <button mat-menu-item><a routerLink="../editInviduals" *ngIf="isMaster" class="navButton">Ed-Invidual</a></button>
-      <button mat-menu-item><a routerLink="../editForms" *ngIf="isMaster" class="navButton">Edit-Forms</a></button>
-      <button mat-menu-item><a routerLink="" (click)="logOut()" class="navButton">Logout</a></button>
-    </mat-menu>
-    <div class="col-md-2">
-        <mat-checkbox #checkBox *ngIf="isMaster" (click)="checked()" style="position: relative; left: 0px;">Report For Drivers</mat-checkbox>
+    <app-header [activeNumber]="'3'"></app-header>
+    <!-- <div class="col-md-2">
+        <mat-checkbox #checkBox (click)="checked()" style="position: relative; left: 0px;">Report For Drivers
+        </mat-checkbox>
     </div>
     <div class="col-md-2">
-      <mat-checkbox #checkBox *ngIf="isMaster" (click)="checked2()" style="position: relative; left: 0px; top:20px;">Report For Hotel</mat-checkbox>
-  </div>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!driverReport && !isMaster">
+        <mat-checkbox #checkBox (click)="checked2()" style="position: relative; left: 0px; top:20px;">
+            Report For Hotel</mat-checkbox>
+    </div>
+    <section class="form-section" *ngIf="formData">
+        <div [formGroup]="raportsForm" class="search-form yco-form-container">
+            <div class="form-upper-part">
+                <ng-container *ngFor="let item of formData; let idx = index" [ngSwitch]="item.key">
+                    <div class="input-container currency" *ngSwitchCase="'currency'" [ngClass]="{'error': raportsForm.controls.currency.dirty && !raportsForm.controls.currency.valid}">
+                        <input type="hidden" formControlName="currency" />
+                        <label for="currency">CURRENCY&nbsp;*</label>
+                    </div>
+                    <div class="input-container number" *ngSwitchCase="'min_rate'" [ngClass]="{'error': (raportsForm.controls.min_rate.dirty && !raportsForm.controls.min_rate.valid) || formInvalid}">
+                        <svg-icon [iconType]="freeTextIcon"></svg-icon>
+                        <input (keydown)="lockSpefificCharsOnIntegers($event)" type="number" formControlName="min_rate" (inputValue)="raportsForm.controls.min_rate.patchValue($event)" [value]="item.value ? item.value : ''" [placeholder]="item.label | titlecase" class="input-value">
+                        <label for="min_rate">MIN RATE&nbsp;*</label>
+                    </div>
+                    <div class="input-container number" *ngSwitchCase="'max_rate'" [ngClass]="{'error': (raportsForm.controls.max_rate.dirty && !raportsForm.controls.max_rate.valid) || formInvalid}">
+                        <svg-icon [iconType]="freeTextIcon"></svg-icon>
+                        <input (keydown)="lockSpefificCharsOnIntegers($event)" type="number" formControlName="max_rate" (inputValue)="raportsForm.controls.max_rate.patchValue($event)" [value]="item.value ? item.value : ''" [placeholder]=" item.label | titlecase" class="input-value">
+                        <label for="max_rate">MAX RATE</label>
+                    </div>
+                    <div class="input-container number" *ngSwitchCase="'base_port'" [ngClass]="{'error': (raportsForm.controls.base_port.dirty && !raportsForm.controls.base_port.valid) || formInvalid}">
+                        <svg-icon [iconType]="freeTextIcon"></svg-icon>
+                        <input type="text" formControlName="base_port" (inputValue)="raportsForm.controls.base_port.patchValue($event)" [value]="item.value ? item.value : ''" [placeholder]=" item.label | titlecase" class="input-value">
+                        <label for="base_port">BASE PORT</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section> -->
+    <!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!driverRepo
     <div class="row time">
         <div class="col-md-1"></div>
     <div class="col-md-4 dateInput">
@@ -81,7 +92,7 @@
     </div>
     </form>
 
-          <form *ngIf="!driverReport && isMaster && !hotelReport" (ngSubmit)="onSubmit3(f)" #f="ngForm">
+          <form *ngIf="!driverRep& !hotelReport" (ngSubmit)="onSubmit3(f)" #f="ngForm">
               <div class="row time">
                   <div class="col-md-1"></div>
               <div class="col-md-4 dateInput">
@@ -260,5 +271,5 @@
                       </section>
                       </div>
                       </div>
-                  </form>
+                  </form> -->
 </header>

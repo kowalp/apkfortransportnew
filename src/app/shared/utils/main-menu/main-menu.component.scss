@@ -1,0 +1,148 @@
+@import '../../styles/variables';
+nav {
+    position: relative;
+    -webkit-box-shadow: 12px 150px 17px -2px rgba(222, 222, 222, 1);
+    -moz-box-shadow: 12px 150px 17px -2px rgba(222, 222, 222, 1);
+    box-shadow: 12px 150px 17px -2px rgba(222, 222, 222, 1);
+    @include flex(column, nowrap, center, center);
+    max-width: 200px;
+    transition: max-width 500ms cubic-bezier(0.215, 0.610, 0.355, 1);
+    z-index: 0;
+    height: 100%;
+    background: linear-gradient($menu-nav-main, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 62%);
+    &.collapsed {
+        max-width: 100px;
+        .icon-toggle-box {
+            position: relative;
+            left: -25px;
+            top: 23px;
+        }
+    }
+    &::after {
+        position: absolute;
+        right: 0;
+        content: '';
+        width: 1px;
+        height: 12%;
+        top: 1.2rem;
+        background: linear-gradient( $menu-nav-main, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 42%);
+    }
+}
+
+.menu-items-box {
+    position: relative;
+    @include flex(column, nowrap, space-around, center);
+    width: 200px;
+    height: 100%;
+    z-index: 0;
+}
+
+.menu-items-container {
+    height: 50%;
+    @include flex(column, nowrap, center, center);
+    transition: all 300ms linear;
+    ul {
+        padding: 0;
+        margin: 0;
+        @include flex(column, nowrap, space-around, center);
+        height: 100%;
+        list-style-type: none;
+        li {
+            a {
+                @include flex(column, nowrap, center, center);
+                color: $grey-darker;
+                text-decoration: none;
+                transition: $transition-300;
+                svg-icon ::ng-deep {
+                    svg path,
+                    svg g {
+                        fill: $grey-darker;
+                        transition: $transition-500;
+                    }
+                }
+                &:hover,
+                &.active {
+                    color: $main-active-color;
+                    svg-icon ::ng-deep {
+                        svg path,
+                        svg g {
+                            fill: $main-active-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.icon-toggle-box {
+    @include flex(row, nowrap, center, center);
+    padding-top: 3rem;
+    padding-left: 1rem;
+    h3 {
+        padding-top: 0px;
+        padding-left: 2.4rem;
+    }
+}
+
+//menu
+input#menu {
+    display: none;
+}
+
+.icon {
+    cursor: pointer;
+    display: block;
+}
+
+label.icon {
+    z-index: 200;
+}
+
+.icon .menu,
+.icon .menu::before,
+.icon .menu::after {
+    background: $grey-dark;
+    content: '';
+    display: block;
+    height: 3px;
+    position: absolute;
+    transition: background ease .3s, top ease .3s .3s, transform ease .3s;
+    width: 25px;
+}
+
+.icon:hover .menu,
+.icon:hover .menu::before,
+.icon:hover .menu::after {
+    background: $main-active-color;
+}
+
+.icon .menu::before {
+    top: -6px;
+}
+
+.icon .menu::after {
+    top: 6px;
+}
+
+#menu:checked+.icon .menu {
+    background: transparent;
+}
+
+#menu:checked+.icon .menu::before {
+    transform: rotate(45deg);
+}
+
+#menu:checked+.icon .menu::after {
+    transform: rotate(-45deg);
+}
+
+#menu:checked+.icon .menu::before,
+#menu:checked+.icon .menu::after {
+    top: 0;
+    transition: top ease .3s, transform ease .3s .3s;
+}
+
+#menu:checked~nav {
+    width: 200px;
+}

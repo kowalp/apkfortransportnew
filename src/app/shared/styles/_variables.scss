@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=Trocchi&display=swap&subset=latin-ext');
+// Colors
+@mixin background-dark-semitransparent($opacity) {
+    background-color: rgba(20, 12, 12, $opacity);
+}
+
+@mixin grey-dark-semitransparent($opacity) {
+    color: rgba(116, 116, 116, $opacity);
+}
+
+$menu-nav-main: #507eb1;
+$grey-dark: #b4b4b4;
+$white: #fff;
+$background-dark: rgb(80,
+80,
+80);
+$main-active-color: #50afb1;
+$white-dark: rgba(255,
+255,
+255,
+0.836);
+$white-background: rgba(255,
+255,
+255,
+0.836);
+$grey-darker: #8b8b8b;
+$grey-bright: #d6d6d6;
+$red-error: #c44659;
+$main-font: rgb(32,
+32,
+32);
+$background: #ececec;
+// Layout
+$widget-header-height: 48px;
+$widget-header-padding: 50px;
+$main-layout-padding: 24px;
+$widget-vertical-padding: 16px;
+$section-padding: 20px;
+$footer-padding: 32px;
+$footer-height: 60px;
+$card-image-margin: 8px;
+%main-layout-padding {
+    padding: $main-layout-padding $main-layout-padding $footer-padding;
+}
+
+// Mixins
+@mixin flex($direction,
+$wrap,
+$justify-content,
+$align-items) {
+    display: flex;
+    flex-flow: $direction $wrap;
+    align-items: $align-items;
+    justify-content: $justify-content;
+}
+
+@mixin blackBar() {
+    display: flex;
+    align-content: center;
+    padding: 16px;
+    min-height: 48px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: $background-dark;
+    text-transform: uppercase;
+    @extend %description;
+}
+
+@mixin boxshadow() {
+    -webkit-box-shadow: 0px 0px 34px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 34px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 34px 0px rgba(0, 0, 0, 0.75);
+}
+
+// Fonts
+$font-family-fallback: 'Source Sans Pro',
+sans-serif;
+$font-default: 'Source Sans Pro',
+sans-serif,
+$font-family-fallback;
+$font-bold: "futura-pt-bold",
+$font-family-fallback;
+$font-condensed: "futura-pt-condensed",
+$font-family-fallback;
+$font-title: 'Trocchi',
+serif;
+// Font sizes
+$title-large: 32px;
+$title-medium: 24px;
+$title-small: 16px;
+$subtitle: 14px;
+$description: 12px;
+$main-stroke-color: rgb(163,
+1,
+1);
+$error: red;
+// Mobile fonts
+$font-size-mobile-very-small: 12px;
+$font-size-mobile-small: 17.6px;
+$font-size-mobile-medium: 25px;
+$font-size-mobile-big: 32px;
+// Miscellaneous
+$transition-300: 300ms all linear;
+$transition-500: 500ms all linear;
+$border-radius: 2px;
+$crossbrowser-border: $grey-dark .4px solid;
+%firefox-scrollbar {
+    scrollbar-color: #ffc700 #140c0c;
+    scrollbar-width: thin;
+}
+
+@mixin buttonAfter ($left,
+$gradient,
+$rotate) {
+    content: "";
+    position: absolute;
+    left: $left;
+    top: 2%;
+    right: 0px;
+    width: 35em;
+    height: 96%;
+    border-radius: 20%;
+    z-index: -22;
+    background: $gradient;
+    -webkit-transform: $rotate;
+    transform: $rotate;
+}

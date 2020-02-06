@@ -1,29 +1,11 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from './../../../log-in/auth.service';
+import { MainService } from './../../../shared/services/main.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { Subject } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CalendarService } from '../../calendar.service';
+import { CalendarService } from '../../../shared/services/calendar.service';
+import { GetTours, GetUsers, GetHotel } from 'calendar-utils';
 
-export interface GetHotel<MetaType = any> {
-  Id?: number;
-  HotelName: string;
-}
-export interface GetUsers<MetaType = any> {
-  id?: number;
-  email: string;
-  name: string;
-  role?: string;
-}
-export interface GetTours<MetaType = any> {
-  Id?: number;
-  Name: string;
-  Price: number;
-  PriceFrom5Persons: number;
-  Duration: number;
-  Commission: number;
-  CommissionFrom5Persons: number;
-}
+
 @Component({
   selector: 'app-edit-forms',
   templateUrl: './edit-forms.component.html',
@@ -31,12 +13,9 @@ export interface GetTours<MetaType = any> {
 })
 export class EditFormsComponent implements OnInit {
   refresh: Subject<any> = new Subject();
-  tours: Array<GetTours<{ time: any }>> = [
-  ];
-  transfers: Array<GetTours<{ time: any }>>  = [
-  ];
-  hotels: GetUsers[] = [
-  ];
+  tours: Array<GetTours<{ time: any }>> = [];
+  transfers: Array<GetTours<{ time: any }>> = [];
+  hotels: GetUsers[] = [];
   driversBefore: GetUsers[] = [];
   modalData: {
     action: string;
@@ -44,64 +23,26 @@ export class EditFormsComponent implements OnInit {
     transfers: GetTours;
     hotels: GetHotel;
   };
-  constructor(private calendarService: CalendarService, private authService: AuthService, private snackBar: MatSnackBar) { }
+
+  constructor(private calendarService: CalendarService, private authService: AuthService, private mainService: MainService) { }
+
   ngOnInit() {
-    this.calendarService.getDrivers()
-    .subscribe(
-      (res) => {
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = {
-              id: res[key].id,
-              email: res[key].email,
-              name: res[key].name,
-            };
-            this.driversBefore.push(element);
-          }
-        }
-        setTimeout(() => {
-          this.hotels = this.driversBefore;
-        }, 200);
-      }
-    );
-    this.calendarService.getTours()
-    .subscribe(
-      (res) => {
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = {
-              Id: res[key].id,
-              Name: res[key].name,
-              Price: res[key].price,
-              PriceFrom5Persons: res[key].priceFrom5Persons,
-              Duration: res[key].duration,
-              Commission: res[key].commission,
-              CommissionFrom5Persons: res[key].commissionFrom5Persons
-            };
-            this.tours.push(element);
-          }
-        }
-      }
-    );
-    this.calendarService.getTransfers()
-    .subscribe(
-      (res) => {
-        for (const key in res) {
-          if (res.hasOwnProperty(key)) {
-            const element = {
-              Id: res[key].id,
-              Name: res[key].name,
-              Price: res[key].price,
-              PriceFrom5Persons: res[key].priceFrom5Persons,
-              Duration: res[key].duration,
-              Commission: res[key].commission,
-              CommissionFrom5Persons: res[key].commissionFrom5Persons
-            };
-            this.transfers.push(element);
-          }
-        }
-      }
-    );
+    this.mainService.getDrivers();
+    this.mainService.setDriversAsObservable()
+      .subscribe((res) => {
+        this.driversBefore = res;
+        this.hotels = this.driversBefore;
+      });
+    this.mainService.getTours();
+    this.mainService.setToursAsObservable()
+      .subscribe((res) => {
+        this.tours = res;
+      });
+    this.mainService.getTransfers();
+    this.mainService.setTransfersAsObservable()
+      .subscribe((res) => {
+        this.transfers = res;
+      });
   }
   SubmitTour(event: GetTours) {
     const values = {
@@ -112,13 +53,8 @@ export class EditFormsComponent implements OnInit {
       Commission: event.Commission,
       CommissionFrom5Persons: event.CommissionFrom5Persons
     };
-    this.calendarService.SubmitTrip(values)
-    .subscribe((data: any) => {
-      this.openSnackBar();
-    },
-    (err: HttpErrorResponse) => {
-      console.log(err );
-    });
+    this.calendarService.SubmitTour(values);
+    this.mainService.getTours();
   }
   SubmitTransfer(event: GetTours) {
     const values = {
@@ -129,38 +65,24 @@ export class EditFormsComponent implements OnInit {
       Commission: event.Commission,
       CommissionFrom5Persons: event.CommissionFrom5Persons
     };
-    this.calendarService.SubmitTransfer(values)
-    .subscribe((data: any) => {
-      this.openSnackBar();
-    },
-    (err: HttpErrorResponse) => {
-      console.log(err );
-    });
+    this.calendarService.SubmitTransfer(values);
   }
+
   DeleteUser(eventToDelete: GetUsers) {
-    this.hotels = this.hotels.filter(event => event !== eventToDelete);
-    this.calendarService.DeleteDriver(eventToDelete.email)
-    .subscribe((res) => this.deleteSnackBar());
+    // this.hotels = this.hotels.filter(event => event !== eventToDelete);
+    this.calendarService.DeleteDriver(eventToDelete.email);
+    this.mainService.getDrivers();
   }
+
   DeleteTour(eventToDelete: GetTours) {
-    this.tours = this.tours.filter(event => event !== eventToDelete);
-    this.calendarService.DeleteTrip(eventToDelete.Id)
-    .subscribe((data: any) => {
-      this.deleteSnackBar();
-        },
-    (err: HttpErrorResponse) => {
-      console.log(err );
-    });
+    // this.tours = this.tours.filter(event => event !== eventToDelete);
+    this.calendarService.DeleteTour(eventToDelete.Id);
+    this.mainService.getTours();
   }
   DeleteTransfer(eventToDelete: GetTours) {
-    this.transfers = this.transfers.filter(event => event !== eventToDelete);
-    this.calendarService.DeleteTransfer(eventToDelete.Id)
-    .subscribe((data: any) => {
-      this.deleteSnackBar();
-    },
-    (err: HttpErrorResponse) => {
-      console.log(err );
-    });
+    // this.transfers = this.transfers.filter(event => event !== eventToDelete);
+    this.calendarService.DeleteTransfer(eventToDelete.Id);
+    this.mainService.getTransfers();
   }
   UpdateTour(event: GetTours) {
     const values = {
@@ -171,13 +93,9 @@ export class EditFormsComponent implements OnInit {
       Commission: event.Commission,
       CommissionFrom5Persons: event.CommissionFrom5Persons
     };
-    this.calendarService.UpdateTrip(event.Id, values)
-    .subscribe((data: any) => {
-      this.openSnackBar();
-    },
-    (err: HttpErrorResponse) => {
-      console.log(err );
-    });
+    this.calendarService.UpdateTour(event.Id, values);
+    this.mainService.getTours();
+
   }
   UpdateTransfer(event: GetTours) {
     const values = {
@@ -188,51 +106,33 @@ export class EditFormsComponent implements OnInit {
       Commission: event.Commission,
       CommissionFrom5Persons: event.CommissionFrom5Persons
     };
-    this.calendarService.UpdateTransfer(event.Id, values)
-    .subscribe((data: any) => {
-      this.openSnackBar();
-    },
-    (err: HttpErrorResponse) => {
-      console.log(err );
-    });
+    this.calendarService.UpdateTransfer(event.Id, values);
+    this.mainService.getTransfers();
   }
+
   AddTour(): void {
-    this.tours = [
-      ...this.tours,
-    {
-      Name: 'Salt Mine Wieliczka',
-      Price: 350,
-      PriceFrom5Persons: 460,
-      Duration: 180,
-      Commission: 70,
-      CommissionFrom5Persons: 92,
-        }
-      ];
+    this.tours.push(
+      {
+        Name: 'Salt Mine Wieliczka',
+        Price: 350,
+        PriceFrom5Persons: 460,
+        Duration: 180,
+        Commission: 70,
+        CommissionFrom5Persons: 92,
+      });
   }
   AddTransfer(): void {
-    this.transfers = [
-      ...this.transfers,
-    {
-      Name: 'Warszawa Airport',
-      Price: 700,
-      PriceFrom5Persons: 900,
-      Duration: 360,
-      Commission: 140,
-      CommissionFrom5Persons: 180,
-        }
-      ];
+    this.transfers.push(
+      {
+        Name: 'Warszawa Airport',
+        Price: 700,
+        PriceFrom5Persons: 900,
+        Duration: 360,
+        Commission: 140,
+        CommissionFrom5Persons: 180,
+      });
   }
   logOut() {
     this.authService.Logout();
-  }
-  openSnackBar() {
-    this.snackBar.open('Dziękujemy!', 'Dane zostały zapisane do bazy!', {
-      duration: 2000,
-    });
-  }
-  deleteSnackBar() {
-    this.snackBar.open('Dziękujemy!', 'Dane zostały usunięte!', {
-      duration: 2000,
-    });
   }
 }

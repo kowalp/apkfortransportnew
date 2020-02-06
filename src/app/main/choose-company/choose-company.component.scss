@@ -1,0 +1,82 @@
+@import '../../shared/styles/variables';
+@import '../../shared/styles/buttons';
+@import '../../shared/styles/typhography';
+.main-container {
+    @include flex(row, nowrap, space-evenly, center);
+    padding-right: 20px;
+    width: 100%;
+    height: calc(100vh - 150px);
+    transition: $transition-300;
+    &.isCollapsed {
+        padding-left: 120px;
+    }
+}
+
+.rides-conatiner {
+    width: 33%;
+    position: relative;
+}
+
+.last-rides {
+    padding: 20px;
+    border-radius: 2px;
+    border: 3px solid $menu-nav-main;
+    @include flex(column, nowrap, flex-start, center);
+    background: $white-dark;
+    position: relative;
+    width: 40%;
+    height: 80%;
+    @include boxshadow;
+    h2 {
+        @extend %title-large;
+    }
+    ul {
+        padding-top: 50px;
+        @include flex(column, nowrap, flex-start, stretch);
+        width: 100%;
+        li {
+            list-style-type: none;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            position: relative;
+            @include flex(row, nowrap, space-between, flex-start);
+            .title-container {
+                @include flex(column, nowrap, flex-start, flex-start);
+                p {
+                    text-transform: uppercase;
+                    @extend %title-medium;
+                    margin: 0;
+                }
+                span {
+                    color: $grey-dark;
+                    line-height: 15px;
+                    @extend %title-small;
+                }
+            }
+            span {
+                @extend %title-small;
+                color: $grey-dark;
+            }
+            &:nth-child(odd) {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 10px;
+                    height: 50px;
+                    background: $main-active-color;
+                }
+            }
+            &:nth-child(even) {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 10px;
+                    height: 50px;
+                    background: $menu-nav-main;
+                }
+            }
+        }
+    }
+}

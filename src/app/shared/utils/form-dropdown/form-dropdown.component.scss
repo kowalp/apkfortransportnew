@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+.collapsed-dropdown {
+    display: block;
+    @include flex(row, nowrap, space-between, flex-start);
+    width: 96.6%;
+    padding: 8px 16px;
+    border: 1px solid $main-active-color;
+    background: $white;
+    cursor: pointer;
+    .selected-option {
+        @include flex(row, nowrap, center, flex-start);
+    }
+}
+
+p {
+    margin: 0;
+    color: $main-font;
+    &.expanded {
+        svg-icon ::ng-deep {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+svg-icon ::ng-deep {
+    svg {
+        g {
+            fill: $main-active-color;
+        }
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.results-list {
+    @extend %firefox-scrollbar;
+    @include flex(column, nowrap, flex-start, flex-start);
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 200px;
+    margin-bottom: 0;
+}
+
+.expanded-dropdown {
+    position: absolute;
+    border: 1px solid $main-active-color;
+    background: $white;
+    width: 237px;
+}
+
+.result-item {
+    width: 100%;
+    padding: 8px 16px;
+    line-height: 28px;
+    list-style-type: none;
+    cursor: pointer;
+    white-space: normal;
+    word-wrap: break-word;
+    color: $main-font;
+    transition: all 0.3s linear;
+    &:hover {
+        color: $white;
+        background-color: $main-active-color;
+        box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.1);
+    }
+    &:active {
+        color: $white;
+        background-color: $main-active-color;
+    }
+    &.highlighted {
+        color: $white;
+        background-color: $main-active-color;
+    }
+    &.selected {
+        color: $white;
+        background-color: $main-active-color;
+    }
+}

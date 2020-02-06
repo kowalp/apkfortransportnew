@@ -1,198 +1,54 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-
+@import '../shared/styles/variables';
 h3 {
     margin: 0 0 10px;
-  }
-  .modal-body,.modal-header, .modal-footer{
-    background-color: hsl(0, 0%, 91%);
+}
 
-  }
-  .jsonShow {
+.header {
+    position: relative;
+}
+
+.calendar {
+    position: relative;
+    top: 10px;
+    padding-left: 110px;
+    width: 95%;
+    transition: $transition-300;
+    &.collaped {
+        padding-left: 210px;
+    }
+}
+
+.modal-body,
+.modal-header,
+.modal-footer {
+    background-color: hsl(0, 0%, 91%);
+}
+
+.jsonShow {
     display: flex;
     background-color: hsl(0, 0%, 93%);
     margin-bottom: -20px;
-    padding-top:5px;
+    padding-top: 5px;
     padding-left: 5px;
-    -webkit-box-shadow: 12px 3px 32px -1px rgba(204,204,204,1);
--moz-box-shadow: 12px 3px 32px -1px rgba(204,204,204,1);
-box-shadow: 12px 3px 32px -1px rgba(204,204,204,1);
-    p{
-      position: relative;
-      top: 4px;
-      left: 5px;
-      font-size: 120%;
+    -webkit-box-shadow: 12px 3px 32px -1px rgba(204, 204, 204, 1);
+    -moz-box-shadow: 12px 3px 32px -1px rgba(204, 204, 204, 1);
+    box-shadow: 12px 3px 32px -1px rgba(204, 204, 204, 1);
+    p {
+        position: relative;
+        top: 4px;
+        left: 5px;
+        font-size: 120%;
     }
-  }
-  .fas, .far{
+}
+
+.fas,
+.far {
     position: relative;
-    top:8px;
-  }
-  $textColor : rgb(14, 4, 100);
+    top: 8px;
+}
+
+$textColor: rgb(14,
+4,
+100);
 $color2: #F8A93F;
-
-.full-width-table {
-  width: 100%;
-}
-.mat-elevation-z8{
-  margin: 0;
-  padding: 10px 0 0 10px;
-}
-.modal-body {
-  height: 80vh;
-}
-button{
-  background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-.cdk-overlay-pane{
-  z-index: 10000 !important;
-}
-.myButton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
-	background:-moz-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
-	background:-webkit-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
-	background:-o-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
-	background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
-	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
-	background-color:#3d94f6;
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-	border-radius:8px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:12px;
-	font-weight:bold;
-	padding:13px 32px;
-	text-decoration:none;
-  text-shadow:0px 1px 0px #3d768a;
-  margin-right: 5px;
-}
-.myButton:hover {
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6));
-	background:-moz-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
-	background:-webkit-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
-	background:-o-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
-	background:-ms-linear-gradient(top, #1e62d0 5%, #3d94f6 100%);
-	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6',GradientType=0);
-	background-color:#1e62d0;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
-.header a img {
-  position: relative;
-  top:-2px;
-}
-pre {
-	margin-top: -33px;
-}
-.submitBtn {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
-	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
-	background-color:#f9f9f9;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	cursor:pointer;
-	color:#666666;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-  text-shadow:0px 1px 0px #ffffff;
-  z-index: 1000;
-}
-.submitBtn:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
-	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
-	background-color:#e9e9e9;
-}
-.submitBtn:active {
-	position:relative;
-	top:1px;
-}
-.cal-week-view .cal-event { 
-  color: #000!important;
-}
-
-.mobileNav{
-	background: #dcdcdc;
-		li{
-		display: flex;
-		flex-direction: row;
-		list-style-type: none;
-		a{
-			text-decoration: none;
-		}
-	}
-}  
-#mobileMenu{
-	display: none;
-}
-@media (max-width: 900px) {
-	.myButton{
-		display:none;
-	}
-	#mobileMenu{
-		display:flex;
-		position: relative;
-		justify-content: flex-end;
-
-	}
-	.navButton{
-		display: flex;
-		justify-content: center;
-		position: relative;
-		color: #000;
-		font-family: Arial;
-		font-weight: bold;
-		padding: 10px;
-		text-align: center;
-		border-bottom: 1px solid black;
-		min-width: 100%;
-		text-transform: uppercase;
-	}
-	.mat-menu-ripple:first-child{
-		padding-top: 0;
-	}
-	.mat-menu-ripple:last-child{
-		padding-bottom: 0;
-	}
-		
-	mat-menu button {
-		width:100%;
-	}
-	.mat-menu-panel {
-		background: #dcdcdc;
-	}
-}
-

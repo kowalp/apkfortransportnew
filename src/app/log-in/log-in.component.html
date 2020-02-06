@@ -1,34 +1,38 @@
-<div class="row imgResponsive">
-  <div class="responsive">
-    <a href="https://krakowwelcome.com">
-      <img  src="http://yea.com.pl/wp-content/uploads/2019/04/logo.png" alt="">
-    </a>
-  </div>
-</div>
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
-  </mat-card-header>
-  <form class="example-form" (ngSubmit)="onSubmit(email.value, password.value)" #f="ngForm">
-  <mat-card-content>
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" #email ngModel name="email" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-        <td><mat-form-field class="example-full-width">
-          <input matInput placeholder="Password" #password ngModel type="password" name="password" required>
-        </mat-form-field></td>
-      </tr></table>
-  </mat-card-content>
+<section class="login-container">
 
-  <mat-card-actions>
-    <button mat-raised-button type="submit"  color="primary">Login</button>
-    <div *ngIf="isLoginError" class="red-text center error-message">Error Incorrect email or password</div>
-  </mat-card-actions>
-</form>
-</mat-card>
+    <div class="login-content">
+        <div class="form">
+            <nav>
+                <ul>
+                    <li [ngClass]="{active: registerFormActive}" (click)="changeToRegister()"><span> New Account</span></li>
+                    <li (click)="changeToLogin()" [ngClass]="{active: loginFormActive}"><span>Login</span></li>
+                </ul>
+            </nav>
+            <div class="register-form" [ngClass]="{'none': !registerFormActive}" [formGroup]="registerForm">
+                <div class="form-input">
+                    <input autofocus type="email" email="true" placeholder="Email" formControlName="emailR">
+                </div>
+                <div class="role">
+                    <input type="hidden" formControlName="roleR" />
+                    <form-dropdown (inputValue)="changeValue($event)" [data]="userRoles" [defaultTitle]="'Choose option'"></form-dropdown>
+                </div>
+                <div class="form-input">
+                    <input type="password" placeholder="Password" formControlName="passwordR">
+                </div>
+                <button type="submit" [disabled]="registerForm.invalid" class="btn btn-register" (click)="onRegisterSubmit()"><span>Register</span > </button>
+            </div>
+            <div class="login-form" [ngClass]="{'none': !loginFormActive}" [formGroup]="loginForm">
+                <div class="form-input" [ngClass]="{'error': isLoginError}">
+                    <input autofocus type="email" email="true" placeholder="Email" formControlName="email">
+                </div>
+                <div class="form-input" [ngClass]="{'error': isLoginError}">
+                    <input type="password" placeholder="Password" formControlName="password">
+                </div>
+                <div *ngIf="isLoginError" class="red-text center error-message">Error Incorrect email or password</div>
+                <button type="submit" class="btn" [disabled]="loginForm.invalid" (click)="onLoginSubmit()"><span>login</span> </button>
+            </div>
+
+        </div>
+
+    </div>
+</section>
