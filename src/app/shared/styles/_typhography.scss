@@ -11,7 +11,7 @@
 }
 
 %title-medium {
-    font-family: $font-default;
+    font-family: $font-title;
     font-size: $title-medium;
     font-weight: 500;
     line-height: 32px;
@@ -40,7 +40,7 @@
 }
 
 %subtitle {
-    font-family: $font-default;
+    font-family: $font-title;
     font-size: $title-small;
     font-weight: 500;
     line-height: 24px;
@@ -52,7 +52,7 @@
     font-family: $font-default;
     font-size: $subtitle;
     font-weight: 500;
-    line-height: 16px;
+    line-height: 20px;
     letter-spacing: 1px;
-    color: $grey-bright;
+    color: $grey-darker;
 }

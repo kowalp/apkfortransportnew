@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { User } from 'src/app/shared/models/calendar.model';
+import { TripCategory } from 'src/app/shared/Interfaces/Form.model';
 
 
 @Component({
@@ -111,52 +112,55 @@ import { User } from 'src/app/shared/models/calendar.model';
   ]
 })
 export class ForLaterComponent implements OnInit {
-  state3 = 'normal';
-  state4 = 'normal';
+
+  fields: TripCategory[] = [{
+    name: 'Number Of People',
+    key: 'numberOfPeople',
+    inputType: 'number',
+    optional: false,
+    value: '',
+  },
+  {
+    name: 'Reservation Number',
+    key: 'reservationNumber',
+    inputType: 'string',
+    optional: true,
+    value: ''
+  },
+  {
+    name: 'Name',
+    key: 'name',
+    inputType: 'string',
+    optional: false,
+    value: ''
+  },
+  {
+    name: 'Date',
+    key: 'date',
+    inputType: 'date',
+    optional: false,
+    value: ''
+  },
+  {
+    name: 'Phone',
+    key: 'phone',
+    inputType: 'phone',
+    optional: false,
+    value: ''
+  },
+  {
+    name: 'Email',
+    key: 'email',
+    inputType: 'email',
+    optional: false,
+    value: localStorage.getItem('email'),
+  },
+];
   iloscOsob = 'numberOfPeople';
-  state = 'normal';
-  stateForName = 'normal';
-  stateForSubmit = 'normal';
-  showTrip = 'normal';
-  showTransfer = 'normal';
-  people = 'normal';
-  price: string;
-  ppl = ['1-4', '5-8', 'MORE'];
-  showFlightNumber = 'normal';
-  currentValueOfTrip: string;
-  currentValueOfTransfer: string;
-  currentNumberOfPeople: string;
-  myDate = new Date();
-  receptionist: User[] = [];
-  public min = new Date(2019, 4, 2, 10, 30);
-  public max = new Date(2020, 1, 3, 23, 59);
+  company: string = 'Krakow welcome';
   personChange = false;
 
   constructor(private authService: AuthService) { }
-
-  dropdownTransfer(e) {
-    this.currentValueOfTransfer = e.target.value;
-    if (e.target.value !== 'Transfer') {
-      this.state = 'in';
-      this.showFlightNumber = 'in';
-    } else {
-      this.state = 'normal';
-      this.showFlightNumber = 'normal';
-    }
-  }
-  dropdownTrip(e) {
-    this.currentValueOfTrip = e.target.value;
-    e.target.value !== 'Trip' ? this.state = 'in' : this.state = 'normal';
-    this.showFlightNumber = 'normal';
-  }
-  dropdownPpl(e) {
-    e.target.value !== 'numberOfPeople' ? this.stateForName = 'in' : this.stateForName = 'normal';
-    this.currentNumberOfPeople = e.target.value;
-  }
-  pickARide(e) {
-    e.target.value === 'Trip' ? this.showTrip = 'in' : this.showTrip = 'normal';
-    e.target.value === 'Transfer' ? this.showTransfer = 'in' : this.showTransfer = 'normal';
-  }
 
   ngOnInit() {
   }

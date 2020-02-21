@@ -3,9 +3,9 @@
     display: block;
     @include flex(row, nowrap, space-between, flex-start);
     width: 96.6%;
-    padding: 8px 16px;
     border: 1px solid $main-active-color;
-    background: $white;
+    padding: 20px 40px;
+    background: transparent;
     cursor: pointer;
     .selected-option {
         @include flex(row, nowrap, center, flex-start);

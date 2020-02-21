@@ -1,5 +1,4 @@
 import { ForLaterComponent } from './for-later/for-later.component';
-import { ForNowComponent } from './for-now/for-now.component';
 import { ChooseCompanyComponent } from './choose-company/choose-company.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { NgModule } from '@angular/core';
@@ -13,23 +12,20 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':id',
+    path: 'pricing',
+    component: PricingComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'company',
     component: ChooseCompanyComponent,
-    children: [
-      {
-        path: 'pricing',
-        component: PricingComponent,
-      },
-      {
-        path: 'for-now',
-        component: ForNowComponent,
-      },
-      {
-        path: 'for-later',
-        component: ForLaterComponent
-      },
-    ]
-  }
+    pathMatch: 'full'
+  },
+  {
+    path: ':id',
+    component: ForLaterComponent
+  },
+
 ];
 
 @NgModule({

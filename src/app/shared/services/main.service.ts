@@ -1,8 +1,9 @@
+import { FormModel } from './../Interfaces/Form.model';
 import { SnackBarService } from './snackBar.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Injectable()
@@ -13,6 +14,8 @@ export class MainService {
   private $receptionistDetails = new ReplaySubject<any[]>(1);
   private $transferDetails = new ReplaySubject<any[]>(1);
   private $hotelsList = new ReplaySubject<any[]>(1);
+  private $formsData = new ReplaySubject<FormModel>(1);
+
   constructor(private httpClient: HttpClient, private snackBarService: SnackBarService, private formBuilder: FormBuilder) { }
 
   sendTripForm(EventToSave) {
@@ -26,6 +29,39 @@ export class MainService {
 
   getTours() {
     this.httpClient.get<any>(this.apiAddress + 'tour/tours').subscribe((payload) => this.$toursDetails.next(payload));
+  }
+
+  getFormsDataAsObservable(): Observable<FormModel> {
+    return this.$formsData.asObservable();
+  }
+
+  setFormsData(): void {
+    this.$formsData.next({
+      tripCategory: [{
+        "data": [{ "key": "1111", "value": "dsa" }, { "key": "111111", "value": "dsa" }],
+        "name": "Transfer",
+        "optional": true,
+        "inputType": "dropdown",
+        "key": "Transfer",
+        "value": "dsa"
+      }, {
+        "data": [{ "key": "222", "value": "dsa" }, { "key": "22222", "value": "dsa" }],
+        "name": "Trip",
+        "optional": true,
+        "inputType": "dropdown",
+        "key": "Trip",
+        "value": "dsa"
+      }],
+      numberOfPeople: {
+        "data": [{ "key": "asd", "value": "dsa" },{ "key": "asd", "value": "dsa" }],
+        "name": "Number Of People",
+        "optional": true,
+        "inputType": "dropdown",
+        "key": "numberOfPeople",
+        "value": "ds"
+      }
+    });
+    // this.httpClient.get('../../data/edit-form-data.json').subscribe((data: FormModel) => console.log(data));
   }
 
   setDriversAsObservable() {
@@ -67,19 +103,6 @@ export class MainService {
   createForm(type: string): FormGroup {
     const required = Validators.required;
     switch (type) {
-      case 'hotelForm':
-        return this.formBuilder.group({
-          name: [''],
-          phone: [''],
-          email: [''],
-          personCount: [''],
-          flightNumber: [''],
-          arrivalTime: [''],
-          tour: [''],
-          trasnfer: [''],
-          price: [''],
-          commission: [''],
-        });
       case 'reports':
         return this.formBuilder.group({
           fromDate: ['', required],
