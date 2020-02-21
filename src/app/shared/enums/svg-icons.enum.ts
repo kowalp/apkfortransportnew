@@ -10,7 +10,11 @@ export enum SVGIconEnum {
   REPORTS,
   MAIN,
   DIVIDER,
-  STAR
+  STAR,
+  QUALITYSTARS,
+  ROAD,
+  TICK,
+  X
 }
 
 export const SVGIconMAPPER = {
@@ -25,4 +29,8 @@ export const SVGIconMAPPER = {
   MAIN: SVGIconEnum.MAIN,
   DIVIDER: SVGIconEnum.DIVIDER,
   STAR: SVGIconEnum.STAR,
+  QUALITYSTARS: SVGIconEnum.QUALITYSTARS,
+  ROAD: SVGIconEnum.ROAD,
+  TICK: SVGIconEnum.TICK,
+  X: SVGIconEnum.X
 };

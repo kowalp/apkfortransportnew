@@ -48,7 +48,7 @@ $btn-height: 32px;
         fill: $main-active-color;
     }
     &:disabled {
-        opacity: .3;
+        opacity: .8;
         color: $grey-bright;
         border: 1px solid $grey-bright;
          ::ng-deep svg-icon svg path {

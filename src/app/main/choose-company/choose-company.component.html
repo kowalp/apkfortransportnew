@@ -2,8 +2,30 @@
 </app-header>
 <div class="main-container" [ngClass]="{'isCollapsed': collapse}">
     <div class="last-rides" *ngFor="let company of companies">
-        <h2>Last Rides</h2>
+        <div class="background">
+            <div class="details">
+                <div class="header-details">
+                    <h4>{{company.name}}</h4>
+                    <div class="svg-container">
+                        <svg-icon *ngFor="let item of company.rate" [iconType]="starIcon"></svg-icon>
+                    </div>
+                </div>
+                <p class="subtitle">{{company.subtitle}}</p>
+                <p class="subtitle">Working Hours: {{company.workingHours}}</p>
 
-
+                <div class="footer-details">
+                    <div class="gallery">
+                        <svg-icon class="road" [iconType]="roadIcon"></svg-icon>
+                        <figure *ngFor="let car of company.cars">
+                            <img [src]="car.value" [alt]="car.value">
+                        </figure>
+                    </div>
+                    <p class="person-text">
+                        <svg-icon [iconType]="personIcon"></svg-icon>Up to {{company.maxNumberOfPeople}} people
+                    </p>
+                    <button class="btn" type="button" [routerLink]="['/main' + company.url]">Book a Ride</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

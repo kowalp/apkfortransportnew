@@ -17,13 +17,6 @@ export class AppHeaderComponent implements OnInit {
     this.name = localStorage.getItem('user-name') || 'Karamsad';
     let c = 45;
 
-    function draw() {
-      document.documentElement.style.setProperty('--direction', c++ + 'deg');
-      requestAnimationFrame(draw);
-    }
-
-    requestAnimationFrame(draw);
-
   }
 
 }

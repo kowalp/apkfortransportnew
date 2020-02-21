@@ -2,14 +2,50 @@
 @import '../../shared/styles/buttons';
 @import '../../shared/styles/typhography';
 .main-container {
-    @include flex(row, nowrap, space-evenly, center);
+    @include flex(row, wrap, space-evenly, flex-start);
     padding-right: 20px;
+    margin-left: 20px;
     width: 100%;
-    height: calc(100vh - 150px);
+    height: 400px;
     transition: $transition-300;
     &.isCollapsed {
         padding-left: 120px;
     }
+}
+
+.details {
+    height: 100%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: 20px;
+    justify-content: space-between;
+    .footer-details {
+        position: relative;
+        @include flex(row, nowrap, space-between, center);
+        .gallery {
+            @include flex(row, nowrap, flex-start, center);
+        }
+    }
+    .subtitle {
+        font-size: 16px;
+        width: 66%;
+        @extend %description;
+        text-align: justify;
+    }
+    .header-details {
+        @include flex(row, nowrap, space-between, center);
+        h4 {
+            @extend %title-medium;
+            font-weight: bold;
+        }
+    }
+}
+
+.person-text {
+    @extend %description;
+    font-size: 16px;
 }
 
 .rides-conatiner {
@@ -18,65 +54,45 @@
 }
 
 .last-rides {
-    padding: 20px;
-    border-radius: 2px;
-    border: 3px solid $menu-nav-main;
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+    }
+    transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border-radius: 1%;
+    margin-top: 40px;
     @include flex(column, nowrap, flex-start, center);
-    background: $white-dark;
     position: relative;
     width: 40%;
+    z-index: 2;
     height: 80%;
+    &:nth-child(even) .background {
+        background: url(../../shared/assets/11230.png);
+    }
+    &:nth-child(odd) .background {
+        background: url(../../shared/assets/11210.png);
+    }
     @include boxshadow;
-    h2 {
-        @extend %title-large;
+}
+
+.background {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+}
+
+.gallery {
+    figure img {
+        width: 80px;
+        margin-right: 5px;
     }
-    ul {
-        padding-top: 50px;
-        @include flex(column, nowrap, flex-start, stretch);
-        width: 100%;
-        li {
-            list-style-type: none;
-            padding: 0 20px;
-            margin-bottom: 20px;
-            position: relative;
-            @include flex(row, nowrap, space-between, flex-start);
-            .title-container {
-                @include flex(column, nowrap, flex-start, flex-start);
-                p {
-                    text-transform: uppercase;
-                    @extend %title-medium;
-                    margin: 0;
-                }
-                span {
-                    color: $grey-dark;
-                    line-height: 15px;
-                    @extend %title-small;
-                }
-            }
-            span {
-                @extend %title-small;
-                color: $grey-dark;
-            }
-            &:nth-child(odd) {
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    width: 10px;
-                    height: 50px;
-                    background: $main-active-color;
-                }
-            }
-            &:nth-child(even) {
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    width: 10px;
-                    height: 50px;
-                    background: $menu-nav-main;
-                }
-            }
-        }
-    }
+}
+
+.btn {
+    @extend %btn-primary;
+}
+
+.road {
+    padding-bottom: 16px;
 }

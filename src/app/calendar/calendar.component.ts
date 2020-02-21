@@ -9,6 +9,7 @@ import {
   TemplateRef,
   OnInit,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import {
   isSameDay,
@@ -49,7 +50,7 @@ export interface CalendarEvent<MetaType = any> {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   hotelForm: Array<CalendarEvent<{ time: any }>> = [];
   receptionistForm: Array<CalendarEvent<{ time: any }>> = [];
   invidualForm: Array<CalendarEvent<{ time: any }>> = [];
@@ -108,7 +109,7 @@ export class CalendarComponent implements OnInit {
     // }
     this.menuService.getStatusOfMenuAsObservable().pipe(takeUntil(this.$unsubscribe)).subscribe((isCollapsed: boolean) => {
       this.collapse = !isCollapsed;
-    })
+    });
   }
 
   ngOnDestroy() {
@@ -133,6 +134,9 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
+  }
+  setView(view: CalendarView) {
+    this.view = view;
   }
 
   closeOpenMonthViewDay() {

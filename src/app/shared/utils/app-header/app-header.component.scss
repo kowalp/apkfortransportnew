@@ -59,7 +59,7 @@ app-main-menu {
     fill: none;
     opacity: 0.15;
     stroke: palevioletred;
-    stroke-width: 12;
+    stroke-width: 2;
     stroke-miterlimit: 10;
     animation: show 4s;
     animation-fill-mode: forwards;
@@ -71,7 +71,7 @@ app-main-menu {
     fill: none;
     opacity: 0.15;
     stroke: skyblue;
-    stroke-width: 12;
+    stroke-width: 2;
     stroke-miterlimit: 10;
     animation: show 4s;
     animation-fill-mode: forwards;
@@ -83,14 +83,14 @@ app-main-menu {
     fill: none;
     opacity: 0.15;
     stroke: navy;
-    stroke-width: 6;
+    stroke-width: 1;
     stroke-miterlimit: 10;
     stroke-dasharray: 200;
     stroke-dashoffset: 800;
     animation: draw 4s;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
 @keyframes draw {

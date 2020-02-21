@@ -52,3 +52,67 @@ $textColor: rgb(14,
 4,
 100);
 $color2: #F8A93F;
+mwl-calendar-week-view ::ng-deep {
+    .cal-week-view .cal-day-headers {
+        border: 1px solid transparent;
+    }
+    .cal-week-view {
+        background: rgba(216, 216, 216, 0.2);
+        border-radius: 1%;
+        background-size: cover;
+    }
+    .cal-week-view .cal-hour-odd {
+        background: rgba(0, 206, 209, 0.04);
+    }
+    .cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,
+    .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment {
+        border: none;
+    }
+    .cal-week-view .cal-day-column {
+        border-left: 1px solid rgba(18, 20, 99, 0.31);
+    }
+    .cal-week-view .cal-day-headers .cal-header:not(:last-child) {
+        border-right: 1px solid rgba(18, 20, 99, 0.31);
+    }
+    .cal-week-view .cal-day-headers .cal-header:first-child {
+        border-left: 1px solid rgba(18, 20, 99, 0.31);
+    }
+    .cal-week-view .cal-time-events .cal-day-columns:not(.cal-resize-active) .cal-hour-segment:hover {
+        background: $main-active-color;
+    }
+    .cal-week-view .cal-header.cal-today {
+        background-color: $main-active-color;
+    }
+}
+
+mwl-calendar-day-view ::ng-deep {
+    .cal-day-view {
+        background: rgba(216, 216, 216, 0.2);
+        border-radius: 1%;
+        background-size: cover;
+    }
+    .cal-day-view .cal-hour:nth-child(odd) {
+        background: rgba(0, 206, 209, 0.04);
+    }
+}
+
+mwl-calendar-month-view ::ng-deep {
+    .cal-month-view .cal-open-day-events {
+        color: #fff;
+        background-color: currentColor;
+    }
+    .cal-month-view .cal-day-cell.cal-today {
+        background: $main-active-color;
+    }
+}
+
+.btn-primary {
+    cursor: pointer;
+    background: $main-active-color;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    background: $main-active-color-hover;
+}
