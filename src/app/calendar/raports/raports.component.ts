@@ -2,8 +2,7 @@ import { MainService } from './../../shared/services/main.service';
 import { CalendarService } from '../../shared/services/calendar.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { GetTours } from 'calendar-utils';
-import { User, Food } from 'src/app/shared/models/calendar.model';
+import { User, Food, GetTours } from 'src/app/shared/models/calendar.model';
 import { FormGroup } from '@angular/forms';
 
 @Component({

@@ -16,16 +16,19 @@ export class MainMenuComponent implements OnInit {
     { value: 'CALENDAR', routing: '/calendar' },
     { value: 'BOOK A RIDE', routing: '/main/choose-company' },
     { value: 'REPORTS', routing: '/calendar/reports' },
+    { value: 'SETTINGS', routing: '/calendar/edit' },
   ];
   readonly icons: SVGIconEnum[] = [
     SVGIconEnum.MAIN,
     SVGIconEnum.CALENDAR,
     SVGIconEnum.RIDE,
     SVGIconEnum.REPORTS,
+    SVGIconEnum.SETTINGS
 ];
   constructor(private menuService: MenuService) { }
 
   ngOnInit() {
+    // TODO: Disable settings for non admins!
     this.menuItems[this.active].active = true;
   }
 

@@ -1,0 +1,26 @@
+@import '../../shared/styles/variables';
+@import '../../shared/styles/typhography';
+@import '../../shared/styles/buttons';
+
+.container {
+  position: relative;
+  @include flex(row, nowrap, center, center);
+  margin-top: 15%;
+  margin-left: 12%;
+  .content {
+    text-align: center;
+    height: 400px;
+    width: 200px;
+    background: linear-gradient(#507eb1, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 62%);
+    margin: 12px;
+    h1 {
+      @extend %title-medium;
+    }
+    p {
+      @extend %title-small;
+    }
+    .btn {
+      @extend %btn-primary;
+    }
+  }
+}

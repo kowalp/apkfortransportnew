@@ -1,4 +1,4 @@
-import { MainService } from './../../../shared/services/main.service';
+import { MainService } from '../../../shared/services/main.service';
 import * as moment from 'moment';
 import {
   Component,
@@ -15,17 +15,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarView
 } from 'angular-calendar';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { CalendarService } from '../../../shared/services/calendar.service';
 import { CalendarEvent } from '../../calendar.component';
 
 @Component({
-  selector: 'app-edit-invidual',
-  templateUrl: './edit-invidual.component.html',
-  styleUrls: ['./edit-invidual.component.scss']
+  selector: 'edit-individual',
+  templateUrl: './edit-individual.component.html',
+  styleUrls: ['./edit-individual.component.scss']
 })
-export class EditInvidualComponent implements OnInit {
-  @ViewChild('modalContent', { static: false }) modalContent: TemplateRef<any>;
+export class EditIndividualComponent implements OnInit {
+  // @ViewChild('modalContent', { static: false }) modalContent: TemplateRef<any>;
   invidualForm: Array<CalendarEvent<{ time: any }>> = [];
   filteredForm: Array<CalendarEvent<{ time: any }>> = [];
   tours = [];
@@ -49,7 +48,7 @@ export class EditInvidualComponent implements OnInit {
     private modal: NgbModal,
     private mainService: MainService,
     private calendarService: CalendarService,
-    private authService: AuthService
+    // private authService: AuthService,
   ) {
   }
 
@@ -75,10 +74,10 @@ export class EditInvidualComponent implements OnInit {
     }
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
+  // handleEvent(action: string, event: CalendarEvent): void {
+  //   this.modalData = { event, action };
+  //   this.modal.open(this.modalContent, { size: 'lg' });
+  // }
 
 
   addEvent(): void {
@@ -149,10 +148,6 @@ export class EditInvidualComponent implements OnInit {
       Price: eventToSave.Price,
     };
     this.calendarService.SaveEventInvidual(arrayOfData);
-  }
-
-  logOut() {
-    this.authService.Logout();
   }
 
   ShowTripsByDate(range) {

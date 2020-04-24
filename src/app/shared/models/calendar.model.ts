@@ -7,11 +7,11 @@ export interface User {
   email: string;
   name: string;
 }
-export interface GetHotel<MetaType = any> {
+export interface GetHotel {
   Id?: number;
   HotelName: string;
 }
-export interface GetUsers<MetaType = any> {
+export interface GetUsers {
   id?: number;
   email: string;
   name: string;
