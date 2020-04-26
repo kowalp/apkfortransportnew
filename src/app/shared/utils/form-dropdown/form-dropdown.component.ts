@@ -23,7 +23,6 @@ export class FormDropdownComponent implements OnInit, OnDestroy {
   constructor(private zone: NgZone, private element: ElementRef) { }
 
   // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log(changes)
   //   if (changes.selectedList) {
   //     this.resultsList = this.filterResults(this.data, this.selectedList.list);
   //   }

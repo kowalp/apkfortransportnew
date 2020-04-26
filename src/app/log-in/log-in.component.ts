@@ -43,7 +43,6 @@ export class LogInComponent implements OnInit {
         });
   }
   onRegisterSubmit(): void {
-    console.log();
     this.authService.Register(this.prepareDataFormatForRegister(this.registerForm.value))
     this.registerForm.reset();
   }

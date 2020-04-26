@@ -159,7 +159,6 @@ export class ReportsComponent implements OnInit {
   //         .subscribe((data: any) => {
   //         },
   //         (err: HttpErrorResponse) => {
-  //           console.log(err );
   //         });
   //       }
   //     }
@@ -176,7 +175,6 @@ export class ReportsComponent implements OnInit {
   //         .subscribe((data: any) => {
   //         },
   //         (err: HttpErrorResponse) => {
-  //           console.log(err );
   //         });
   //       }
   //     }
@@ -193,7 +191,6 @@ export class ReportsComponent implements OnInit {
   //         .subscribe((data: any) => {
   //         },
   //         (err: HttpErrorResponse) => {
-  //           console.log(err );
   //         });
   //       }
   //     }
@@ -210,7 +207,6 @@ export class ReportsComponent implements OnInit {
   //         .subscribe((data: any) => {
   //         },
   //         (err: HttpErrorResponse) => {
-  //           console.log(err );
   //         });
   //       }
   //     }
