@@ -3,13 +3,11 @@ export interface Food {
   viewValue: string;
 }
 export interface User {
-  id: number;
   email: string;
   name: string;
 }
-export interface GetHotel {
-  Id?: number;
-  HotelName: string;
+export interface GetUser {
+  userName: string;
 }
 export interface GetUsers {
   id?: number;
