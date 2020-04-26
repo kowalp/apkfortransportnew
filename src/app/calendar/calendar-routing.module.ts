@@ -1,33 +1,23 @@
-import { EditFormsComponent } from './edit-mode/edit-forms/edit-forms.component';
-import { EditModeComponent } from './edit-mode/edit-mode.component';
-import { RaportsComponent } from './raports/raports.component';
+import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditInvidualComponent } from './edit-mode/edit-invidual/edit-invidual.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CalendarComponent,
-    children: [
-      {
-        path: 'reports',
-        component: RaportsComponent
-      },
-      {
-        path: 'edit-mode',
-        component: EditModeComponent
-      },
-      {
-        path: 'edit-individual',
-        component: EditInvidualComponent
-      },
-      {
-        path: 'edit-forms',
-        component: EditFormsComponent
-      },
-    ]
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('./admin-edit/admin-edit.module').then(m => m.AdminEditModule),
+    data: {
+      featureType: 'main'
+    }
   },
 ];
 

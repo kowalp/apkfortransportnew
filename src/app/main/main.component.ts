@@ -39,7 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuService.getStatusOfMenuAsObservable().pipe(takeUntil(this.$unsubscribe)).subscribe((isCollapsed: boolean) => {
       this.collapse = !isCollapsed;
-    })
+    });
   }
   ngOnDestroy() {
     this.$unsubscribe.next();

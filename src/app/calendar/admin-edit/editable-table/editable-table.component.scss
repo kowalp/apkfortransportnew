@@ -1,0 +1,31 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css';
+@import 'https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css';
+@import 'https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css';
+@import '../../../shared/styles/variables';
+
+.container {
+  max-width: 100%;
+  transition: $transition-300;
+  padding-left: 120px;
+  &.collapsed {
+    padding-left: 220px;
+  }
+}
+.circle {
+  background: $main-active-color;
+  border: 0.1175em solid #0F1C3F;
+  border-radius: 50%;
+  height: 1em;
+  display: block;
+  width: 1em;
+  margin: 13px;
+  .circle-inner {
+    background: $white;
+    height: 1em;
+    border-radius: 50%;
+    width: 1em;
+  }
+}
+.row-clickable {
+  cursor: pointer;
+}
