@@ -17,16 +17,6 @@ export interface GetUsers {
   name: string;
   role?: string;
 }
-export interface GetTours<MetaType = any> {
-  Id?: number;
-  Name: string;
-  Price: number;
-  PriceFrom5Persons: number;
-  Duration: number;
-  Commission: number;
-  CommissionFrom5Persons: number;
-}
-
 export interface KeyValueObject {
   key: string;
   value: string;

@@ -11,3 +11,21 @@
     padding-left: 220px;
   }
 }
+.circle {
+  background: $main-active-color;
+  border: 0.1175em solid #0F1C3F;
+  border-radius: 50%;
+  height: 1em;
+  display: block;
+  width: 1em;
+  margin: 13px;
+  .circle-inner {
+    background: $white;
+    height: 1em;
+    border-radius: 50%;
+    width: 1em;
+  }
+}
+.row-clickable {
+  cursor: pointer;
+}

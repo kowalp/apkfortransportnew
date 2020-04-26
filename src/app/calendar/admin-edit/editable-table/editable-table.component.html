@@ -1,13 +1,25 @@
 <div class="container" [ngClass]="{'collapsed': collapse}">
+  <div class="button-container">
+    <button class="btn" (click)="addRow()">Add</button>
+    <button class="btn" [disabled]='disableEdit' (click)="editRow()">Edit</button>
+    <button class="btn" [disabled]='disableDelete' (click)="deleteRow()">Delete</button>
+  </div>
   <table #table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
       <tr>
+        <th *ngIf="editable"></th>
         <th *ngFor="let column of data.columns">{{column.value}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data.rows; let i = index">
-        <td *ngFor="let col of data.columns"> {{row[col.key]}}</td>
+      <tr class="row-clickable" *ngFor="let row of data.rows; let i = index" (click)="selectRow(row)">
+        <ng-container *ngIf="editable">
+          <td class="circle">
+            <div *ngIf="row.isSelected" class="circle-inner">
+            </div>
+          </td>
+        </ng-container>
+        <td *ngFor="let col of data.columns">  {{row[col.key]}}</td>
       </tr>
     </tbody>
   </table>

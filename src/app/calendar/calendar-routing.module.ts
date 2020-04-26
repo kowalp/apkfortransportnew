@@ -1,4 +1,4 @@
-import { RaportsComponent } from './raports/raports.component';
+import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'reports',
-    component: RaportsComponent,
+    component: ReportsComponent,
   },
   {
     path: 'edit',

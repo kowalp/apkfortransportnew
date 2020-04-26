@@ -1,6 +1,6 @@
 import { NotFoundComponent } from './log-in/not-found/not-found.component';
 import { SnackBarService } from './shared/services/snackBar.service';
-import { SafePipe } from './calendar/raports/safe.pipe';
+import { SafePipe } from './calendar/reports/safe.pipe';
 import { CalendarService } from './shared/services/calendar.service';
 import { AuthGuard } from './shared/guards/auth-guard';
 import { AuthService } from './shared/services/auth.service';

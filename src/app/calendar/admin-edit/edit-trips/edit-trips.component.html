@@ -1,2 +1,2 @@
 <app-header [activeNumber]='4'></app-header>
-<editable-table [data]="toursData"></editable-table>
+<editable-table *ngIf="toursData" [data]="toursData"></editable-table>

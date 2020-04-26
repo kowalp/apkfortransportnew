@@ -5,13 +5,13 @@
 .container {
   position: relative;
   @include flex(row, nowrap, center, center);
-  margin-top: 15%;
-  margin-left: 12%;
+  margin-top: 10%;
+  padding-left: 4%;
   .content {
     text-align: center;
     height: 400px;
     width: 200px;
-    background: linear-gradient(#507eb1, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 62%);
+    background: linear-gradient(150deg, $menu-nav-main, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 62%);
     margin: 12px;
     h1 {
       @extend %title-medium;
