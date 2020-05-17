@@ -1,6 +1,53 @@
 <section class="reports">
-  <div class="form">
-    <div class="date-picker"></div>
+  <div class="form" [formGroup]="reportsForm">
+    <div class="container" formArrayName="information">
+      <ng-container *ngFor="let property of formData | keyvalue; let idx = index" [ngSwitch]="property.key">
+        <div class="input-container input-effect" *ngSwitchCase="'dateFrom'"
+          [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+          <label>
+            Date From:
+            <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [max]="maxDateFrom"
+              class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+            <owl-date-time #dt></owl-date-time>
+          </label>
+          <span class="focus-border">
+            <i></i>
+          </span>
+        </div>
+        <div class="input-container input-effect" *ngSwitchCase="'dateFrom'"
+          [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+          <label>
+            Date To:
+            <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [min]="minDateTo"
+              class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+            <owl-date-time #dt></owl-date-time>
+          </label>
+          <span class="focus-border">
+            <i></i>
+          </span>
+        </div>
+        <div class="ride-category" *ngSwitchCase="'type'">
+          <div class="category">
+            <label [for]="idx">{{property.key}}&nbsp;*</label>
+            <input type="hidden" [formControlName]="idx" class="dropdown" />
+            <form-dropdown (inputValue)="information.at(idx).patchValue($event)" [data]="roleList"
+              [defaultTitle]="'Choose '+ property.key">
+            </form-dropdown>
+          </div>
+        </div>
+        <ng-container *ngIf="formData.driver">
+          <div class="ride-category" *ngSwitchCase="'driver'">
+            <div class="category">
+              <label [for]="idx">{{property.key}}&nbsp;*</label>
+              <input type="hidden" [formControlName]="idx" class="dropdown" />
+              <form-dropdown (inputValue)="information.at(idx).patchValue($event)" [data]="driversList"
+                [defaultTitle]="'Choose ' + property.key">
+              </form-dropdown>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
     <div class="options"></div>
     <div class="submit"></div>
   </div>

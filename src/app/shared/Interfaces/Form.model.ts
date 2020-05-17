@@ -7,8 +7,8 @@ export interface FormModel {
 export interface TripCategory {
   data?: KeyValueObject[];
   name: string;
-  optional: boolean;
-  inputType: string;
+  optional?: boolean;
+  inputType?: string;
   key: string;
   value: string;
 }

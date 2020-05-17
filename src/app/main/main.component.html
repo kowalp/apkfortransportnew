@@ -5,7 +5,7 @@
         <h2>Last Rides</h2>
         <ul>
             <ng-container *ngIf="trips">
-                <li *ngFor="let trip of trips">
+                <li class="list-item" *ngFor="let trip of trips">
                     <div class="title-container">
                         <p>{{trip.title}}</p>
                         <span>{{trip.numberOfPeople}}people</span>
