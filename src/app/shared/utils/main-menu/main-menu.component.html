@@ -1,24 +1,23 @@
 <nav [ngClass]="{'collapsed': isCollapsed}">
-    <div class="icon-toggle-box">
-        <input type="checkbox" id="menu">
-        <label for="menu" class="icon" (click)="toggleMenu()">
-          <div class="menu"></div>
-        </label>
-        <h3 *ngIf="!isCollapsed">Menu</h3>
-        <div class="divider">
-        </div>
+  <div class="icon-toggle-box">
+    <input type="checkbox" id="menu">
+    <label for="menu" class="icon" (click)="toggleMenu()">
+      <div class="menu"></div>
+    </label>
+    <h3 *ngIf="!isCollapsed">Menu</h3>
+    <div class="divider">
     </div>
-    <section class="menu-items-box">
-        <div class="menu-items-container">
-            <ul>
-                <li class="menuItem" *ngFor="let item of menuItems; let idx = index">
-                    <a [href]="item.routing" [ngClass]="{'active': item.active}">
-                        <svg-icon [iconType]="icons[idx]"></svg-icon>
-                        <span *ngIf="!isCollapsed">{{item.value}}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-    </section>
+  </div>
+  <section class="menu-items-box">
+    <div class="menu-items-container">
+      <ul>
+        <li class="menuItem" *ngFor="let item of menuItems; let idx = index">
+          <a [href]="item.routing" [ngClass]="{'active': item.active}">
+            <svg-icon [iconType]="icons[idx]"></svg-icon>
+            <span *ngIf="!isCollapsed">{{item.value}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
 </nav>

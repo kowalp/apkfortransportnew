@@ -1,112 +1,47 @@
-@import '../../styles/variables';
-header {
-    position: relative;
-    z-index: 1;
-    height: 150px;
-    width: 100%;
-    @include flex(row, nowrap, space-around, center);
-    padding: 0 40px;
-    background: linear-gradient(150deg, $menu-nav-main, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 62%);
-    -webkit-box-shadow: 100px 10px 36px 0px rgba(222, 222, 222, 1);
-    -moz-box-shadow: 100px 10px 36px 0px rgba(222, 222, 222, 1);
-    box-shadow: 100px 10px 36px 0px $menu-nav-main;
-    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-    border-radius: 0 0 68%;
-}
-
-.profile-container {
-    @include flex(row, nowrap, center, center);
-}
-
-.car-big {
-    background: url('../../assets/pngguru.com.png') no-repeat;
-}
-
-.car {
-    background: url('../../assets/mercedes.png') no-repeat;
-}
-
-.car,
-.car-big {
-    position: relative;
-    width: 221px;
-    height: 150px;
-    background-size: contain;
-}
-
+@import "../../styles/variables";
+$background-color: rgba(228, 228, 228, 0.521);
 app-main-menu {
-    @include flex(column,
-    nowrap,
-    center,
-    center);
-    position: fixed;
-    z-index: 2;
-    height: 100%;
+  @include flex(column, nowrap, center, center);
+  position: fixed;
+  z-index: 2;
+  height: 100%;
 }
-
+.topmenu {
+  background: transparent;
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
 //background
 .background {
-    position: fixed;
-    z-index: -9999;
-    top: -48px;
-}
-
-#home {
-    clip-path: url(#cache);
-}
-
-#red {
-    fill: none;
-    opacity: 0.15;
-    stroke: palevioletred;
-    stroke-width: 2;
-    stroke-miterlimit: 10;
-    animation: show 4s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-}
-
-#blue {
-    fill: none;
-    opacity: 0.15;
-    stroke: skyblue;
-    stroke-width: 2;
-    stroke-miterlimit: 10;
-    animation: show 4s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-}
-
-#light-blue {
-    fill: none;
-    opacity: 0.15;
-    stroke: navy;
-    stroke-width: 1;
-    stroke-miterlimit: 10;
-    stroke-dasharray: 200;
-    stroke-dashoffset: 800;
-    animation: draw 4s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-
-@keyframes draw {
-    to {
-        stroke-dashoffset: 0;
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  &.collapsed {
+    &::before {
+      margin-left: 100px;
     }
-}
-
-@keyframes show {
-    0% {
-        opacity: 0.15;
-    }
-    50% {
-        opacity: 0.2;
-    }
-    100% {
-        opacity: 0.15;
-    }
+  }
+  &::after {
+    background: $background-color;
+    content: "";
+    display: block;
+    clip-path: polygon(95% 0, 100% 0, 100% 100%, 78% 100%);
+    width: 100vw;
+    position: absolute;
+    height: 100vh;
+    margin-top: -120px;
+  }
+  &::before {
+    background: $background-color;
+    content: "";
+    width: 100vw;
+    margin-left: 0;
+    transition: $transition-300;
+    display: block;
+    position: absolute;
+    clip-path: polygon(0 60%, 0% 100%, 10% 100%);
+    height: 100vh;
+  }
 }

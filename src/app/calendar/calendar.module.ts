@@ -1,6 +1,6 @@
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { SharedModule } from './../shared/utils/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './calendar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,6 +28,7 @@ import { ReportsContentComponent } from './reports/reports-content/reports-conte
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     AdminEditModule,
   ]

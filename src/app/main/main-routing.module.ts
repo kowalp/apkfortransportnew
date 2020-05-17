@@ -9,17 +9,14 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    pathMatch: 'full',
   },
-  {
-    path: 'pricing',
-    component: PricingComponent,
-    pathMatch: 'full'
-  },
+  // {
+  //   path: 'pricing',
+  //   component: PricingComponent,
+  // },
   {
     path: 'company',
     component: ChooseCompanyComponent,
-    pathMatch: 'full'
   },
   {
     path: ':id',

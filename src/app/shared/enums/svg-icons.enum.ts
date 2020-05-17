@@ -15,7 +15,7 @@ export enum SVGIconEnum {
   ROAD,
   TICK,
   X,
-  SETTINGS
+  SETTINGS,
 }
 
 export const SVGIconMAPPER = {
@@ -34,5 +34,5 @@ export const SVGIconMAPPER = {
   ROAD: SVGIconEnum.ROAD,
   TICK: SVGIconEnum.TICK,
   X: SVGIconEnum.X,
-  SETTINGS: SVGIconEnum.SETTINGS
+  SETTINGS: SVGIconEnum.SETTINGS,
 };

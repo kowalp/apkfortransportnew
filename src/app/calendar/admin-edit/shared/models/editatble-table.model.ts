@@ -18,8 +18,8 @@ export interface EditTour {
   basicPrice: number;
   advancePrice: number;
   tripLength: string;
-  basicCommission: number;
-  advanceCommission: number;
+  basicCommission?: number;
+  advanceCommission?: number;
 }
 
 export interface DataTable {

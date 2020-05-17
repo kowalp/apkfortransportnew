@@ -22,6 +22,12 @@ export class MainComponent implements OnInit, OnDestroy {
     {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
     {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
     {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+
+    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
   ];
   companies: any = [
     {title: 'Krakow Welcome'},

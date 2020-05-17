@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class MainService {
   apiAddress = `http://51.68.143.24:5000/`;
   private $toursDetails = new ReplaySubject<any[]>(1);
-  private $driversDetails = new ReplaySubject<any[]>(1);
+  private $driversDetails = new ReplaySubject<string[]>(1);
   private $receptionistDetails = new ReplaySubject<any[]>(1);
   private $transferDetails = new ReplaySubject<any[]>(1);
   private $hotelsList = new ReplaySubject<any[]>(1);
@@ -68,9 +68,9 @@ export class MainService {
     return this.$driversDetails.asObservable();
   }
 
-  getDrivers() {
-    this.httpClient.get<any>(this.apiAddress + 'account/getall/driver')
-      .subscribe((payload) => this.$driversDetails.next(payload));
+  getDrivers(companyId: number) {
+    this.httpClient.get(this.apiAddress + companyId +'/getall/driver')
+      .subscribe((payload: string[]) => this.$driversDetails.next(payload));
   }
 
   setReceptionistAsObservable() {
