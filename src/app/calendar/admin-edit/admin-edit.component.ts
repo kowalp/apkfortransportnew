@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 import {
   CalendarView
 } from 'angular-calendar';
-import { CalendarEvent } from '../calendar.component';
+import { CalendarEvent } from 'src/app/shared/Interfaces/calendar.model';
 
 @Component({
   selector: 'admin-edit',

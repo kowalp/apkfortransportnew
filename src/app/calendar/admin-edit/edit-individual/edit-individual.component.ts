@@ -16,7 +16,6 @@ import {
   CalendarView
 } from 'angular-calendar';
 import { CalendarService } from '../../../shared/services/calendar.service';
-import { CalendarEvent } from '../../calendar.component';
 import { TourData, DataTable } from '../shared/models/editatble-table.model';
 import { KeyValueObject } from 'src/app/shared/models/calendar.model';
 import { columns } from '../shared/data/columns.data';

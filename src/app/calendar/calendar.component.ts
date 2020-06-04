@@ -18,39 +18,21 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarView } from 'angular-calendar';
 import { takeUntil } from 'rxjs/operators';
-
-export interface CalendarEvent<MetaType = any> {
-  Id?: number;
-  Name?: string | number;
-  start: Date;
-  end: Date;
-  title: string;
-  Email: string;
-  Phone: string;
-  Transfer: string;
-  Trip: string;
-  PersonCount: string;
-  Comment?: string;
-  PickupFrom?: string;
-  FlightNumber?: string;
-  Price: number;
-  TourType?: string;
-  allDay?: boolean;
-  cssClass?: string;
-  resizable?: {
-    beforeStart?: boolean;
-    afterEnd?: boolean;
-  };
-  draggable?: boolean;
-  meta?: MetaType;
-}
-
+import { CalendarEvent } from '../shared/Interfaces/calendar.model';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit, OnDestroy {
+  loading: boolean = true;
+  config = {
+    backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+    primaryColour: '#50afb1',
+    secondaryColour: '#50afb1',
+    tertiaryColour: '#50afb1'
+   };
   hotelForm: Array<CalendarEvent<{ time: any }>> = [];
   receptionistForm: Array<CalendarEvent<{ time: any }>> = [];
   invidualForm: Array<CalendarEvent<{ time: any }>> = [];
@@ -79,6 +61,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1200);
     // this.userRole = localStorage.getItem('role');
     // this.isMaster = false;
     // this.isDriver = false;
