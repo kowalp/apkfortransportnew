@@ -1,26 +1,179 @@
-@import '../../shared/styles/variables';
-@import '../../shared/styles/typhography';
-@import '../../shared/styles/buttons';
+@import "../../shared/styles/variables";
+@import "../../shared/styles/typhography";
+@import "../../shared/styles/buttons";
 
 .container {
   position: relative;
   @include flex(row, nowrap, center, center);
-  margin-top: 10%;
   padding-left: 4%;
-  .content {
-    text-align: center;
-    height: 400px;
-    width: 200px;
-    background: linear-gradient(150deg, $menu-nav-main, #709dc7 10%, #dde9f5 38%, #eaf2f9 48%, #f6f9fc 62%);
-    margin: 12px;
+  width: 100%;
+  height: 100%;
+  @media screen and (max-width: 1470px) {
+    @include flex(row, wrap, center, center);
+  }
+  h1 {
+    @extend %title-medium;
+  }
+  p {
+    @extend %title-small;
+  }
+  .btn {
+    @extend %btn-primary;
+  }
+}
+.content-left {
+  @include flex(column, nowrap, center, flex-start);
+  .content-1 {
+    @include flex(row, nowrap, flex-start, flex-start);
+    background: $main-active-color-1;
+    border-radius: 5%;
+    position: relative;
+    width: 97%;
+    padding: 40px;
+
     h1 {
-      @extend %title-medium;
+      margin-top: 30px;
+      position: relative;
+      &::before {
+        display: block;
+        position: absolute;
+        height: 20px;
+        border-radius: 20%;
+        content: "";
+        background: rgba(0, 51, 255, 0.14);
+        width: 68%;
+        left: -6px;
+        top: 17px;
+      }
     }
     p {
-      @extend %title-small;
+      padding-top: 30px;
+      width: 40%;
     }
     .btn {
-      @extend %btn-primary;
+      margin: 30px 0;
     }
+  }
+  .container-trips {
+    margin-top: 20px;
+    @include flex(row, nowrap, center, center);
+    position: relative;
+    width: 97%;
+    .trips {
+      padding: 30px 30px 30px 40px;
+      width: 25em;
+      height: 100%;
+      position: relative;
+      border-radius: 5%;
+      h1 {
+        margin-top: 20px;
+        width: 60%;
+      }
+      p {
+        padding-top: 20px;
+        width: 60%;
+      }
+    }
+    .content-2 {
+      background: $main-active-color-2;
+      @include flex(row, nowrap, center, center);
+    }
+    .content-3 {
+      margin-left: 20px;
+      background: $main-active-color-3;
+    }
+  }
+}
+.icon {
+  position: absolute;
+  width: 128px;
+  height: 158px;
+}
+
+.icons-container {
+  @include flex(row, nowrap, center, center);
+  .icon-passenger {
+    bottom: 65px;
+    width: 126px;
+    height: 128px;
+    margin-left: -53px;
+    background: url("../../shared/assets/passenger.png") no-repeat;
+  }
+  .icon-trip {
+    background: url("../../shared/assets/tripslist.png") no-repeat;
+    top: 48px;
+    right: 170px;
+    background-size: 150px;
+    transform: scale(1.5);
+  }
+  .icon-shape {
+    background: url("../../shared/assets/shape.png") no-repeat;
+    width: 100px;
+    bottom: 0px;
+    height: 80px;
+    right: 0;
+  }
+}
+.content-4 {
+  position: relative;
+  margin-left: 20px;
+  border-radius: 5%;
+  @include flex(column, nowrap, center, center);
+  padding: 210px 120px;
+  background: $main-active-color-4;
+  h1 {
+    margin-top: 30px;
+    position: relative;
+    word-break: keep-all;
+    width: 208px;
+    &::before {
+      display: block;
+      position: absolute;
+      height: 20px;
+      text-align: center;
+      border-radius: 20%;
+      content: "";
+      background: rgba(0, 51, 255, 0.14);
+      width: 100%;
+      left: -6px;
+      top: 17px;
+    }
+  }
+  p {
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+  }
+  .btn {
+    margin: 30px 0;
+  }
+  .icon-person {
+    background: url("../../shared/assets/policy.png") no-repeat;
+    top: 60px;
+  }
+  .icon-arrow {
+    background: url("../../shared/assets/shape.png") no-repeat;
+    bottom: 0;
+    right: 0;
+    width: 102px;
+    height: 91px;
+  }
+}
+.icons-container-2 {
+  @include flex(column, nowrap, flex-end, flex-end);
+  .icon-arrow {
+    background: url("../../shared/assets/arrow.png") no-repeat;
+    background-size: contain;
+    width: 100px;
+    top: 45px;
+    height: 80px;
+    transform: rotate(-90deg);
+  }
+  .icon-list {
+    right: 13px;
+    bottom: 0px;
+    width: 75px;
+    height: 75px;
+    background: url("../../shared/assets/triplist2.png") no-repeat;
   }
 }

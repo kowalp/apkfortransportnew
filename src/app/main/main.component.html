@@ -29,6 +29,7 @@
   <div class="rides-conatiner" >
     <div class="favourite-companies" >
       <h2>Favourite Companies</h2>
+      <div class="divider"></div>
       <ul>
         <ng-container *ngIf="companies && !loading">
           <li *ngFor="let company of companies">
@@ -47,6 +48,7 @@
     </div>
     <div class="favourite-companies last-trip">
       <h2>Your last trip in details</h2>
+      <div class="divider"></div>
       <ul>
         <ng-container *ngIf="trips[0] && !loading">
           <li>

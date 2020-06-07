@@ -23,6 +23,7 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
     this.menuService.getStatusOfMenuAsObservable().pipe(takeUntil(this.$unsubscribe)).subscribe((isCollapsed: boolean) => {
       this.collapse = !isCollapsed;
     });
+    //TODO: add useravatar and dropdown
   }
 
   ngOnDestroy() {

@@ -16,7 +16,7 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
   @Input() data: DataTable;
   @Input() editable: boolean = true;
   collapse: boolean = false;
-  disableEdit: boolean = false;
+  disableEdit: boolean = true;
   disableDelete: boolean = true;
   private $unsubscribe: Subject<void> = new Subject<void>();
   @ViewChild('table', { static: true }) dataTable: ElementRef;
@@ -36,6 +36,8 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
     $('#table').DataTable({
       responsive: true,
       paging: true,
+      searching: false,
+      lengthChange: false,
       order: [[1, 'asc']],
     });
   }
@@ -48,6 +50,7 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
   }
 
   addRow() {
+
     // TODO:open modal, emit data to the component above
   }
 

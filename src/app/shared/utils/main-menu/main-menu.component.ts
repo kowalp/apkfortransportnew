@@ -1,6 +1,7 @@
 import { SVGIconEnum } from './../../enums/svg-icons.enum';
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -24,8 +25,9 @@ export class MainMenuComponent implements OnInit {
     SVGIconEnum.RIDE,
     SVGIconEnum.REPORTS,
     SVGIconEnum.SETTINGS
-];
-  constructor(private menuService: MenuService) { }
+  ];
+  readonly logoutIcon: SVGIconEnum = SVGIconEnum.LOGOUT;
+  constructor(private menuService: MenuService, private authService: AuthService) { }
 
   ngOnInit() {
     // TODO: Disable settings for non admins!
@@ -35,5 +37,9 @@ export class MainMenuComponent implements OnInit {
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
     this.menuService.setStatusOfMenu(this.isCollapsed);
+  }
+
+  logOut(): void {
+    this.authService.Logout();
   }
 }
