@@ -13,6 +13,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatNativeDateModule, MatInputModule} from '@angular/material';
 import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
+import { NgxLoadingModule  } from 'ngx-loading';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -33,6 +35,7 @@ import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
     MatInputModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    NgxLoadingModule.forRoot({})
   ],
 })
 export class MainModule { }

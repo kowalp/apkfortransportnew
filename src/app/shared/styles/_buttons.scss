@@ -1,119 +1,122 @@
-@import './variables';
+@import "./variables";
 @font-face {
-    font-family: 'MyWebFont';
-    src: url('src/app/shared/assets/fonts/KIN668.TTF') format('truetype'), /* Safari, Android, iOS */
+  font-family: "MyWebFont";
+  src: url("src/app/shared/assets/fonts/KIN668.TTF") format("truetype"); /* Safari, Android, iOS */
 }
 
 %font-value {
-    font-family: 'MyWebFont', serif;
+  font-family: "MyWebFont", serif;
 }
 
 $btn-height: 32px;
 %btn {
-    padding: 8px 16px;
-    font-family: 'MyWebFont', serif;
-    font-size: 14px;
-    line-height: 1;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: $border-radius;
+  padding: 8px 16px;
+  font-family: 'Segoe UI';
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  outline: transparent;
+  background-color: transparent;
+  &:focus:not(:disabled) {
     outline: transparent;
     background-color: transparent;
-    &:focus:not(:disabled) {
-        outline: transparent;
-        background-color: transparent;
-        box-shadow: 0 0 0 0 transparent;
-    }
-    &:active {
-        color: $main-active-color;
-        border: 1px solid $main-active-color;
-        outline: transparent;
-        background-color: transparent;
-        box-shadow: 0 0 0 0 transparent;
-    }
-    &:disabled {
-        cursor: initial;
-    }
+    box-shadow: 0 0 0 0 transparent;
+  }
+  &:active {
+    color: $main-active-color;
+    border: 1px solid $main-active-color;
+    outline: transparent;
+    background-color: transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  &:disabled {
+    cursor: initial;
+  }
 }
 
 %btn-primary {
-    @extend %btn;
-    height: $btn-height;
-    padding: 0 20px;
+  @extend %btn;
+  height: $btn-height;
+  padding: 6px 30px;
+  transition: $transition-300;
+  background: $main-active-color;
+  color: $white;
+  border: 1px solid $main-active-color;
+  ::ng-deep svg-icon svg path {
     transition: $transition-300;
-    color: $main-active-color;
-    border: 1px solid $main-active-color;
-     ::ng-deep svg-icon svg path {
-        transition: $transition-300;
-        fill: $main-active-color;
+    fill: $main-active-color;
+  }
+  &:disabled {
+    opacity: 0.8;
+    color: $grey-bright;
+    border: 1px solid $grey-bright;
+    ::ng-deep svg-icon svg path {
+      fill: $grey-bright;
     }
-    &:disabled {
-        opacity: .8;
-        color: $grey-bright;
-        border: 1px solid $grey-bright;
-         ::ng-deep svg-icon svg path {
-            fill: $grey-bright;
-        }
-    }
-    &:hover:not(:disabled) {
-        color: $background-dark;
-        border: 1px solid $background-dark;
-    }
+  }
+  &:hover:not(:disabled) {
+    color: $menu-nav-main;
+    border: 1px solid $menu-nav-main;
+  }
 }
 %btn-login {
-    font-size: 14px;
-    line-height: 1;
-    height: $btn-height;
-    padding: 0 20px;
-    transition: $transition-300;
-    color: $main-active-color;
+  font-size: 14px;
+  line-height: 1;
+  height: $btn-height;
+  padding: 0 20px;
+  transition: $transition-300;
+  color: $main-active-color;
+  position: relative;
+  &:focus:not(:disabled) {
+    outline: transparent;
+    background-color: transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  span {
+    background-color: $white;
+    padding: 0px 20px;
+    font-size: 17px;
+    font-family: "MyWebFont", serif;
+    z-index: 2;
     position: relative;
-    &:focus:not(:disabled) {
-        outline: transparent;
-        background-color: transparent;
-        box-shadow: 0 0 0 0 transparent;
-    }
+    border: 3px solid $main-active-color;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    height: $btn-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &::after {
+    content: "";
+    border: 3px solid $main-active-color;
+    position: absolute;
+    height: $btn-height;
+    width: 67%;
+    top: 15px;
+    left: 11px;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 0;
+    box-sizing: border-box;
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:not(:disabled) {
+    cursor: pointer;
     span {
-        background-color: $white;
-        padding: 0px 20px;
-        font-size: 17px;
-        font-family: 'MyWebFont', serif;
-        z-index: 2;
-        position: relative;
-        border: 3px solid $main-active-color;
-        transition: transform .4s cubic-bezier(.19, 1, .22, 1);
-        height: $btn-height;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      cursor: pointer;
+      &:active:not(:disabled) {
+        transform: translate(3px, 3px);
+      }
+      &:hover:not(:active) {
+        transform: translate(-2px, -2px);
+      }
     }
-    &::after {
-        content: "";
-        border: 3px solid $main-active-color;
-        position: absolute;
-        height: $btn-height;
-        width: 67%;
-        top: 15px;
-        left: 11px;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        z-index: 0;
-        box-sizing: border-box;
-    }
-    &:disabled {
-        opacity: .5;
-    }
-    &:not(:disabled) {
-        cursor: pointer;
-        span {
-            cursor: pointer;
-            &:active:not(:disabled) {
-                transform: translate(3px, 3px);
-            }
-            &:hover:not(:active) {
-                transform: translate(-2px, -2px);
-            }
-        }
-    }
+  }
 }

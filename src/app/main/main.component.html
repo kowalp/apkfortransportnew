@@ -1,69 +1,75 @@
 <app-header [activeNumber]="'0'">
 </app-header>
 <div class="main-container" [ngClass]="{'isCollapsed': collapse}">
-    <div class="last-rides">
-        <h2>Last Rides</h2>
-        <ul>
-            <ng-container *ngIf="trips">
-                <li class="list-item" *ngFor="let trip of trips">
-                    <div class="title-container">
-                        <p>{{trip.title}}</p>
-                        <span>{{trip.numberOfPeople}}people</span>
-                    </div>
-                    <span>{{trip.date}}</span>
-                </li>
+  <ngx-loading [show]="loading" [config]="config" [template]="lastRides"></ngx-loading>
+  <ng-template #lastRides>
+    <div class="last-rides"></div>
+  </ng-template>
+  <div class="last-rides" >
+    <h2>Last Rides</h2>
+    <ul>
+      <ng-container *ngIf="trips && !loading">
+        <li class="list-item" *ngFor="let trip of trips">
+          <div class="title-container">
+            <p>{{trip.title}}</p>
+            <span>{{trip.numberOfPeople}}people</span>
+          </div>
+          <span>{{trip.date}}</span>
+        </li>
 
-            </ng-container>
-            <ng-container *ngIf="!trips">
-                <li>
-                    <h3>You haven't booked any trip yet! Do it now:</h3>
-                    <button class="btn">Book a Ride</button>
+      </ng-container>
+      <ng-container *ngIf="!trips">
+        <li>
+          <h3>You haven't booked any trip yet! Do it now:</h3>
+          <button class="btn">Book a Ride</button>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <div class="rides-conatiner" >
+    <div class="favourite-companies" >
+      <h2>Favourite Companies</h2>
+      <div class="divider"></div>
+      <ul>
+        <ng-container *ngIf="companies && !loading">
+          <li *ngFor="let company of companies">
+            <svg-icon [iconType]="starIcon"></svg-icon>
+            <p>{{company.title}}</p>
+            <button class="btn">Take a ride</button>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!trips">
+          <li>
+            <h3>You haven't booked any trip yet! Do it now:</h3>
+            <button class="btn">Book a Ride</button>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+    <div class="favourite-companies last-trip">
+      <h2>Your last trip in details</h2>
+      <div class="divider"></div>
+      <ul>
+        <ng-container *ngIf="trips[0] && !loading">
+          <li>
+            <p>{{trips[0].title}}</p>
+            <div class="inner-container">
+              <ul>
+                <li *ngFor="let item of trips[0].tripDetails">
+                  <span>{{item.key}}</span>
+                  <span>{{item.value}}</span>
                 </li>
-            </ng-container>
-        </ul>
+              </ul>
+            </div>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!trips">
+          <li>
+            <h3>You haven't booked any trip yet! Do it now:</h3>
+            <button class="btn">Book a Ride</button>
+          </li>
+        </ng-container>
+      </ul>
     </div>
-    <div class="rides-conatiner">
-        <div class="favourite-companies">
-            <h2>Favourite Companies</h2>
-            <ul>
-                <ng-container *ngIf="companies">
-                    <li *ngFor="let company of companies">
-                        <svg-icon [iconType]="starIcon"></svg-icon>
-                        <p>{{company.title}}</p>
-                        <button class="btn">Take a ride</button>
-                    </li>
-                </ng-container>
-                <ng-container *ngIf="!trips">
-                    <li>
-                        <h3>You haven't booked any trip yet! Do it now:</h3>
-                        <button class="btn">Book a Ride</button>
-                    </li>
-                </ng-container>
-            </ul>
-        </div>
-        <div class="favourite-companies last-trip">
-            <h2>Your last trip in details</h2>
-            <ul>
-                <ng-container *ngIf="trips[0]">
-                    <li>
-                        <p>{{trips[0].title}}</p>
-                        <div class="inner-container">
-                            <ul>
-                                <li *ngFor="let item of trips[0].tripDetails">
-                                    <span>{{item.key}}</span>
-                                    <span>{{item.value}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ng-container>
-                <ng-container *ngIf="!trips">
-                    <li>
-                        <h3>You haven't booked any trip yet! Do it now:</h3>
-                        <button class="btn">Book a Ride</button>
-                    </li>
-                </ng-container>
-            </ul>
-        </div>
-    </div>
+  </div>
 </div>

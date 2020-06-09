@@ -5,14 +5,14 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MainMenuComponent } from './main-menu/main-menu.component';
-
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
     MainMenuComponent,
     AppHeaderComponent,
     FormDropdownComponent,
-    SvgIconsComponent
+    SvgIconsComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +21,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
     MainMenuComponent,
     AppHeaderComponent,
     FormDropdownComponent,
-    SvgIconsComponent
+    SvgIconsComponent,
   ],
   providers: [MenuService]
 })

@@ -1,6 +1,10 @@
 <div class="header">
     <app-header [activeNumber]="'1'">
     </app-header>
+    <ngx-loading [show]="loading" [config]="config" [template]="lastRides"></ngx-loading>
+  <ng-template #lastRides>
+    <div class="calendar"></div>
+  </ng-template>
     <section class="calendar" [ngClass]="{'collaped': collapse}">
         <div class="row text-center">
             <div class="col-md-4">

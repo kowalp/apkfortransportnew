@@ -3,7 +3,7 @@
 %title-large {
     font-family: $font-title;
     font-size: $title-large;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -23,11 +23,9 @@
 %title-small {
     font-family: $font-default;
     font-size: $title-small;
-    font-weight: 500;
-    font-style: italic;
+    font-weight: 400;
     line-height: 24px;
     letter-spacing: 1px;
-    text-transform: uppercase;
     color: $main-font;
 }
 

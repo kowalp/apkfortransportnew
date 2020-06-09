@@ -10,6 +10,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AdminEditModule } from './admin-edit/admin-edit.module';
 import { ReportsComponent } from './reports/reports.component';
 import { ReportsContentComponent } from './reports/reports-content/reports-content.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ReportsContentComponent } from './reports/reports-content/reports-conte
     ReactiveFormsModule,
     SharedModule,
     AdminEditModule,
+    NgxLoadingModule.forRoot({})
   ]
 })
 export class CalendarsModule { }
