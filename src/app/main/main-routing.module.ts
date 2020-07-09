@@ -10,10 +10,6 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
   },
-  // {
-  //   path: 'pricing',
-  //   component: PricingComponent,
-  // },
   {
     path: 'company',
     component: ChooseCompanyComponent,

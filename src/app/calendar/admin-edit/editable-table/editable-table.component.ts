@@ -6,6 +6,7 @@ import { MenuService } from 'src/app/shared/services/menu.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DataTable } from '../shared/models/editatble-table.model';
+import { SVGIconEnum } from 'src/app/shared/enums/svg-icons.enum';
 
 @Component({
   selector: 'editable-table',
@@ -19,10 +20,13 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
   disableEdit: boolean = true;
   disableDelete: boolean = true;
   private $unsubscribe: Subject<void> = new Subject<void>();
+  readonly arrow: SVGIconEnum = SVGIconEnum.ARROW;
   @ViewChild('table', { static: true }) dataTable: ElementRef;
+  dataToDisplay: Object;
   constructor(private menuService: MenuService) { }
 
   ngOnInit() {
+    this.dataToDisplay = this.data.rows[0];
     this.menuService.getStatusOfMenuAsObservable().pipe(takeUntil(this.$unsubscribe)).subscribe((isCollapsed: boolean) => {
       this.collapse = !isCollapsed;
     });
@@ -34,8 +38,17 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
 
   createTable() {
     $('#table').DataTable({
+      language: {
+        paginate: {
+          first: '',
+          last: '',
+          next: '<img style="height: 24px; background: transparent" src="https://img.icons8.com/fluent/48/000000/arrow.png"/>', // or '→'
+          previous: '<img  style="transform: rotate(180deg);height: 24px; background: transparent" src="https://img.icons8.com/fluent/48/000000/arrow.png"/>' // or '←'
+        }
+      },
       responsive: true,
       paging: true,
+      pagingType: 'full_numbers',
       searching: false,
       lengthChange: false,
       order: [[1, 'asc']],
@@ -50,7 +63,7 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
   }
 
   addRow() {
-
+    console.log('modal opened');
     // TODO:open modal, emit data to the component above
   }
 

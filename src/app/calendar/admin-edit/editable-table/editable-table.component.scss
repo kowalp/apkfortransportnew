@@ -4,6 +4,15 @@
 @import "../../../shared/styles/variables";
 @import "../../../shared/styles/buttons";
 
+// color of rows
+$row-1: #5fc7c9;
+$row-2: #7fced1;
+$row-3: #9bdddf;
+$row-4: #bae6e7;
+$row-5: #cceef0;
+
+$border-radious-row: 100%;
+
 .container {
   max-width: 100%;
   transition: $transition-300;
@@ -12,6 +21,12 @@
     padding-left: 220px;
   }
 }
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+
 .button-container {
   @include flex(row, nowrap, flex-end, center);
   width: 100%;
@@ -20,6 +35,7 @@
     margin-right: 5px;
   }
 }
+
 .disable {
   cursor: default !important;
   &::before {
@@ -29,47 +45,83 @@
     display: none !important;
   }
 }
+
 .circle {
-  border: 1px solid $main-active-color;
-  border-radius: 50%;
-  height: 1em;
   position: relative;
-  display: block;
-  width: 1em;
-  margin: 13px;
-  border-bottom-width: 1px !important;
-  border-left-width: 1px !important;
+  &::before {
+    border: 1px solid $main-active-color;
+    border-radius: 50%;
+    height: 2em;
+    position: absolute;
+    display: block;
+    content: "";
+    width: 2em;
+    top: 8px;
+    left: 12px;
+    border-bottom-width: 1px !important;
+    border-left-width: 1px !important;
+  }
   .circle-inner {
     transition: $transition-300;
     background: url("../../../shared/assets/tick.png") no-repeat;
     background-size: contain;
-    height: 40px;
+    height: 31px;
     width: 55px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 7px;
+    left: 13px;
   }
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background: transparent !important;
+}
+.paging_full_numbers a.paginate_active {
+  color: #fff !important;
 }
 thead th,
 tr,
 table {
   border: none !important;
 }
+
 td {
-  border: 1px solid $main-active-color;
+  border-right: none;
 }
+
 .row-clickable {
   cursor: pointer;
 }
+
 #table_length {
   display: none !important;
 }
+
+.table-striped tbody tr:first-child {
+  box-shadow: none;
+}
+
 .table-striped tbody tr {
-  background-color: $menu-nav-main-3;
+  -webkit-box-shadow: 17px -17px 10px 0px rgb(212, 212, 212);
+  -moz-box-shadow: 17px -17px 10px 0px rgb(212, 212, 212);
+  box-shadow: 17px -17px 10px 0px rgba(212, 212, 212, 0.514);
+  border-radius: 30%;
+  background-color: $white;
 }
+
+tr td:first-child {
+  margin-bottom: 50px;
+  border-top-left-radius: $border-radious-row;
+  border-bottom-left-radius: $border-radious-row;
+}
+
+tr td:last-child {
+  border-radius: 0 19% 12% 0/9% 66% 69% 130%;
+}
+
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: $main-active-color-3;
+  background-color: $row-5;
 }
+
 .title th {
   &:first-child {
     border-radius: 20px 0 0 0 !important;
@@ -78,10 +130,9 @@ td {
     border-radius: 0 20px 0 0 !important;
   }
 }
+
 .title {
-  background: #E0EAFC;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: transparent; /* fallback for old browsers */
 }
 
 /* dataTables CSS modification & positioning */
@@ -92,6 +143,7 @@ table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:before {
   content: url("../../../shared/assets/arrowup.png") !important;
 }
+
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after,
@@ -99,4 +151,7 @@ table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after {
   content: url("../../../shared/assets/arrowup.png") !important;
   transform: rotate(180deg);
+}
+.page-item.disabled .page-link {
+  background: transparent!important;
 }

@@ -15,7 +15,7 @@ export class MainMenuComponent implements OnInit {
   menuItems: Array<any> = [
     { value: 'MAIN', routing: '/main' },
     { value: 'CALENDAR', routing: '/calendar' },
-    { value: 'BOOK A RIDE', routing: '/main/choose-company' },
+    { value: 'BOOK A RIDE', routing: '/main/company' },
     { value: 'REPORTS', routing: '/calendar/reports' },
     { value: 'SETTINGS', routing: '/calendar/edit' },
   ];

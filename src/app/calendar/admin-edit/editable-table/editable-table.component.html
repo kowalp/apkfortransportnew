@@ -1,6 +1,6 @@
 <div class="container" [ngClass]="{'collapsed': collapse}">
   <div class="button-container">
-    <button class="btn" (click)="addRow()">Add</button>
+    <app-basic-modal [title]="'Add'" [headerText]="'Add custom tour'" [formData]="dataToDisplay"></app-basic-modal>
     <button class="btn" [disabled]='disableEdit' (click)="editRow()">Edit</button>
     <button class="btn" [disabled]='disableDelete' (click)="deleteRow()">Delete</button>
   </div>

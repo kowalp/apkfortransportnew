@@ -1,19 +1,53 @@
-<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save changes</button>
+<button class="btn" (click)="openModal()">{{title}}</button>
+<modal #myModal>
+
+  <modal-header>
+    <h2>{{headerText}}</h2>
+  </modal-header>
+
+  <modal-content>
+    <div *ngIf="tableRow" [formGroup]="tableRow" class="search-form">
+      <div formArrayName="information" class="gallery-container">
+        <ng-container *ngFor="let property of formData | keyvalue; let idx = index">
+          <!-- <div class="choosing-container">
+            <div class="ride-category">
+              <div class="category">
+                <label [for]="idx">{{property.key}}&nbsp;*</label>
+                <input type="hidden" [formControlName]="idx" class="dropdown" />
+                <form-dropdown (inputValue)="information.at(idx).patchValue($event)" [data]="property.value"
+                  [defaultTitle]="'Choose ' + property.key">
+                </form-dropdown>
+              </div>
+            </div>
+          </div> -->
+          <div class="input-container input-effect form__group field" *ngIf="property.key !== 'arrivalTime'"
+            [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+            <div class="col-1">
+              <label [for]="idx" *ngIf="!information.at(idx).invalid">{{property.key}} </label>
+            </div>
+            <div class="col-2">
+              <input type="text" [placeholder]="property.key" class="effect-21 form__field" [formControlName]="idx" />
+            </div>
+          </div>
+          <div class="input-container input-effect" *ngIf="property.key === 'arrivalTime'"
+            [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+            <div class="col-1">
+              <label>{{property.key}}</label>
+            </div>
+            <div class="col-2">
+              <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [min]="minDate"
+                class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+            </div>
+            <owl-date-time #dt></owl-date-time>
+          </div>
+        </ng-container>
       </div>
     </div>
-  </div>
-</div>
+  </modal-content>
+
+  <modal-footer>
+    <button class="btn" (click)="addRow()" *ngIf="title === 'Add'">{{title}}</button>
+    <button class="btn" (click)="editRow()" *ngIf="title === 'Edit'">{{title}}</button>
+    <button class="btn" (click)="closeModal()">Close</button>
+  </modal-footer>
+</modal>

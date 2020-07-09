@@ -93,7 +93,6 @@ export class EditFormComponent implements OnInit, OnDestroy {
         this.information.push(this.formBuilder.control('', validators));
       }
     });
-    console.log(this.reservationForm);
   }
 
   onSubmit(): void {

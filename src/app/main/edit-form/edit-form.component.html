@@ -3,7 +3,7 @@
         <div formArrayName="information" class="gallery-container">
             <div class="navigation">
                 <button class="btn" [disabled]="counter === 0" (click)="previousState()">Previous</button>
-                <button class="btn" [disabled]="disableNext" (click)="nextState()">Next</button>
+                <button class="btn" *ngIf="!disableNext" (click)="nextState()">Next</button>
                 <button class="btn" (click)="onSubmit()" type="submit" *ngIf="disableNext" title='Fill required fields to submit form'>SUBMIT</button>
             </div>
             <div class="gallery" #container>

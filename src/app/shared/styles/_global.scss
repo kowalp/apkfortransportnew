@@ -79,3 +79,6 @@ h6 {
 background-color: $main-active-color;
 outline: 1px solid slategrey;
 }
+.cdk-overlay-container {
+  z-index: 1100;
+}

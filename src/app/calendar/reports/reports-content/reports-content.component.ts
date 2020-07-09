@@ -41,7 +41,7 @@ export class ReportsContentComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.mainService.sendTripForm(this.information.value);
+    this.mainService.sendTripForm(this.prepareDataToSend(this.information.value));
   }
 
   get information(): FormArray {
@@ -57,7 +57,6 @@ export class ReportsContentComponent implements OnInit, OnDestroy {
     for (const key in data) {
       key !== 'driver' ? this.information.push(this.formBuilder.control('')) : this.information.push(this.formBuilder.control('', validators));
     }
-    console.log(this.reportsForm);
   }
 
   private watchFormChanges(): void {
@@ -70,5 +69,13 @@ export class ReportsContentComponent implements OnInit, OnDestroy {
         const data = value.information.filter(item => item !== '' && item !== null);
       });
   }
-
+  private prepareDataToSend(data: any[]): KeyValueObject[] {
+    const arr = [];
+    for (const key in data) {
+      if (true) {
+        arr.push({ key: Object.keys(this.formData)[key], value: data[key] });
+      }
+    }
+    return arr;
+  }
 }

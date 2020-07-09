@@ -5,7 +5,6 @@
   @include flex(row, nowrap, space-evenly, center);
   padding-right: 20px;
   width: 100%;
-  padding-top: 40px;
   height: calc(100vh - 100px);
   transition: $transition-300;
   &.isCollapsed {
