@@ -27,7 +27,8 @@ modal ::ng-deep .h2 {
     flex: 0 0 42%;
     label {
       display: flex;
-      color: black;padding-top: 7px;
+      color: black;
+      padding-top: 7px;
       @extend %subtitle;
       text-transform: uppercase;
     }

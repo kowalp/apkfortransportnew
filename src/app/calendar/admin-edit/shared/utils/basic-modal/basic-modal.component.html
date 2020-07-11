@@ -23,7 +23,7 @@
           <div class="input-container input-effect form__group field" *ngIf="property.key !== 'arrivalTime'"
             [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
             <div class="col-1">
-              <label [for]="idx" *ngIf="!information.at(idx).invalid">{{property.key}} </label>
+              <label [for]="idx">{{property.key}} </label>
             </div>
             <div class="col-2">
               <input type="text" [placeholder]="property.key" class="effect-21 form__field" [formControlName]="idx" />

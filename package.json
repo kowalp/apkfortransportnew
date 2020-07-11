@@ -43,7 +43,10 @@
     "jquery": "^3.5.0",
     "moment": "^2.19.1",
     "ng-pick-datetime": "^5.2.6",
+<<<<<<< HEAD
     "ngb-modal": "^2.0.3",
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
     "ngx-loading": "^8.0.0",
     "rxjs": "~6.5.2",
     "rxjs-compat": "^6.4.0",

@@ -48,7 +48,10 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
       },
       responsive: true,
       paging: true,
+<<<<<<< HEAD
       pagingType: 'full_numbers',
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
       searching: false,
       lengthChange: false,
       order: [[1, 'asc']],
@@ -63,7 +66,11 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
   }
 
   addRow() {
+<<<<<<< HEAD
     console.log('modal opened');
+=======
+
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
     // TODO:open modal, emit data to the component above
   }
 

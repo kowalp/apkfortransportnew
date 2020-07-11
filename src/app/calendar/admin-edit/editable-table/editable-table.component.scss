@@ -3,6 +3,7 @@
 @import "https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css";
 @import "../../../shared/styles/variables";
 @import "../../../shared/styles/buttons";
+<<<<<<< HEAD
 
 // color of rows
 $row-1: #5fc7c9;
@@ -12,6 +13,8 @@ $row-4: #bae6e7;
 $row-5: #cceef0;
 
 $border-radious-row: 100%;
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 
 .container {
   max-width: 100%;
@@ -21,12 +24,15 @@ $border-radious-row: 100%;
     padding-left: 220px;
   }
 }
+<<<<<<< HEAD
 
 table {
   border-collapse: separate;
   border-spacing: 0 1em;
 }
 
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 .button-container {
   @include flex(row, nowrap, flex-end, center);
   width: 100%;
@@ -35,7 +41,10 @@ table {
     margin-right: 5px;
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 .disable {
   cursor: default !important;
   &::before {
@@ -45,6 +54,7 @@ table {
     display: none !important;
   }
 }
+<<<<<<< HEAD
 
 .circle {
   position: relative;
@@ -61,10 +71,23 @@ table {
     border-bottom-width: 1px !important;
     border-left-width: 1px !important;
   }
+=======
+.circle {
+  border: 1px solid $main-active-color;
+  border-radius: 50%;
+  height: 1em;
+  position: relative;
+  display: block;
+  width: 1em;
+  margin: 13px;
+  border-bottom-width: 1px !important;
+  border-left-width: 1px !important;
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
   .circle-inner {
     transition: $transition-300;
     background: url("../../../shared/assets/tick.png") no-repeat;
     background-size: contain;
+<<<<<<< HEAD
     height: 31px;
     width: 55px;
     position: absolute;
@@ -78,11 +101,21 @@ table {
 .paging_full_numbers a.paginate_active {
   color: #fff !important;
 }
+=======
+    height: 40px;
+    width: 55px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 thead th,
 tr,
 table {
   border: none !important;
 }
+<<<<<<< HEAD
 
 td {
   border-right: none;
@@ -122,6 +155,23 @@ tr td:last-child {
   background-color: $row-5;
 }
 
+=======
+td {
+  border: 1px solid $main-active-color;
+}
+.row-clickable {
+  cursor: pointer;
+}
+#table_length {
+  display: none !important;
+}
+.table-striped tbody tr {
+  background-color: $menu-nav-main-3;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: $main-active-color-3;
+}
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 .title th {
   &:first-child {
     border-radius: 20px 0 0 0 !important;
@@ -130,9 +180,16 @@ tr td:last-child {
     border-radius: 0 20px 0 0 !important;
   }
 }
+<<<<<<< HEAD
 
 .title {
   background: transparent; /* fallback for old browsers */
+=======
+.title {
+  background: #E0EAFC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 }
 
 /* dataTables CSS modification & positioning */
@@ -143,7 +200,10 @@ table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:before {
   content: url("../../../shared/assets/arrowup.png") !important;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after,
@@ -152,6 +212,9 @@ table.dataTable thead .sorting_desc_disabled:after {
   content: url("../../../shared/assets/arrowup.png") !important;
   transform: rotate(180deg);
 }
+<<<<<<< HEAD
 .page-item.disabled .page-link {
   background: transparent!important;
 }
+=======
+>>>>>>> dcf1e1754237864fd3b23f503c5e0a432b417f11
