@@ -12,6 +12,7 @@ import { EditClientsComponent } from './edit-clients/edit-clients.component';
 import { BasicModalComponent } from './shared/utils/basic-modal/basic-modal.component';
 import { ModalModule } from 'ngb-modal';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { ConfirmModalComponent } from './shared/utils/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     EditableTableComponent,
     EditIndividualComponent,
     BasicModalComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     CommonModule,

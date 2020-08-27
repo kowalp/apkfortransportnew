@@ -7,7 +7,7 @@
 <div class="expanded-dropdown" *ngIf="expandMenu">
     <div class="selected-option-container">
         <ul class="results-list">
-            <li class="result-item result-dropdown" [ngClass]="{'selected': result === selectedOption, 'highlighted': highlightedResult === idx }" *ngFor="let result of resultsList; index as idx" (click)="chooseOption(result)">
+            <li class="result-item result-dropdown" [ngClass]="{'selected': result === selectedOption, 'highlighted': ' ' }" *ngFor="let result of resultsList; index as idx" (click)="chooseOption(result)">
                 {{ result.key }}
             </li>
         </ul>

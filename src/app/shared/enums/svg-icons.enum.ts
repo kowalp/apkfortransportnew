@@ -17,7 +17,8 @@ export enum SVGIconEnum {
   X,
   SETTINGS,
   LOGOUT,
-  ARROW
+  ARROW,
+  MORE
 }
 
 export const SVGIconMAPPER = {
@@ -38,5 +39,6 @@ export const SVGIconMAPPER = {
   X: SVGIconEnum.X,
   SETTINGS: SVGIconEnum.SETTINGS,
   LOGOUT: SVGIconEnum.LOGOUT,
-  ARROW: SVGIconEnum.ARROW
+  ARROW: SVGIconEnum.ARROW,
+  MORE: SVGIconEnum.MORE
 };

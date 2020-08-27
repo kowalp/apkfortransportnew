@@ -42,6 +42,7 @@ export class EditFormComponent implements OnInit, OnDestroy {
       this.formData = arr;
       this.createForm(this.formData);
       this.watchFormChanges();
+      console.log(this.formData);
     });
   }
 

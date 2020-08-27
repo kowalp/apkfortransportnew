@@ -6,7 +6,7 @@ import { formUtils } from 'src/app/shared/utils/code/form.utils';
 import { KeyValueObject } from 'src/app/shared/models/calendar.model';
 
 @Component({
-  selector: 'app-basic-modal',
+  selector: 'basic-modal',
   templateUrl: './basic-modal.component.html',
   styleUrls: ['./basic-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -14,6 +14,7 @@ import { KeyValueObject } from 'src/app/shared/models/calendar.model';
 export class BasicModalComponent implements OnInit, OnDestroy {
   @ViewChild('myModal', { static: true }) myModal;
   @Input() title: string;
+  @Input() disableButton: boolean = false;
   @Input() headerText: string;
   @Input() formData: object;
   @Output() sendRowToAdd: EventEmitter<object> = new EventEmitter<object>();
@@ -60,12 +61,10 @@ export class BasicModalComponent implements OnInit, OnDestroy {
   }
 
   editRow() {
-    console.log(this.information.value)
     this.sendRowToEdit.emit(this.information.value);
   }
 
   addRow() {
-    console.log(this.prepareDataToSend(this.information.value))
     this.sendRowToAdd.emit(this.information.value);
   }
 

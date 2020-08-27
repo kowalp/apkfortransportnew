@@ -1,8 +1,11 @@
 <app-main-menu [active]="activeNumber">
 </app-main-menu>
 <div class="topmenu">
-  <img src="" alt="">
-  <h5>User</h5>
+  <svg-icon *ngIf="!userIcon" [iconType]="personIcon"></svg-icon>
+  <img *ngIf="userIcon" src="" alt="">
+  <h5>{{userName}}</h5>
+  <app-dropdown [data]="dropdownData"></app-dropdown>
+
 </div>
 <div class="background" [ngClass]="{'collapsed': collapse}">
 </div>

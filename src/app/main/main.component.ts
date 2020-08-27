@@ -18,21 +18,21 @@ export class MainComponent implements OnInit, OnDestroy {
    tertiaryColour: '#50afb1'
   };
   trips: any = [
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5, tripDetails: [
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5, tripDetails: [
       {key: 'Date', value: '09/12/2020'},
       {key: 'Distance', value: '18 kilometers'},
       {key: 'Driver', value: 'Adrian Maciek'},
       {key: 'Total Price', value: '70zł'},
     ]},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
 
-    {title: 'Hotel Qubus - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
+    {title: 'Hotel X - Kraków Airport', date: '09/12/2020', numberOfPeople: 5},
   ];
   companies: any = [
     {title: 'Krakow Welcome'},

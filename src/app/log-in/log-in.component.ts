@@ -16,7 +16,7 @@ export class LogInComponent implements OnInit {
   loginForm: FormGroup;
   registerFormActive: boolean = false;
   loginFormActive: boolean = true;
-  userRoles: any[] = [{ key: 'Driver', value: 'driver' }, { key: 'Regular User', value: 'hotel' }];
+  userRoles: Array<object> = [{ key: 'Driver', value: 'driver' }, { key: 'Hotel', value: 'hotel' }];
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit() {

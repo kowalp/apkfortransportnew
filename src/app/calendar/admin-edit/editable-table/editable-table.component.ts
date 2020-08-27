@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { ConfirmModalComponent } from './../shared/utils/confirm-modal/confirm-modal.component';
+import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
@@ -19,10 +20,17 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
   collapse: boolean = false;
   disableEdit: boolean = true;
   disableDelete: boolean = true;
+  selectedList: Array<any>;
+  rowsToDelete: number;
   private $unsubscribe: Subject<void> = new Subject<void>();
   readonly arrow: SVGIconEnum = SVGIconEnum.ARROW;
   @ViewChild('table', { static: true }) dataTable: ElementRef;
-  dataToDisplay: Object;
+  @ViewChild('modal', { static: true }) confirmModal: ConfirmModalComponent;
+  @Output() sendRowsToDelete: EventEmitter<object> = new EventEmitter<object>();
+  @Output() sendRowsToUpdate: EventEmitter<object> = new EventEmitter<object>();
+  @Output() sendRowsToAdd: EventEmitter<object> = new EventEmitter<object>();
+
+  dataToDisplay: object;
   constructor(private menuService: MenuService) { }
 
   ngOnInit() {
@@ -57,21 +65,25 @@ export class EditableTableComponent implements AfterViewInit, OnInit {
 
   selectRow(row: any) {
     row.isSelected = !row.isSelected;
-    const selectedList = this.data.rows.filter(item => item.isSelected);
-    this.disableEdit = selectedList.length !== 1;
-    this.disableDelete = selectedList.length < 1;
+    this.rowsToDelete = this.data.rows.filter(item => item.isSelected).length;
+    this.selectedList = this.data.rows.filter(item => item.isSelected);
+    this.disableEdit = this.selectedList.length !== 1;
+    this.disableDelete = this.selectedList.length < 1;
   }
 
-  addRow() {
-    console.log('modal opened');
-    // TODO:open modal, emit data to the component above
+  addRow(data) {
+    this.sendRowsToAdd.emit(data);
   }
 
-  editRow() {
-    // TODO:open modal, emit data to the component above
+  editRow(data) {
+    this.sendRowsToUpdate.emit(data);
+  }
+
+  sendDeletedRows(data) {
+    this.sendRowsToDelete.emit(data);
   }
 
   deleteRow() {
-    // TODO:open modal, emit data to the component above
+    this.confirmModal.openModal();
   }
 }

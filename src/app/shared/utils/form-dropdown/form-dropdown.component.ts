@@ -16,6 +16,7 @@ export class FormDropdownComponent implements OnInit, OnDestroy {
   expandMenu: boolean;
   resultsList: KeyValueObject[];
   activeValue: boolean = false;
+  highlightedResult: boolean = false;
   readonly dropdownArrowIcon: SVGIconEnum = SVGIconEnum.DROPDOWNARROW;
   private $unsubscribe: Subject<void> = new Subject<void>();
   @Output() inputValue: EventEmitter<KeyValueObject> = new EventEmitter();

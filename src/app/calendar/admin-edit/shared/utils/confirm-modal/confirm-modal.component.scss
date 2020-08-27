@@ -1,0 +1,84 @@
+@import "../../../../../shared/styles/buttons";
+@import "../../../../../shared/styles/variables";
+@import "../../../../../shared/styles/typhography";
+.btn {
+  @extend %btn-primary;
+}
+
+h2 {
+  text-align: center;
+}
+modal ::ng-deep .modal-footer,
+modal ::ng-deep .h2 {
+  display: flex;
+  justify-content: center !important;
+}
+.btn {
+  margin-right: 10px;
+}
+.input-container {
+  position: relative;
+  width: 100%;
+  @include flex(row, nowrap, center, center);
+  .col-1 {
+    @include flex(row, nowrap, flex-end, center);
+    position: relative;
+    max-width: 100%;
+    flex: 0 0 42%;
+    label {
+      display: flex;
+      color: black;
+      padding-top: 7px;
+      @extend %subtitle;
+      text-transform: uppercase;
+    }
+  }
+  .col-2 {
+    position: relative;
+    @include flex(row, nowrap, end, center);
+    max-width: 100%;
+    flex: 0 0 50%;
+  }
+}
+
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: black;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary,$secondary);
+  border-image-slice: 1;
+}

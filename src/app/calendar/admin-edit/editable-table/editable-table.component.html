@@ -1,8 +1,9 @@
 <div class="container" [ngClass]="{'collapsed': collapse}">
   <div class="button-container">
-    <app-basic-modal [title]="'Add'" [headerText]="'Add custom tour'" [formData]="dataToDisplay"></app-basic-modal>
-    <button class="btn" [disabled]='disableEdit' (click)="editRow()">Edit</button>
-    <button class="btn" [disabled]='disableDelete' (click)="deleteRow()">Delete</button>
+    <basic-modal [title]="'Add'" [headerText]="'Add custom tour'" (sendRowToAdd)="addRow($event)" [formData]="dataToDisplay"></basic-modal>
+    <basic-modal [headerText]="'Edit your trip'" [disableButton]='disableEdit' [title]="'Edit'" (sendRowToEdit)="editRow($event)" [formData]="dataToDisplay"></basic-modal>
+    <confirm-modal #modal [title]="'Delete rows'" (sendData)="sendDeletedRows($event)" [description]="'Are you sure you want to delete ' + rowsToDelete + ' rows?'"></confirm-modal>
+    <button class="btn" [disabled]='disableDelete' (click)="deleteRow()">Delete <span *ngIf="rowsToDelete">({{ rowsToDelete }})</span></button>
   </div>
   <table #table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>

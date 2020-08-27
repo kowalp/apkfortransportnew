@@ -38,18 +38,11 @@ export class MainService {
   setFormsData(): void {
     this.$formsData.next({
       tripCategory: [{
-        "data": [{ "key": "1111", "value": "dsa" }, { "key": "111111", "value": "dsa" }],
+        "data": [{ "key": "Kraków lotnisko", "value": "dsa" }, { "key": "111111", "value": "dsa" }],
         "name": "Transfer",
         "optional": true,
         "inputType": "dropdown",
         "key": "Transfer",
-        "value": "dsa"
-      }, {
-        "data": [{ "key": "222", "value": "dsa" }, { "key": "22222", "value": "dsa" }],
-        "name": "Trip",
-        "optional": true,
-        "inputType": "dropdown",
-        "key": "Trip",
         "value": "dsa"
       }],
       numberOfPeople: {

@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,9 +16,12 @@ import { NgxLoadingModule } from 'ngx-loading';
     AppHeaderComponent,
     FormDropdownComponent,
     SvgIconsComponent,
+    DropdownComponent,
   ],
   imports: [
     CommonModule,
+    MatMenuModule,
+    RouterModule
   ],
   exports: [
     MainMenuComponent,

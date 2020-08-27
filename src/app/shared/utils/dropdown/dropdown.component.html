@@ -1,0 +1,8 @@
+<svg-icon [iconType]="dotsIcon" [matMenuTriggerFor]="menu"></svg-icon>
+<mat-menu #menu="matMenu">
+  <ul *ngFor="let item of data">
+    <li>
+      <button mat-menu-item [routerLink]="['/main' + item.url]"><a>{{item.title}}</a></button>
+    </li>
+  </ul>
+</mat-menu>

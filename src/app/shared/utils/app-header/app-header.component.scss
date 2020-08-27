@@ -9,8 +9,12 @@ app-main-menu {
 .topmenu {
   background: transparent;
   position: relative;
+  @include flex(row, nowrap, flex-end, center);
   width: 100%;
   height: 100px;
+  h5 {
+    padding: 7px 10px 0;
+  }
 }
 //background
 .background {

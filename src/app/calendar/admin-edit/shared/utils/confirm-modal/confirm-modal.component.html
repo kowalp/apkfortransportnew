@@ -1,0 +1,17 @@
+<modal #myModal >
+
+  <modal-header>
+    <h2>{{title}}</h2>
+  </modal-header>
+
+  <modal-content>
+    <div class="container">
+      {{description}}
+    </div>
+  </modal-content>
+
+  <modal-footer>
+    <button class="btn" (click)="confirm()">Confirm</button>
+    <button class="btn" (click)="closeModal()">Close</button>
+  </modal-footer>
+</modal>

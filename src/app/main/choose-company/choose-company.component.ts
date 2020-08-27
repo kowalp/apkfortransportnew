@@ -17,7 +17,7 @@ export class ChooseCompanyComponent implements OnInit, OnDestroy {
     workingHours: '9am - 6pm',
     maxNumberOfPeople: 10,
     url: '/krakow-welcome',
-    cars: [{ key: 'mercedes Vito', value: `http://yea.com.pl/wp-content/uploads/2019/04/mercedes-vito-png-6.png` }, { key: 'mercedes Benz', value: `http://yea.com.pl/wp-content/uploads/2019/04/mercedes-benz-s-class-3378362_960_720.png` }],
+    cars: [{ key: 'mercedes Vito', value: `https://mtrans-paliwa.pl/wp-content/uploads/2020/07/mercedes.png` }, { key: 'mercedes Benz', value: `https://mtrans-paliwa.pl/wp-content/uploads/2020/07/pngguru.com_.png` }],
     rate: [{}, {}, {}, {}, {}],
   }, {
     name: 'Krakow Welcome',
@@ -25,7 +25,7 @@ export class ChooseCompanyComponent implements OnInit, OnDestroy {
     workingHours: '9am - 6pm',
     maxNumberOfPeople: 10,
     url: '/krakow-welcome',
-    cars: [{ key: 'mercedes Vito', value: `http://yea.com.pl/wp-content/uploads/2019/04/mercedes-vito-png-6.png` }, { key: 'mercedes Benz', value: `http://yea.com.pl/wp-content/uploads/2019/04/mercedes-benz-s-class-3378362_960_720.png` }],
+    cars: [{ key: 'mercedes Vito', value: `https://mtrans-paliwa.pl/wp-content/uploads/2020/07/mercedes.png` }, { key: 'mercedes Benz', value: `https://mtrans-paliwa.pl/wp-content/uploads/2020/07/pngguru.com_.png` }],
     rate: [{}, {}, {}, {}, {}],
   },];
   collapse: boolean;

@@ -1,5 +1,5 @@
-<button class="btn" (click)="openModal()">{{title}}</button>
-<modal #myModal>
+<button class="btn" (click)="openModal()" [disabled]="disableButton">{{title}}</button>
+<modal #myModal >
 
   <modal-header>
     <h2>{{headerText}}</h2>

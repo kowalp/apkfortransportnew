@@ -1,15 +1,17 @@
 <section class="reports">
   <div class="form" [formGroup]="reportsForm">
     <div class="container" formArrayName="information">
+      <div class="top-bar"></div>
+      <h4>Reports</h4>
       <ng-container *ngFor="let property of formData | keyvalue; let idx = index" [ngSwitch]="property.key">
         <div class="input-container input-effect" *ngSwitchCase="'dateFrom'"
           [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
           <label>
-            Date From:
-            <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [max]="maxDateFrom"
+            Date from&nbsp;*
+          </label>
+            <input autocomplete="off"[formControlName]="idx" [max]="maxDateFrom"
               class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
             <owl-date-time #dt></owl-date-time>
-          </label>
           <span class="focus-border">
             <i></i>
           </span>
@@ -17,11 +19,11 @@
         <div class="input-container input-effect" *ngSwitchCase="'dateFrom'"
           [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
           <label>
-            Date To:
-            <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [min]="minDateTo"
+            Date to&nbsp;*
+          </label>
+            <input autocomplete="off" [formControlName]="idx" [min]="minDateTo"
               class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
             <owl-date-time #dt></owl-date-time>
-          </label>
           <span class="focus-border">
             <i></i>
           </span>
@@ -47,8 +49,26 @@
           </div>
         </ng-container>
       </ng-container>
+      <div class="options">
+        <div class="cbx" (click)="showDropdownDrivers()"><input id="cbx" type="checkbox" /><label for="cbx"></label><svg width="15" height="14" viewbox="0 0 15 14" fill="none"><path d="M2 8.36364L6.23077 12L13 2"></path></svg></div>
+        <!-- Gooey--><svg xmlns="http://www.w3.org/2000/svg" version="1.1"><defs><filter id="goo"><fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur><fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo"></fecolormatrix><feblend in="SourceGraphic" in2="goo"></feblend></filter></defs></svg>
+        <label class="driver" for="">Driver</label>
+      </div>
+      <div class="submit">
+        <button class="btn" type="button" (click)="createRaport()">Generate Raport</button>
+      </div>
     </div>
-    <div class="options"></div>
-    <div class="submit"></div>
+
+  </div>
+  <div class="driver-list" *ngIf="showDropdown">
+    <div class="drivers" *ngFor="let driver of driversList">
+      <div class="avatar"><img src="driver.picture" alt=""></div>
+      <div class="name"> {{driver.name}}</div>
+      <div class="checkbox">
+        <div class="cbx"><input id="cbx" type="checkbox" /><label for="cbx"></label><svg width="15" height="14" viewbox="0 0 15 14" fill="none"><path d="M2 8.36364L6.23077 12L13 2"></path></svg></div>
+        <!-- Gooey--><svg xmlns="http://www.w3.org/2000/svg" version="1.1"><defs><filter id="goo"><fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur><fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo"></fecolormatrix><feblend in="SourceGraphic" in2="goo"></feblend></filter></defs></svg>
+      </div>
+    </div>
+
   </div>
 </section>

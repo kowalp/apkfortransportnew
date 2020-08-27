@@ -1,0 +1,18 @@
+@import "../../styles/variables";
+@import "../../styles/buttons";
+
+svg-icon {
+  cursor: pointer;
+}
+.collapsed {
+  position: absolute;
+  right: 20px;
+  background: red;
+  width: 150px;
+  max-height: 300px;
+}
+   ul {
+    button {
+      @extend %btn;
+    }
+   }

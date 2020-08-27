@@ -17,7 +17,8 @@ export class ReportsContentComponent implements OnInit, OnDestroy {
   maxDateFrom: Date;
   minDateTo: Date;
   formData: ReportsData;
-  driversList: Array<string>;
+  showDropdown: boolean = false;
+  driversList: Array<any>;
   roleList: KeyValueObject[] = [
     { key: 'full', value: 'full' },
     { key: 'tour', value: 'tour' },
@@ -33,6 +34,7 @@ export class ReportsContentComponent implements OnInit, OnDestroy {
     this.mainService.setDriversAsObservable().subscribe((data: Array<string>) => this.driversList = data);
     this.formData = this.data;
     this.watchFormChanges();
+    console.log(this.information);
   }
 
   ngOnDestroy() {
@@ -40,14 +42,16 @@ export class ReportsContentComponent implements OnInit, OnDestroy {
     this.$unsubscribe.complete();
   }
 
-  onSubmit(): void {
+  createRaport(): void {
     this.mainService.sendTripForm(this.prepareDataToSend(this.information.value));
   }
 
   get information(): FormArray {
     return this.reportsForm.get('information') as FormArray;
   }
-
+  showDropdownDrivers(): void {
+    this.showDropdown = !this.showDropdown;
+  }
   private createForm(data: ReportsData): void {
     this.reportsForm = this.formBuilder.group({
       information: this.formBuilder.array([])

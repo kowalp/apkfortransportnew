@@ -1,83 +1,103 @@
 <section class="form-section">
-    <div *ngIf="reservationForm" [formGroup]="reservationForm" class="search-form">
-        <div formArrayName="information" class="gallery-container">
-            <div class="navigation">
-                <button class="btn" [disabled]="counter === 0" (click)="previousState()">Previous</button>
-                <button class="btn" *ngIf="!disableNext" (click)="nextState()">Next</button>
-                <button class="btn" (click)="onSubmit()" type="submit" *ngIf="disableNext" title='Fill required fields to submit form'>SUBMIT</button>
+  <div *ngIf="reservationForm" [formGroup]="reservationForm" class="search-form">
+    <div formArrayName="information" class="gallery-container">
+      <div class="navigation">
+        <button class="btn" [disabled]="counter === 0" (click)="previousState()">Previous</button>
+        <button class="btn" *ngIf="!disableNext" (click)="nextState()">Next</button>
+        <button class="btn" (click)="onSubmit()" type="submit" *ngIf="disableNext"
+          title='Fill required fields to submit form'>SUBMIT</button>
+      </div>
+      <div class="gallery" #container>
+        <ng-container *ngFor="let property of formData; let idx = index" [ngSwitch]="property.inputType">
+          <ng-container *ngIf="counter === idx">
+            <div class="choosing-container" *ngSwitchCase="'dropdown'">
+              <div class="ride-category">
+                <div class="category">
+                  <label [for]="idx">{{property.name}}&nbsp;*</label>
+                  <input type="hidden" [formControlName]="idx" class="dropdown" />
+                  <form-dropdown (inputValue)="information.at(idx).patchValue($event)" [data]="property.data"
+                    [defaultTitle]="'Choose ' + property.name">
+                  </form-dropdown>
+                </div>
+              </div>
             </div>
-            <div class="gallery" #container>
-                <ng-container *ngFor="let property of formData; let idx = index" [ngSwitch]="property.inputType">
-                    <ng-container *ngIf="counter === idx">
-                        <div class="choosing-container" *ngSwitchCase="'dropdown'">
-                            <div class="ride-category">
-                                <div class="category">
-                                    <label [for]="idx">{{property.name}}&nbsp;*</label>
-                                    <input type="hidden" [formControlName]="idx" class="dropdown" />
-                                    <form-dropdown (inputValue)="information.at(idx).patchValue($event)" [data]="property.data" [defaultTitle]="'Choose ' + property.name">
-                                    </form-dropdown>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-container input-effect" *ngSwitchCase="'string'" [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
-                            <input type="text" class="effect-21" [formControlName]="idx" />
-                            <label [for]="idx" *ngIf="information.at(idx).invalid || property.optional">{{property.name}} <span
+            <div class="input-container input-effect" *ngSwitchCase="'string'"
+              [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+              <input type="text" class="effect-21" [formControlName]="idx" />
+              <label [for]="idx" *ngIf="information.at(idx).invalid || property.optional">{{property.name}} <span
                   *ngIf="!property.optional">&nbsp;* </span></label>
-                            <span class="focus-border">
+              <span class="focus-border">
                 <i></i>
               </span>
-                        </div>
-                        <div class="input-container input-effect" *ngSwitchCase="'number'" [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
-                            <input type="number" step="1" (keydown)="lockSpefificCharsOnIntegers($event)" max="100" min="1" class="effect-21" [formControlName]="idx" />
-                            <label [for]="idx" *ngIf="information.at(idx).invalid">{{property.name}}&nbsp;*</label>
-                            <span class="focus-border">
-                <i></i>
-              </span>
-                        </div>
-                        <div class="input-container input-effect" *ngSwitchCase="'date'" [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
-                            <label>
-                            Date Time:
-                            <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [min]="minDate" class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-                            <owl-date-time #dt></owl-date-time>
-                        </label>
-                            <span class="focus-border">
-                          <i></i>
-                        </span>
-                        </div>
-                        <div class="input-container input-effect" *ngSwitchCase="'phone'" [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
-                            <input type="tel" [formControlName]="idx" [value]="property.value ? property.value : ''" class="input-value effect-21">
-                            <label for="phone" *ngIf="information.at(idx).invalid">PHONE NUMBER&nbsp;*</label>
-                            <span class="focus-border">
-                <i></i>
-              </span>
-                        </div>
-                        <div class="input-container input-effect" *ngSwitchCase="'email'" [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
-                            <input type="email" [formControlName]="idx" [value]="property.value ? property.value : ''" class="input-value effect-21">
-                            <label for="email" *ngIf="information.at(idx).invalid">Email Adress&nbsp;*</label>
-                            <span class="focus-border">
-                <i></i>
-              </span>
-                        </div>
-                    </ng-container>
-                </ng-container>
             </div>
-        </div>
+            <div class="input-container input-effect" *ngSwitchCase="'number'"
+              [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+              <input type="number" step="1" (keydown)="lockSpefificCharsOnIntegers($event)" max="100" min="1"
+                class="effect-21" [formControlName]="idx" />
+              <label [for]="idx" *ngIf="information.at(idx).invalid">{{property.name}}&nbsp;*</label>
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div class="input-container input-effect" *ngSwitchCase="'car'"
+              [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+              *ngFor="let item of items"
+              <input type="checkbox" class="effect-21" [formControlName]="idx" />
+              <label [for]="idx" *ngIf="information.at(idx).invalid">{{property.name}}&nbsp;*</label>
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div class="input-container input-effect" *ngSwitchCase="'date'"
+              [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+              <label>
+                Date Time:
+                <input autocomplete="off" placeholder="Choose date*" [formControlName]="idx" [min]="minDate"
+                  class="effect-21" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                <owl-date-time #dt></owl-date-time>
+              </label>
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div class="input-container input-effect" *ngSwitchCase="'phone'"
+              [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+              <input type="tel" [formControlName]="idx" [value]="property.value ? property.value : ''"
+                class="input-value effect-21">
+              <label for="phone" *ngIf="information.at(idx).invalid">PHONE NUMBER&nbsp;*</label>
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div class="input-container input-effect" *ngSwitchCase="'email'"
+              [class.error]="(information.at(idx).dirty && !information.at(idx).valid)">
+              <input type="email" [formControlName]="idx" [value]="property.value ? property.value : ''"
+                class="input-value effect-21">
+              <label for="email" *ngIf="information.at(idx).invalid">Email Adress&nbsp;*</label>
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
     </div>
+  </div>
 </section>
 <section class="display-data" *ngIf="displayData">
-    <div class="data-container">
-        <div class="data" *ngFor="let i of reservationForm.value.information; let idx = index">
-            <ng-container *ngIf="i">
-                <div class="description-container">
-                    <svg-icon [iconType]="tickIcon" *ngIf="information.at(idx).valid"></svg-icon>
-                    <svg-icon [iconType]="xIcon" *ngIf="information.at(idx).invalid"></svg-icon>
-                    <p class="key">{{formData[idx].name}}: </p>
-                </div>
-                <p class="value" *ngIf="formData[idx].inputType !== 'date'">{{i.key ? i.key : i }}
-                </p>
-                <p class="value" *ngIf="formData[idx].inputType === 'date'">{{ i | date: 'd MMMM, yyyy, HH:mm'}}
-                </p>
-            </ng-container>
+  <div class="data-container">
+    <div class="data" *ngFor="let i of reservationForm.value.information; let idx = index">
+      <ng-container *ngIf="i">
+        <div class="description-container">
+          <svg-icon [iconType]="tickIcon" *ngIf="information.at(idx).valid"></svg-icon>
+          <svg-icon [iconType]="xIcon" *ngIf="information.at(idx).invalid"></svg-icon>
+          <p class="key">{{formData[idx].name}}: </p>
         </div>
+        <p class="value" *ngIf="formData[idx].inputType !== 'date'">{{i.key ? i.key : i }}
+        </p>
+        <p class="value" *ngIf="formData[idx].inputType === 'date'">{{ i | date: 'd MMMM, yyyy, HH:mm'}}
+        </p>
+      </ng-container>
     </div>
+  </div>
 </section>

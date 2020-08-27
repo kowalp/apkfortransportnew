@@ -16,16 +16,14 @@ $border-radious-row: 100%;
 .container {
   max-width: 100%;
   transition: $transition-300;
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
   padding-left: 120px;
   &.collapsed {
     padding-left: 220px;
   }
 }
 
-table {
-  border-collapse: separate;
-  border-spacing: 0 1em;
-}
 
 .button-container {
   @include flex(row, nowrap, flex-end, center);
@@ -55,7 +53,7 @@ table {
     display: block;
     content: "";
     width: 2em;
-    top: 8px;
+    top: 16px;
     left: 12px;
     border-bottom-width: 1px !important;
     border-left-width: 1px !important;
@@ -67,7 +65,7 @@ table {
     height: 31px;
     width: 55px;
     position: absolute;
-    top: 7px;
+    top: 15px;
     left: 13px;
   }
 }
@@ -77,14 +75,14 @@ table {
 .paging_full_numbers a.paginate_active {
   color: #fff !important;
 }
-thead th,
-tr,
 table {
-  border: none !important;
+  border: none!important;
 }
-
-td {
-  border-right: none;
+.table-bordered th, .table-bordered td{
+  border-bottom: none!important;
+  border-top: 1px solid white!important;
+  border-right: none!important;
+  border-left: none!important;
 }
 
 .row-clickable {
@@ -99,28 +97,31 @@ td {
   box-shadow: none;
 }
 
+table {
+  background: rgb(246, 246, 246);
+}
 .table-striped tbody tr {
-  -webkit-box-shadow: 17px -17px 10px 0px rgb(212, 212, 212);
-  -moz-box-shadow: 17px -17px 10px 0px rgb(212, 212, 212);
-  box-shadow: 17px -17px 10px 0px rgba(212, 212, 212, 0.514);
-  border-radius: 30%;
   background-color: $white;
 }
 
 tr td:first-child {
   margin-bottom: 50px;
-  border-top-left-radius: $border-radious-row;
-  border-bottom-left-radius: $border-radious-row;
-}
 
-tr td:last-child {
-  border-radius: 0 19% 12% 0/9% 66% 69% 130%;
 }
+tr {
+padding:20px 0;
 
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background: transparent;
+}
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: $row-5;
-}
+  background: transparent;
 
+}
+tbody th, tbody td {
+  padding: 18px 10px; /* e.g. change 8x to 4px here */
+}
 .title th {
   &:first-child {
     border-radius: 20px 0 0 0 !important;

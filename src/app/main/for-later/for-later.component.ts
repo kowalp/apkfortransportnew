@@ -135,6 +135,13 @@ export class ForLaterComponent implements OnInit {
     value: ''
   },
   {
+    name: 'Pick Up From',
+    key: 'pickupFrom',
+    inputType: 'string',
+    optional: false,
+    value: '',
+  },
+  {
     name: 'Date',
     key: 'date',
     inputType: 'date',
