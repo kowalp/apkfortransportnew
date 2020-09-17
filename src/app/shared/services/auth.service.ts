@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  apiAddress = `http://51.68.143.24:5000/`;
+  apiAddress = `https://localhost:5001/`;
 
   constructor(private router: Router, private httpClient: HttpClient, private snackBarService: SnackBarService) { }
 
   LogIn(email: string, password: string): Observable<any> {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' });
-    return this.httpClient.post<any>(this.apiAddress + 'account/login', {
+    return this.httpClient.post<any>(this.apiAddress + 'api/User', {
       Email: email,
       Password: password
     }, { headers: reqHeader });
@@ -32,17 +32,16 @@ export class AuthService {
   }
 
   Register(form) {
-    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.httpClient.post<any>(this.apiAddress + 'account/register', form, { headers: reqHeader }).subscribe(() => {
+    const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True'  });
+    this.httpClient.post<any>(this.apiAddress + 'api/user', form, { headers: reqHeader }).subscribe(() => {
       this.snackBarService.openSnackBar('You were register successfully!');
-    });
+    })
   }
 
   ChangePassword(form) {
     const reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.httpClient.post<any>(this.apiAddress + 'account/changepassword', form, { headers: reqHeader }).subscribe(() => {
-      this.snackBarService.openSnackBar(`Your password was changed successfully!`);
-    });
+    this.httpClient.post<any>(this.apiAddress + 'account/changepassword', form, { headers: reqHeader });
+    this.snackBarService.openSnackBar(`Your password was changed successfully!`);
   }
 
   getMaster() {
